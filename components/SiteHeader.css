@@ -1,0 +1,310 @@
+
+/* =========================================
+   PROSIGHT — SITE HEADER
+   Font: Manrope
+========================================= */
+
+.prosight-header {
+  position: relative;
+  z-index: 100;
+  width: 100%;
+  min-height: 76px;
+  color: #080808;
+  font-family: var(--font-manrope), "Manrope", sans-serif;
+  background: transparent;
+}
+
+.prosight-header__container {
+  width: calc(100% - 40px);
+  max-width: 1280px;
+  min-height: 76px;
+  margin-inline: auto;
+
+  display: grid;
+  grid-template-columns: 1fr auto 48px;
+  align-items: center;
+  column-gap: 40px;
+}
+
+/* =========================================
+   PROSIGHT SVG LOGO
+========================================= */
+
+.prosight-brand {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  justify-self: start;
+  text-decoration: none;
+  line-height: 0;
+}
+
+.prosight-brand__logo {
+  display: block;
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* =========================================
+   DESKTOP NAVIGATION
+========================================= */
+
+.prosight-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(24px, 3vw, 48px);
+}
+
+.prosight-nav__link {
+  display: inline-flex;
+  align-items: center;
+  padding-block: 8px;
+
+  color: #080808;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition: color 180ms ease;
+}
+
+.prosight-nav__link:hover {
+  color: #2478ba;
+}
+
+.prosight-nav__link:focus-visible {
+  outline: 2px solid #2478ba;
+  outline-offset: 4px;
+}
+
+/* =========================================
+   HAMBURGER BUTTON
+========================================= */
+
+.prosight-menu-button {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  flex-direction: column;
+  gap: 4px;
+
+  padding: 8px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.prosight-menu-button span {
+  display: block;
+  width: 15px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: #142536;
+
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease,
+    background-color 180ms ease;
+}
+
+.prosight-menu-button:hover span {
+  background: #2478ba;
+}
+
+/* Hamburger transforms into a close icon */
+
+.prosight-menu-button.is-open span:first-child {
+  transform: translateY(5.5px) rotate(45deg);
+}
+
+.prosight-menu-button.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.prosight-menu-button.is-open span:last-child {
+  transform: translateY(-5.5px) rotate(-45deg);
+}
+
+.prosight-menu-button:focus-visible {
+  outline: 2px solid #2478ba;
+  outline-offset: 3px;
+}
+
+/* =========================================
+   MOBILE / EXPANDABLE NAVIGATION
+   Hidden on desktop
+========================================= */
+
+.prosight-mobile-menu {
+  display: none;
+}
+
+/* =========================================
+   LARGE DESKTOP
+========================================= */
+
+@media (min-width: 1600px) {
+  .prosight-header__container {
+    max-width: 1760px;
+  }
+
+  .prosight-brand__logo {
+    width: 155px;
+  }
+
+  .prosight-nav__link {
+    font-size: 14px;
+  }
+
+  .prosight-nav {
+    gap: clamp(32px, 3vw, 54px);
+  }
+}
+
+@media (min-width: 2200px) {
+  .prosight-header__container {
+    max-width: 1960px;
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .prosight-header__container {
+    width: calc(100% - 32px);
+    grid-template-columns: 1fr auto 40px;
+    column-gap: 16px;
+  }
+
+  .prosight-brand__logo {
+    width: 125px;
+  }
+
+  .prosight-nav {
+    display: flex;
+    gap: clamp(10px, 1.8vw, 20px);
+  }
+
+  .prosight-nav__link {
+    font-size: clamp(10px, 1.4vw, 13px);
+  }
+
+  .prosight-menu-button {
+    width: 36px;
+    height: 40px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 640px) {
+  .prosight-header,
+  .prosight-header__container {
+    min-height: 76px;
+  }
+
+  .prosight-header__container {
+    width: calc(100% - 32px);
+    grid-template-columns: 1fr 48px;
+    column-gap: 12px;
+  }
+
+  .prosight-brand__logo {
+    width: 125px;
+  }
+
+  .prosight-nav {
+    display: none;
+  }
+
+  .prosight-menu-button {
+    display: flex;
+  }
+
+  .prosight-mobile-menu {
+    position: absolute;
+    top: 100%;
+    right: 16px;
+    left: 16px;
+    z-index: 200;
+
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    max-width: none;
+
+    padding: 8px 20px;
+    border: 1px solid #e5edf0;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 16px 40px rgb(20 37 54 / 10%);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-8px);
+
+    transition:
+      opacity 180ms ease,
+      transform 180ms ease,
+      visibility 180ms ease;
+  }
+
+  .prosight-mobile-menu.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .prosight-mobile-menu__link {
+    display: flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    border-bottom: 1px solid #edf1f3;
+    color: #142536;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .prosight-mobile-menu__link:last-child {
+    border-bottom: 0;
+  }
+
+  .prosight-mobile-menu__link:hover {
+    color: #2478ba;
+  }
+
+  .prosight-mobile-menu__link:focus-visible {
+    outline: 2px solid #2478ba;
+    outline-offset: 2px;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .prosight-nav__link,
+  .prosight-menu-button span,
+  .prosight-mobile-menu {
+    transition: none;
+  }
+}

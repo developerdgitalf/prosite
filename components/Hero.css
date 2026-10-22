@@ -1,0 +1,323 @@
+
+/* =========================================
+   PROSIGHT HERO
+========================================= */
+
+.prosight-hero {
+  width: 100%;
+  padding: 28px 24px 22px;
+  overflow: hidden;
+  color: #080808;
+  font-family: var(--font-manrope), "Manrope", sans-serif;
+}
+
+.prosight-hero__content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1050px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.prosight-hero__content h1 {
+  margin: 0;
+  font-size: clamp(42px, 4.2vw, 72px);
+  font-weight: 750;
+  line-height: 1.06;
+  letter-spacing: -0.045em;
+  color: #050505;
+}
+
+.prosight-hero__description {
+  max-width: 780px;
+  margin: 22px auto 0;
+  font-size: clamp(15px, 1.35vw, 22px);
+  font-weight: 500;
+  line-height: 1.55;
+  color: #111111;
+}
+
+.prosight-hero__cta {
+  display: inline-flex;
+  min-height: 58px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+  padding: 0 27px;
+  border: 1px solid #151515;
+  border-radius: 999px;
+  background: #151515;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.prosight-hero__cta:hover {
+  background: #ffffff;
+  color: #151515;
+}
+
+.prosight-hero__cta:focus-visible {
+  outline: 3px solid #2478ba;
+  outline-offset: 4px;
+}
+
+.prosight-hero__cta svg {
+  width: 21px;
+  height: 21px;
+  flex-shrink: 0;
+}
+
+/* =========================================
+   IMAGE LAYOUT
+   Two left + one centre + two right
+========================================= */
+
+.prosight-hero__visual {
+  position: relative;
+  width: 100%;
+  max-width: 1500px;
+  height: 290px;
+  margin: -8px auto 0;
+}
+
+.prosight-hero__cluster {
+  position: absolute;
+  top: 0;
+  width: 29%;
+  height: 100%;
+}
+
+.prosight-hero__cluster--left {
+  left: 0;
+}
+
+.prosight-hero__cluster--right {
+  right: 0;
+}
+
+/* Curved connectors stay behind the images */
+
+.prosight-hero__connector {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* All five image placeholders */
+
+.prosight-hero__tile {
+  position: absolute;
+  z-index: 1;
+  overflow: hidden;
+  background-color: #d9f0f3;
+}
+
+/* LEFT TOP IMAGE */
+
+.prosight-hero__tile--left-top {
+  top: 0;
+  left: 1%;
+  width: 46%;
+  aspect-ratio: 1;
+  border-radius: 24px 6px 18px 6px;
+
+  background-image: linear-gradient(
+    140deg,
+    #e5f7fa,
+    #c5e8ee 55%,
+    #edf9fa
+  );
+}
+
+/* LEFT BOTTOM IMAGE */
+
+.prosight-hero__tile--left-bottom {
+  top: 51%;
+  right: 0;
+  width: 46%;
+  aspect-ratio: 1;
+  border-radius: 6px 18px 24px 18px;
+
+  background-image: linear-gradient(
+    140deg,
+    #e5f7fa,
+    #c5e8ee 55%,
+    #edf9fa
+  );
+}
+
+/* CENTRE IMAGE */
+
+.prosight-hero__tile--centre {
+  top: 61%;
+  left: 35%;
+  width: 30%;
+  height: 120px;
+  border-radius: 16px;
+
+  background-image: linear-gradient(
+    120deg,
+    #9baac0,
+    #d4e0e6 55%,
+    #8bb8c4
+  );
+
+  box-shadow: 0 3px 5px rgb(0 0 0 / 8%);
+}
+
+/* RIGHT TOP IMAGE */
+
+.prosight-hero__tile--right-top {
+  top: 0;
+  right: 1%;
+  width: 46%;
+  aspect-ratio: 1;
+  border-radius: 6px 24px 6px 18px;
+
+  background-image: linear-gradient(
+    140deg,
+    #e1ddff,
+    #b4b7ff 55%,
+    #ded1ff
+  );
+}
+
+/* RIGHT BOTTOM IMAGE */
+
+.prosight-hero__tile--right-bottom {
+  top: 51%;
+  left: 0;
+  width: 46%;
+  aspect-ratio: 1;
+  border-radius: 18px 6px 18px 24px;
+
+  background-image: linear-gradient(
+    140deg,
+    #e3d2ff,
+    #b7a5fa 55%,
+    #d4ccff
+  );
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+  .prosight-hero {
+    padding-inline: 20px;
+  }
+
+  .prosight-hero__content h1 {
+    font-size: clamp(38px, 5.5vw, 52px);
+  }
+
+  .prosight-hero__description {
+    font-size: 16px;
+  }
+
+  .prosight-hero__visual {
+    height: 245px;
+    margin-top: 4px;
+  }
+
+  .prosight-hero__cluster {
+    width: 31%;
+  }
+
+  .prosight-hero__tile--centre {
+    left: 34%;
+    width: 32%;
+    height: 100px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .prosight-hero {
+    padding: 26px 16px 25px;
+  }
+
+  .prosight-hero__content h1 {
+    font-size: clamp(32px, 8vw, 43px);
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+  }
+
+  .prosight-hero__description {
+    margin-top: 17px;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .prosight-hero__desktop-break {
+    display: none;
+  }
+
+  .prosight-hero__cta {
+    min-height: 48px;
+    margin-top: 22px;
+    padding-inline: 21px;
+    font-size: 14px;
+  }
+
+  .prosight-hero__visual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 12px;
+    height: auto;
+    margin-top: 30px;
+  }
+
+  .prosight-hero__cluster {
+    position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+    width: 100%;
+    height: 155px;
+  }
+
+  .prosight-hero__tile--left-top,
+  .prosight-hero__tile--right-top {
+    top: 0;
+    width: 48%;
+  }
+
+  .prosight-hero__tile--left-bottom,
+  .prosight-hero__tile--right-bottom {
+    top: 48%;
+    width: 48%;
+  }
+
+  .prosight-hero__tile--centre {
+    position: relative;
+    top: auto;
+    left: auto;
+    grid-column: 1 / -1;
+    width: 88%;
+    height: 105px;
+    margin-inline: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prosight-hero__cta {
+    transition: none;
+  }
+}
+/* Remove only the curved straps */
+.prosight-hero__connector {
+  display: none !important;
+}

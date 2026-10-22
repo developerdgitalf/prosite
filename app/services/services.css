@@ -1,0 +1,568 @@
+
+/* =========================================
+   PROSIGHT — SERVICES PAGE
+========================================= */
+
+.prosight-services-page {
+  width: 100%;
+  color: #111111;
+  font-family: var(--font-manrope), "Manrope", sans-serif;
+}
+
+.services-page__header {
+  width: 100%;
+  background: #ffffff;
+}
+
+/* =========================================
+   SERVICES HERO — OUR SERVICES
+========================================= */
+
+.services-hero {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  min-height: 192px;
+  padding: 32px 3%;
+
+  background: linear-gradient(
+    110deg,
+    #153b56 0%,
+    #18244e 52%,
+    #1b1949 100%
+  );
+
+  color: #ffffff;
+}
+
+.services-hero__container {
+  width: 100%;
+  max-width: 1760px;
+  margin-inline: auto;
+}
+
+.services-hero__container h1 {
+  margin: 0;
+  color: #ffffff;
+
+  font-family: var(--font-manrope), "Manrope", sans-serif;
+  font-size: clamp(32px, 3vw, 44px);
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* =========================================
+   SHARED SECTION LAYOUT
+========================================= */
+
+.services-section {
+  width: 100%;
+  padding: 34px 28px 46px;
+}
+
+.services-section--engineering {
+  background: #ffffff;
+}
+
+.services-section--practice {
+  background: #eff9fb;
+}
+
+.services-section--assessment {
+  background: #ffffff;
+}
+
+.services-section__container {
+  width: 100%;
+  max-width: 1500px;
+  margin-inline: auto;
+}
+
+/* =========================================
+   SECTION HEADING AND DESCRIPTION
+========================================= */
+
+.services-section__header {
+  max-width: 1100px;
+  margin: 0 auto 30px;
+  text-align: center;
+}
+
+.services-section__header h1,
+.services-section__header h2 {
+  margin: 0;
+  color: #111111;
+  font-size: clamp(22px, 2vw, 29px);
+  font-weight: 750;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.services-section__header p {
+  max-width: 1050px;
+  margin: 12px auto 0;
+  color: #464646;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+/* =========================================
+   SERVICE CARD GRID
+   Three cards on row one,
+   two centred cards on row two
+========================================= */
+
+.services-section__grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 28px 16px;
+  width: 100%;
+}
+
+/* Each card occupies two of six columns */
+
+.services-card {
+  display: flex;
+  min-width: 0;
+  min-height: 220px;
+  flex-direction: column;
+  grid-column: span 2;
+
+  overflow: hidden;
+  border: 1px solid #d7d7d7;
+  border-radius: 5px;
+  background: #ffffff;
+  box-shadow: 0 2px 3px rgb(0 0 0 / 12%);
+}
+
+/* Centre cards four and five */
+
+.services-card:nth-child(4) {
+  grid-column: 2 / span 2;
+}
+
+.services-card:nth-child(5) {
+  grid-column: 4 / span 2;
+}
+
+/* =========================================
+   EMPTY IMAGE PLACEHOLDER
+========================================= */
+
+.services-card__image {
+  width: 100%;
+  height: 105px;
+  flex: 0 0 105px;
+
+  background: #373737;
+  border-radius: 4px 4px 0 0;
+}
+
+/* =========================================
+   CARD TEXT
+========================================= */
+
+.services-card__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 14px 15px 17px;
+}
+
+.services-card__content h3 {
+  margin: 0 0 10px;
+  color: #111111;
+  font-size: 15px;
+  font-weight: 750;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.services-card__content p {
+  margin: 0;
+  color: #424242;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* =========================================
+   AI ASSESSMENT AND BENCHMARKING
+========================================= */
+
+.services-section--assessment {
+  padding-top: 48px;
+  padding-bottom: 56px;
+}
+
+.services-section--assessment .services-section__header {
+  max-width: 1000px;
+  margin-bottom: 48px;
+}
+
+.services-section--assessment .services-section__header h1,
+.services-section--assessment .services-section__header h2 {
+  font-size: clamp(22px, 2vw, 28px);
+  line-height: 1.35;
+}
+
+.services-section--assessment .services-section__header p {
+  max-width: 900px;
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Assessment cards: three + two */
+
+.services-section--assessment .services-section__grid {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 52px 16px;
+}
+
+/* Taller assessment cards */
+
+.services-section--assessment .services-card {
+  min-height: 310px;
+  border-radius: 10px;
+}
+
+.services-section--assessment .services-card__image {
+  height: 154px;
+  flex-basis: 154px;
+  background: #383838;
+  border-radius: 9px 9px 8px 8px;
+}
+
+.services-section--assessment .services-card__content {
+  padding: 26px 26px 24px;
+}
+
+.services-section--assessment .services-card__content h3 {
+  margin-bottom: 16px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.services-section--assessment .services-card__content p {
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+/* =========================================
+   LARGE DESKTOP / 32-INCH MONITORS
+========================================= */
+
+@media (min-width: 1600px) {
+  .services-hero {
+    min-height: 210px;
+  }
+
+  .services-hero__container h1 {
+    font-size: 46px;
+  }
+
+  .services-section {
+    padding: 44px 40px 56px;
+  }
+
+  .services-section__container {
+    max-width: 1600px;
+  }
+
+  .services-section__header {
+    max-width: 1300px;
+    margin-bottom: 36px;
+  }
+
+  .services-section__header h1,
+  .services-section__header h2 {
+    font-size: 32px;
+  }
+
+  .services-section__header p {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .services-section__grid {
+    gap: 32px 22px;
+  }
+
+  .services-card {
+    min-height: 270px;
+  }
+
+  .services-card__image {
+    height: 130px;
+    flex-basis: 130px;
+  }
+
+  .services-card__content {
+    padding: 18px 20px 22px;
+  }
+
+  .services-card__content h3 {
+    margin-bottom: 12px;
+    font-size: 17px;
+  }
+
+  .services-card__content p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* Assessment section on large desktop */
+
+  .services-section--assessment {
+    padding-top: 60px;
+    padding-bottom: 64px;
+  }
+
+  .services-section--assessment .services-section__header {
+    margin-bottom: 56px;
+  }
+
+  .services-section--assessment .services-section__grid {
+    gap: 56px 22px;
+  }
+
+  .services-section--assessment .services-card {
+    min-height: 340px;
+  }
+
+  .services-section--assessment .services-card__image {
+    height: 170px;
+    flex-basis: 170px;
+  }
+
+  .services-section--assessment .services-card__content {
+    padding: 26px 26px 28px;
+  }
+
+  .services-section--assessment .services-card__content h3 {
+    font-size: 16px;
+  }
+
+  .services-section--assessment .services-card__content p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+  .services-hero {
+    min-height: 160px;
+    padding-inline: 24px;
+  }
+
+  .services-hero__container h1 {
+    font-size: 34px;
+  }
+
+  .services-section {
+    padding: 34px 22px 40px;
+  }
+
+  .services-section__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  /* Reset desktop positioning */
+
+  .services-card,
+  .services-card:nth-child(4),
+  .services-card:nth-child(5) {
+    grid-column: auto;
+  }
+
+  /* Centre a single last card when necessary */
+
+  .services-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    width: min(100%, 480px);
+    justify-self: center;
+  }
+
+  .services-card {
+    min-height: 230px;
+  }
+
+  .services-card__image {
+    height: 110px;
+    flex-basis: 110px;
+  }
+
+  .services-card__content h3 {
+    font-size: 14px;
+  }
+
+  .services-card__content p {
+    font-size: 12px;
+  }
+
+  /* Assessment tablet layout */
+
+  .services-section--assessment {
+    padding-top: 38px;
+    padding-bottom: 42px;
+  }
+
+  .services-section--assessment .services-section__header {
+    margin-bottom: 30px;
+  }
+
+  .services-section--assessment .services-section__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .services-section--assessment .services-card,
+  .services-section--assessment .services-card:nth-child(4),
+  .services-section--assessment .services-card:nth-child(5) {
+    grid-column: auto;
+    width: 100%;
+  }
+
+  .services-section--assessment .services-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    width: min(100%, 480px);
+    justify-self: center;
+  }
+
+  .services-section--assessment .services-card__content {
+    padding: 20px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 560px) {
+  .services-hero {
+    min-height: 130px;
+    padding-inline: 20px;
+  }
+
+  .services-hero__container h1 {
+    font-size: 30px;
+  }
+
+  .services-section {
+    padding: 30px 16px 34px;
+  }
+
+  .services-section__header {
+    margin-bottom: 24px;
+  }
+
+  .services-section__header h1,
+  .services-section__header h2 {
+    font-size: 24px;
+  }
+
+  .services-section__header p {
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* One card per row */
+
+  .services-section__grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .services-card,
+  .services-card:nth-child(4),
+  .services-card:nth-child(5),
+  .services-card:last-child:nth-child(odd) {
+    grid-column: 1;
+    width: 100%;
+    min-height: 0;
+  }
+
+  .services-card__image {
+    height: 150px;
+    flex-basis: 150px;
+  }
+
+  .services-card__content {
+    padding: 17px 16px 20px;
+  }
+
+  .services-card__content h3 {
+    margin-bottom: 9px;
+    font-size: 15px;
+  }
+
+  .services-card__content p {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  /* Assessment mobile layout */
+
+  .services-section--assessment {
+    padding: 32px 16px 38px;
+  }
+
+  .services-section--assessment .services-section__header {
+    margin-bottom: 24px;
+  }
+
+  .services-section--assessment .services-section__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .services-section--assessment .services-card,
+  .services-section--assessment .services-card:nth-child(4),
+  .services-section--assessment .services-card:nth-child(5),
+  .services-section--assessment .services-card:last-child:nth-child(odd) {
+    grid-column: 1;
+    width: 100%;
+    min-height: 0;
+  }
+
+  .services-section--assessment .services-card__image {
+    height: 170px;
+    flex-basis: 170px;
+  }
+
+  .services-section--assessment .services-card__content {
+    padding: 20px;
+  }
+
+  .services-section--assessment .services-card__content h3 {
+    font-size: 15px;
+  }
+
+  .services-section--assessment .services-card__content p {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .services-section *,
+  .services-hero * {
+    scroll-behavior: auto;
+  }
+}

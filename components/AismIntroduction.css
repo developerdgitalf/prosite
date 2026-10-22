@@ -1,0 +1,254 @@
+/* =========================================
+   PROSIGHT — WHAT IS AISM?
+   Font: Manrope
+========================================= */
+
+.aism-intro {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 40px 24px 44px;
+
+  background: linear-gradient(
+    105deg,
+    #ffffff 0%,
+    #ffffff 53%,
+    #f5fcfd 75%,
+    #d8f1f5 100%
+  );
+
+  color: #202020;
+  font-family: var(--font-manrope), "Manrope", sans-serif;
+}
+
+.aism-intro__container {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 84px);
+
+  width: 100%;
+  max-width: 1120px;
+  min-height: 260px;
+  margin-inline: auto;
+}
+
+/* =========================================
+   LEFT CONTENT
+========================================= */
+
+.aism-intro__content {
+  width: 100%;
+  max-width: 370px;
+  justify-self: center;
+}
+
+.aism-intro__eyebrow {
+  margin: 0 0 10px;
+
+  color: #111111;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: 0.015em;
+}
+
+.aism-intro__content p {
+  margin: 0 0 10px;
+
+  color: #666666;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.38;
+}
+
+.aism-intro__content p:last-child {
+  margin-bottom: 0;
+}
+
+/* =========================================
+   RIGHT PNG IMAGE
+========================================= */
+
+.aism-intro__visual {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  aspect-ratio: 1.08 / 1;
+  justify-self: center;
+}
+
+.aism-intro__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* =========================================
+   LARGE DESKTOP
+========================================= */
+
+@media (min-width: 1600px) {
+  .aism-intro__container {
+    max-width: 1760px;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  }
+
+  .aism-intro__content {
+    max-width: 420px;
+  }
+
+  .aism-intro__eyebrow {
+    font-size: 12px;
+  }
+
+  .aism-intro__content p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .aism-intro__visual {
+    max-width: 510px;
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 760px) {
+  .aism-intro {
+    padding: 36px 24px;
+  }
+
+  .aism-intro__container {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 24px;
+  }
+
+  .aism-intro__visual {
+    width: 100%;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 560px) {
+  .aism-intro {
+    padding: 34px 20px 40px;
+  }
+
+  .aism-intro__container {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .aism-intro__content {
+    max-width: 440px;
+  }
+
+  .aism-intro__eyebrow {
+    font-size: 12px;
+  }
+
+  .aism-intro__content p {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .aism-intro__visual {
+    width: 100%;
+    max-width: 380px;
+    aspect-ratio: 1.08 / 1;
+    margin-inline: auto;
+  }
+}
+
+
+/* =========================================
+   AISM INTRO — LARGER TEXT & WIDER CONTENT
+========================================= */
+
+/* Give the text area more room */
+.aism-intro__content {
+  width: 100%;
+  max-width: 540px;
+}
+
+/* Make the section heading more prominent */
+.aism-intro__eyebrow {
+  margin-bottom: 18px;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+/* Improve paragraph readability */
+.aism-intro__content p {
+  margin-bottom: 18px;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+/* Large desktop and 32-inch monitors */
+@media (min-width: 1600px) {
+  .aism-intro__container {
+    max-width: 1500px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(60px, 7vw, 120px);
+    min-height: 400px;
+  }
+
+  .aism-intro__content {
+    max-width: 600px;
+    justify-self: center;
+  }
+
+  .aism-intro__eyebrow {
+    margin-bottom: 20px;
+    font-size: 17px;
+  }
+
+  .aism-intro__content p {
+    margin-bottom: 20px;
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  .aism-intro__visual {
+    max-width: 560px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 760px) {
+  .aism-intro__content {
+    max-width: 100%;
+  }
+
+  .aism-intro__eyebrow {
+    font-size: 14px;
+  }
+
+  .aism-intro__content p {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+}
+
+/* Mobile */
+@media (max-width: 560px) {
+  .aism-intro__eyebrow {
+    font-size: 14px;
+  }
+
+  .aism-intro__content p {
+    margin-bottom: 14px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+}

@@ -1,0 +1,429 @@
+
+/* =========================================
+   PROSIGHT — ENTERPRISE AI DILEMMA
+========================================= */
+
+.enterprise-ai-dilemma {
+  width: 100%;
+  padding: 46px 24px 54px;
+  background: #ffffff;
+  color: #202020;
+  font-family: var(--font-manrope), "Manrope", sans-serif;
+}
+
+.enterprise-ai-dilemma__container {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+}
+
+.enterprise-ai-dilemma__header {
+  max-width: 1050px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.enterprise-ai-dilemma__eyebrow {
+  margin: 0 0 19px;
+  color: #111111;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.enterprise-ai-dilemma__title {
+  margin: 0;
+  color: #202020;
+  font-size: clamp(32px, 3.3vw, 42px);
+  font-weight: 650;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+}
+
+.enterprise-ai-dilemma__lead {
+  margin: 24px 0 0;
+  color: #202020;
+  font-size: clamp(20px, 2.1vw, 26px);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.enterprise-ai-dilemma__description {
+  max-width: 900px;
+  margin: 24px auto 0;
+  color: #777777;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.enterprise-ai-dilemma__subheading {
+  margin: 38px 0 24px;
+  color: #111111;
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 1.35;
+  text-align: center;
+}
+
+/* =========================================
+   FOUR-CARD GRID
+========================================= */
+
+.enterprise-ai-gap-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+/* Default card */
+
+.enterprise-gap-card {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  min-height: 197px;
+  overflow: hidden;
+  padding: 17px 16px;
+  border-radius: 5px;
+
+  background-color: #d1f0fd;
+  color: #090909;
+
+  transition:
+    color 250ms ease,
+    transform 250ms ease,
+    box-shadow 250ms ease,
+    padding 250ms ease;
+}
+
+/* Hover photograph and dark overlay */
+
+.enterprise-gap-card::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+
+  content: "";
+  opacity: 0;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  transition: opacity 300ms ease;
+}
+
+/* Individual photo paths.
+   Put the corresponding image files in public/images/ai-gap/. */
+
+.enterprise-gap-card--governance::before {
+  background-image:
+    linear-gradient(
+      110deg,
+      rgb(12 24 32 / 88%),
+      rgb(12 24 32 / 57%)
+    ),
+    url("/images/ai-gap/no-governance.webp");
+}
+
+.enterprise-gap-card--skills::before {
+  background-image:
+    linear-gradient(
+      110deg,
+      rgb(12 24 32 / 88%),
+      rgb(12 24 32 / 57%)
+    ),
+    url("/images/ai-gap/skill-gaps.webp");
+}
+
+.enterprise-gap-card--roi::before {
+  background-image:
+    linear-gradient(
+      110deg,
+      rgb(12 24 32 / 88%),
+      rgb(12 24 32 / 57%)
+    ),
+    url("/images/ai-gap/unclear-roi.webp");
+}
+
+.enterprise-gap-card--data::before {
+  background-image:
+    linear-gradient(
+      110deg,
+      rgb(12 24 32 / 88%),
+      rgb(12 24 32 / 57%)
+    ),
+    url("/images/ai-gap/data-information.webp");
+}
+
+/* Card content */
+
+.enterprise-gap-card__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  height: 100%;
+  min-height: 163px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.enterprise-gap-card__icon {
+  display: flex;
+  width: 36px;
+  height: 38px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 14px;
+  color: #111111;
+
+  transition:
+    color 250ms ease,
+    margin 250ms ease;
+}
+
+.enterprise-gap-card__icon svg {
+  display: block;
+  width: 36px;
+  height: 36px;
+}
+
+.enterprise-gap-card__title {
+  margin: 0;
+  color: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+
+  transition: color 250ms ease;
+}
+
+.enterprise-gap-card__description {
+  max-width: 100%;
+  max-height: 100px;
+  margin: 12px 0 0;
+  overflow: hidden;
+
+  color: #454e53;
+  font-size: 13.5px;
+  font-weight: 400;
+  line-height: 1.45;
+
+  opacity: 1;
+  transform: translateY(0);
+
+  transition:
+    opacity 180ms ease,
+    transform 200ms ease,
+    max-height 250ms ease,
+    margin 250ms ease;
+}
+
+/* =========================================
+   HOVER STATE
+   Image background, white icon and heading
+========================================= */
+
+.enterprise-gap-card:hover {
+  padding-top: 46px;
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgb(12 24 32 / 14%);
+  transform: translateY(-2px);
+}
+
+.enterprise-gap-card:hover::before {
+  opacity: 1;
+}
+
+.enterprise-gap-card:hover .enterprise-gap-card__icon {
+  margin-bottom: 31px;
+  color: #ffffff;
+}
+
+.enterprise-gap-card:hover .enterprise-gap-card__description {
+  max-height: 0;
+  margin-top: 0;
+  opacity: 0;
+  transform: translateY(5px);
+}
+
+/* =========================================
+   LARGE DESKTOP
+========================================= */
+
+@media (min-width: 1600px) {
+  .enterprise-ai-dilemma__container {
+    max-width: 1760px;
+  }
+
+  .enterprise-ai-gap-grid {
+    gap: 12px;
+  }
+
+  .enterprise-gap-card {
+    min-height: 205px;
+    padding: 20px;
+  }
+
+  .enterprise-gap-card:hover {
+    padding-top: 49px;
+  }
+
+  .enterprise-gap-card__title {
+    font-size: 17px;
+  }
+
+  .enterprise-gap-card__description {
+    font-size: 14px;
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+  .enterprise-ai-dilemma {
+    padding-inline: 20px;
+  }
+
+  .enterprise-ai-gap-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .enterprise-ai-dilemma__description {
+    max-width: 720px;
+  }
+
+  .enterprise-gap-card {
+    min-height: 190px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 520px) {
+  .enterprise-ai-dilemma {
+    padding: 35px 16px 40px;
+  }
+
+  .enterprise-ai-dilemma__eyebrow {
+    margin-bottom: 14px;
+    font-size: 16px;
+  }
+
+  .enterprise-ai-dilemma__title {
+    font-size: clamp(28px, 7vw, 34px);
+    line-height: 1.15;
+  }
+
+  .enterprise-ai-dilemma__desktop-break {
+    display: none;
+  }
+
+  .enterprise-ai-dilemma__lead {
+    margin-top: 18px;
+    font-size: 18px;
+  }
+
+  .enterprise-ai-dilemma__description {
+    margin-top: 16px;
+    font-size: 14px;
+  }
+
+  .enterprise-ai-dilemma__subheading {
+    margin: 28px 0 17px;
+    font-size: 21px;
+  }
+
+  .enterprise-ai-gap-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .enterprise-gap-card {
+    min-height: 180px;
+    padding: 17px;
+  }
+
+  .enterprise-gap-card:hover {
+    padding-top: 38px;
+  }
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  .enterprise-gap-card,
+  .enterprise-gap-card::before,
+  .enterprise-gap-card__icon,
+  .enterprise-gap-card__description,
+  .enterprise-gap-card__title {
+    transition: none;
+  }
+}
+
+
+
+/* =========================================
+   REVERSED CARD HOVER BEHAVIOUR
+   Default: Image + icon + title
+   Hover:   Blue card + full description
+========================================= */
+
+/* Default state: show image, icon and title */
+.enterprise-gap-card {
+  padding-top: 46px;
+  color: #ffffff;
+  background-color: #25343b;
+  transform: none;
+  box-shadow: none;
+}
+
+.enterprise-gap-card::before {
+  opacity: 1;
+}
+
+.enterprise-gap-card__icon {
+  margin-bottom: 31px;
+  color: #ffffff;
+}
+
+.enterprise-gap-card__description {
+  max-height: 0;
+  margin-top: 0;
+  opacity: 0;
+  transform: translateY(5px);
+  pointer-events: none;
+}
+
+/* Hover state: reveal description on the blue card */
+.enterprise-gap-card:hover {
+  padding-top: 17px;
+  color: #090909;
+  background-color: #d1f0fd;
+  transform: none;
+  box-shadow: none;
+}
+
+.enterprise-gap-card:hover::before {
+  opacity: 0;
+}
+
+.enterprise-gap-card:hover .enterprise-gap-card__icon {
+  margin-bottom: 14px;
+  color: #111111;
+}
+
+.enterprise-gap-card:hover .enterprise-gap-card__description {
+  max-height: 120px;
+  margin-top: 12px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}

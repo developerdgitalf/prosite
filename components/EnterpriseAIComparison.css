@@ -1,0 +1,182 @@
+
+/* =========================================
+   PROSIGHT — ENTERPRISE AI COMPARISON
+========================================= */
+
+.enterprise-ai-comparison {
+  width: 100%;
+  padding: 30px 20px 36px;
+  background: #f0fafc;
+  color: #111111;
+  font-family: var(--font-manrope), "Manrope", sans-serif;
+}
+
+/* Centred heading */
+
+.enterprise-ai-comparison__title {
+  margin: 0 0 50px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+/* Two cards with clear breathing space */
+
+.enterprise-ai-comparison__grid {
+  display: grid;
+  grid-template-columns:
+    clamp(255px, 24vw, 400px)
+    clamp(293px, 27vw, 450px);
+  justify-content: center;
+  align-items: stretch;
+  column-gap: clamp(48px, 20vw, 141px);
+
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+}
+
+/* Shared card styling */
+
+.enterprise-comparison-card {
+  min-width: 0;
+  min-height: 294px;
+  padding: 22px 24px;
+
+  border: 1px solid rgb(18 48 60 / 5%);
+  border-radius: 5px;
+  box-shadow: 0 2px 2px rgb(0 0 0 / 16%);
+
+  color: #111111;
+}
+
+.enterprise-comparison-card--traditional {
+  background: #ffffff;
+}
+
+.enterprise-comparison-card--transformed {
+  background: #e5f6fb;
+}
+
+/* Card titles */
+
+.enterprise-comparison-card h3 {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+/* Lists */
+
+.enterprise-comparison-card ul {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.enterprise-comparison-card li {
+  position: relative;
+  padding-left: 16px;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.enterprise-comparison-card li::before {
+  position: absolute;
+  top: 0.52em;
+  left: 0;
+
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #050505;
+  content: "";
+}
+
+/* Unbulleted line under Build AI capability */
+
+.enterprise-comparison-card li.enterprise-comparison-card__subitem {
+  margin-top: -2px;
+  padding-left: 16px;
+}
+
+.enterprise-comparison-card li.enterprise-comparison-card__subitem::before {
+  display: none;
+}
+
+/* =========================================
+   COMPACT TABLET
+========================================= */
+
+@media (min-width: 641px) and (max-width: 700px) {
+  .enterprise-ai-comparison {
+    padding-inline: 16px;
+  }
+
+  .enterprise-ai-comparison__title {
+    margin-bottom: 32px;
+  }
+
+  .enterprise-ai-comparison__grid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.05fr);
+    gap: 18px;
+  }
+
+  .enterprise-comparison-card {
+    padding: 20px 15px;
+  }
+
+  .enterprise-comparison-card h3 {
+    font-size: 16px;
+  }
+
+  .enterprise-comparison-card li {
+    font-size: 12px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 640px) {
+  .enterprise-ai-comparison {
+    padding: 26px 16px 30px;
+  }
+
+  .enterprise-ai-comparison__title {
+    margin-bottom: 26px;
+    font-size: 18px;
+  }
+
+  .enterprise-ai-comparison__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .enterprise-comparison-card {
+    min-height: auto;
+    padding: 22px 20px;
+  }
+
+  .enterprise-comparison-card h3 {
+    font-size: 18px;
+  }
+
+  .enterprise-comparison-card ul {
+    gap: 13px;
+  }
+
+  .enterprise-comparison-card li {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}

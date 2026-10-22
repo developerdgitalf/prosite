@@ -1,0 +1,19 @@
+
+.testPage {
+  min-height: 100vh;
+  padding: 60px;
+  background: lightblue !important;
+  color: navy !important;
+  font-family: Arial, sans-serif;
+}
+
+.testPage h1 {
+  font-size: 48px;
+  color: navy !important;
+}
+
+.testPage p {
+  padding: 20px;
+  background: navy;
+  color: white;
+}
