@@ -5,22 +5,38 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const navigation = [
+const navigationBeforeResources = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Framework", href: "/frameworks" },
-  { label: "Resources", href: "/resources" },
+];
+
+const navigationAfterResources = [
   { label: "Contact", href: "/contact" },
 ];
 
-export default function SiteHeader() {
-  const [menuOpen, setMenuOpen] = useState(false);
+const resourceLinks = [
+  { label: "Perspectives", href: "/resources" },
+  {
+    label: "AI Maturity Assessment",
+    href: "/aiswitch-assessment",
+  },
+];
 
-  const closeMenu = () => setMenuOpen(false);
+export default function SiteHeader() {
+  // Both state variables must be declared inside this component.
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [resourcesOpen, setResourcesOpen] = useState(false);
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+    setResourcesOpen(false);
+  };
 
   return (
     <header className="prosight-header">
       <div className="prosight-header__container">
+        {/* Brand logo */}
         <Link
           href="/"
           className="prosight-brand"
@@ -37,18 +53,100 @@ export default function SiteHeader() {
           />
         </Link>
 
+        {/* Desktop navigation */}
         <nav className="prosight-nav" aria-label="Main navigation">
-          {navigation.map((item) => (
+          {navigationBeforeResources.map((item) => (
             <Link
               key={item.label}
               href={item.href}
               className="prosight-nav__link"
+              onClick={closeMenu}
+            >
+              {item.label}
+            </Link>
+          ))}
+
+          {/* Resources dropdown */}
+          <div
+            className={`prosight-nav__dropdown ${
+              resourcesOpen ? "is-open" : ""
+            }`}
+            onMouseEnter={() => setResourcesOpen(true)}
+            onMouseLeave={() => setResourcesOpen(false)}
+            onFocus={() => setResourcesOpen(true)}
+            onBlur={(event) => {
+              const nextTarget = event.relatedTarget;
+
+              if (
+                !(nextTarget instanceof Node) ||
+                !event.currentTarget.contains(nextTarget)
+              ) {
+                setResourcesOpen(false);
+              }
+            }}
+          >
+            <button
+              type="button"
+              className="prosight-nav__link prosight-nav__dropdown-trigger"
+              aria-expanded={resourcesOpen}
+              aria-controls="prosight-resources-submenu"
+              onClick={() => setResourcesOpen(true)}
+            >
+              <span>Resources</span>
+
+              <svg
+                className="prosight-nav__dropdown-chevron"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="m6 9 6 6 6-6"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+
+            <div
+              id="prosight-resources-submenu"
+              className="prosight-nav__submenu"
+            >
+              {resourceLinks.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="prosight-nav__submenu-link"
+                  onClick={closeMenu}
+                >
+                  <span>{item.label}</span>
+
+                  <span
+                    className="prosight-nav__submenu-arrow"
+                    aria-hidden="true"
+                  >
+                    
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {navigationAfterResources.map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              className="prosight-nav__link"
+              onClick={closeMenu}
             >
               {item.label}
             </Link>
           ))}
         </nav>
 
+        {/* Hamburger button */}
         <button
           type="button"
           className={`prosight-menu-button ${
@@ -59,7 +157,10 @@ export default function SiteHeader() {
           }
           aria-expanded={menuOpen}
           aria-controls="prosight-mobile-menu"
-          onClick={() => setMenuOpen((open) => !open)}
+          onClick={() => {
+            setMenuOpen((open) => !open);
+            setResourcesOpen(false);
+          }}
         >
           <span />
           <span />
@@ -67,6 +168,7 @@ export default function SiteHeader() {
         </button>
       </div>
 
+      {/* Mobile navigation */}
       <nav
         id="prosight-mobile-menu"
         className={`prosight-mobile-menu ${
@@ -76,7 +178,56 @@ export default function SiteHeader() {
         aria-hidden={!menuOpen}
         inert={!menuOpen}
       >
-        {navigation.map((item) => (
+        {navigationBeforeResources.map((item) => (
+          <Link
+            key={item.label}
+            href={item.href}
+            className="prosight-mobile-menu__link"
+            onClick={closeMenu}
+          >
+            <span>{item.label}</span>
+            <span aria-hidden="true">↗</span>
+          </Link>
+        ))}
+
+        {/* Mobile Resources submenu toggle */}
+        <button
+          type="button"
+          className="prosight-mobile-menu__link prosight-mobile-menu__resources-toggle"
+          aria-expanded={resourcesOpen}
+          aria-controls="prosight-mobile-resources-submenu"
+          onClick={() => setResourcesOpen((open) => !open)}
+        >
+          <span>Resources</span>
+
+          <span
+            className="prosight-mobile-menu__resources-icon"
+            aria-hidden="true"
+          >
+            {resourcesOpen ? "−" : "+"}
+          </span>
+        </button>
+
+        {resourcesOpen && (
+          <div
+            id="prosight-mobile-resources-submenu"
+            className="prosight-mobile-menu__submenu"
+          >
+            {resourceLinks.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="prosight-mobile-menu__sublink"
+                onClick={closeMenu}
+              >
+                <span>{item.label}</span>
+                <span aria-hidden="true">↗</span>
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {navigationAfterResources.map((item) => (
           <Link
             key={item.label}
             href={item.href}

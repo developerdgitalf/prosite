@@ -1,0 +1,918 @@
+
+/* =========================================
+   CHIP2EXPERIENCE2OUTCOMES™
+   Interactive horizontal capability slider
+========================================= */
+
+.chip2-outcomes {
+  --chip2-card-width: clamp(310px, 31vw, 460px);
+  --chip2-navy: #0e192b;
+  --chip2-cyan: #69d7f4;
+  --chip2-ink: #173540;
+
+  width: 100%;
+  overflow: hidden;
+  padding: 76px 0 52px;
+
+  background:
+    radial-gradient(
+      ellipse at 85% 12%,
+      rgb(28 92 111 / 24%),
+      transparent 34%
+    ),
+    linear-gradient(135deg, #0b1526 0%, #112238 58%, #0c1b2c 100%);
+
+  color: #ffffff;
+  font-family: var(--font-manrope), "Manrope", sans-serif;
+}
+
+.chip2-outcomes *,
+.chip2-outcomes *::before,
+.chip2-outcomes *::after {
+  box-sizing: border-box;
+}
+
+.chip2-outcomes__container {
+  width: 100%;
+  max-width: 1920px;
+  margin-inline: auto;
+}
+
+/* =========================================
+   SECTION INTRO
+========================================= */
+
+.chip2-outcomes__header {
+  max-width: 1280px;
+  margin: 0 auto 34px;
+  padding: 0 36px;
+  text-align: center;
+}
+
+.chip2-outcomes__eyebrow {
+  margin: 0 0 14px;
+  color: var(--chip2-cyan);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: 0.18em;
+}
+
+.chip2-outcomes__header h2 {
+  margin: 0;
+  color: #e9f8ff;
+  font-size: clamp(30px, 3vw, 48px);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+}
+
+.chip2-outcomes__intro {
+  max-width: 1120px;
+  margin: 20px auto 0;
+  color: #d8e3ed;
+  font-size: clamp(14px, 1.15vw, 17px);
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+.chip2-outcomes__intro strong {
+  color: #69d7f4;
+  font-weight: 750;
+}
+
+.chip2-outcomes__legend {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 22px;
+  color: #acbdce;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.chip2-outcomes__legend-dot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 8px;
+  border-radius: 50%;
+  background: #71e6c0;
+  box-shadow: 0 0 15px rgb(113 230 192 / 55%);
+}
+
+/* =========================================
+   SLIDER CONTROLS
+========================================= */
+
+.chip2-outcomes__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  max-width: 1540px;
+  margin: 0 auto;
+  padding: 0 28px 12px;
+}
+
+.chip2-outcomes__counter {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  color: #8fa5b8;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.chip2-outcomes__counter strong {
+  color: #ffffff;
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.chip2-outcomes__arrows {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chip2-outcomes__arrow {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+
+  border: 1px solid rgb(153 211 231 / 30%);
+  border-radius: 50%;
+  background: rgb(255 255 255 / 5%);
+  color: #ffffff;
+
+  font-size: 21px;
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.chip2-outcomes__arrow:hover:not(:disabled) {
+  border-color: #69d7f4;
+  background: #69d7f4;
+  color: #0e192b;
+}
+
+.chip2-outcomes__arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.chip2-outcomes__arrow:focus-visible {
+  outline: 2px solid #69d7f4;
+  outline-offset: 4px;
+}
+
+/* =========================================
+   HORIZONTAL SLIDER TRACK
+========================================= */
+
+.chip2-outcomes__track {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+
+  width: 100%;
+  padding:
+    28px
+    max(24px, calc((100% - var(--chip2-card-width)) / 2))
+    36px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.chip2-outcomes__track::-webkit-scrollbar {
+  display: none;
+}
+
+/* =========================================
+   CAPABILITY CARDS
+========================================= */
+
+.chip2-outcomes__card {
+  position: relative;
+  display: flex;
+  flex: 0 0 var(--chip2-card-width);
+  flex-direction: column;
+
+  width: var(--chip2-card-width);
+  min-width: 0;
+  min-height: 650px;
+
+  padding: 28px 24px 20px;
+  overflow: hidden;
+
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 22px;
+
+  color: var(--chip2-ink);
+  text-align: left;
+  cursor: pointer;
+
+  scroll-snap-align: center;
+  transform: scale(0.965);
+  transform-origin: center center;
+  opacity: 0.5;
+  filter: saturate(0.72);
+
+  transition:
+    opacity 250ms ease,
+    transform 250ms ease,
+    box-shadow 250ms ease,
+    filter 250ms ease,
+    border-color 250ms ease;
+}
+
+.chip2-outcomes__card::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+
+  height: 4px;
+  content: "";
+  background: rgb(19 65 76 / 18%);
+}
+
+.chip2-outcomes__card.is-active {
+  z-index: 1;
+  transform: translateY(-5px) scale(1);
+  opacity: 1;
+  filter: saturate(1);
+
+  border-color: rgb(255 255 255 / 55%);
+  box-shadow:
+    0 24px 65px rgb(0 0 0 / 32%),
+    0 0 0 1px rgb(105 215 244 / 20%);
+}
+
+.chip2-outcomes__card:focus-visible {
+  outline: 3px solid #69d7f4;
+  outline-offset: 5px;
+}
+
+/* Coordinated mint palette */
+
+.chip2-outcomes__card--hybrid-cloud {
+  background: #a7e8d0;
+}
+
+.chip2-outcomes__card--integrated-network {
+  background: #98dfc6;
+}
+
+.chip2-outcomes__card--output-outcomes {
+  background: #7dcbb2;
+}
+
+.chip2-outcomes__card--operational-outcomes {
+  background: #65baa3;
+}
+
+.chip2-outcomes__card--business-outcomes {
+  background: #4ca994;
+}
+
+/* =========================================
+   CARD HEADERS
+========================================= */
+
+.chip2-outcomes__card-header {
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgb(23 53 64 / 35%);
+}
+
+.chip2-outcomes__card-index {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 22px;
+  border-radius: 50%;
+  background: #173943;
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.chip2-outcomes__card-kicker {
+  display: block;
+  margin-bottom: 10px;
+  color: rgb(23 53 64 / 72%);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.chip2-outcomes__card-header h3 {
+  margin: 0;
+  color: #173540;
+  font-size: clamp(23px, 2vw, 31px);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+}
+
+/* =========================================
+   NUMBERED CAPABILITIES
+========================================= */
+
+.chip2-outcomes__items {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 24px;
+
+  padding-top: 24px;
+}
+
+.chip2-outcomes__item {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+}
+
+.chip2-outcomes__number {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: #173943;
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.chip2-outcomes__item-content h4 {
+  margin: 2px 0 7px;
+  color: #173540;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.chip2-outcomes__item-content p {
+  margin: 0;
+  color: #203b43;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* =========================================
+   CARD FOOTER
+========================================= */
+
+.chip2-outcomes__card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  margin-top: auto;
+  padding-top: 22px;
+
+  border-top: 1px solid rgb(23 53 64 / 25%);
+
+  color: rgb(23 53 64 / 80%);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.chip2-outcomes__card-action {
+  white-space: nowrap;
+}
+
+/* =========================================
+   PAGINATION
+========================================= */
+
+.chip2-outcomes__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  margin: 4px auto 0;
+}
+
+.chip2-outcomes__pagination-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+
+  border: 0;
+  border-radius: 999px;
+  background: rgb(201 226 238 / 35%);
+  cursor: pointer;
+
+  transition:
+    width 200ms ease,
+    background-color 200ms ease;
+}
+
+.chip2-outcomes__pagination-dot.is-active {
+  width: 28px;
+  background: #69d7f4;
+}
+
+.chip2-outcomes__pagination-dot:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 4px;
+}
+
+.chip2-outcomes__footer-note {
+  margin: 22px 20px 0;
+  color: #9bb0c1;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* =========================================
+   LARGE DESKTOP
+========================================= */
+
+@media (min-width: 1600px) {
+  .chip2-outcomes {
+    --chip2-card-width: clamp(390px, 26vw, 490px);
+
+    padding-top: 90px;
+    padding-bottom: 64px;
+  }
+
+  .chip2-outcomes__header {
+    margin-bottom: 44px;
+  }
+
+  .chip2-outcomes__header h2 {
+    font-size: clamp(42px, 2.7vw, 56px);
+  }
+
+  .chip2-outcomes__intro {
+    font-size: 17px;
+  }
+
+  .chip2-outcomes__track {
+    gap: 26px;
+    padding-top: 34px;
+    padding-bottom: 44px;
+  }
+
+  .chip2-outcomes__card {
+    min-height: 700px;
+    padding: 32px 30px 24px;
+    border-radius: 26px;
+  }
+
+  .chip2-outcomes__card-header h3 {
+    font-size: 32px;
+  }
+
+  .chip2-outcomes__items {
+    gap: 28px;
+  }
+
+  .chip2-outcomes__item {
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 15px;
+  }
+
+  .chip2-outcomes__number {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .chip2-outcomes__item-content h4 {
+    font-size: 15px;
+  }
+
+  .chip2-outcomes__item-content p {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+  .chip2-outcomes {
+    --chip2-card-width: clamp(310px, 55vw, 430px);
+
+    padding-top: 58px;
+    padding-bottom: 46px;
+  }
+
+  .chip2-outcomes__header {
+    margin-bottom: 28px;
+  }
+
+  .chip2-outcomes__header h2 {
+    font-size: clamp(27px, 4.5vw, 40px);
+  }
+
+  .chip2-outcomes__intro {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .chip2-outcomes__track {
+    gap: 16px;
+  }
+
+  .chip2-outcomes__card {
+    min-height: 610px;
+    padding: 23px 20px 18px;
+    border-radius: 18px;
+  }
+
+  .chip2-outcomes__card-header h3 {
+    font-size: 25px;
+  }
+
+  .chip2-outcomes__item-content h4 {
+    font-size: 13px;
+  }
+
+  .chip2-outcomes__item-content p {
+    font-size: 12px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .chip2-outcomes {
+    --chip2-card-width: min(84vw, 390px);
+
+    padding-top: 44px;
+    padding-bottom: 36px;
+  }
+
+  .chip2-outcomes__header {
+    padding-inline: 20px;
+    margin-bottom: 24px;
+  }
+
+  .chip2-outcomes__eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+
+  .chip2-outcomes__header h2 {
+    font-size: clamp(25px, 7vw, 34px);
+    overflow-wrap: anywhere;
+  }
+
+  .chip2-outcomes__intro {
+    margin-top: 15px;
+    font-size: 13px;
+    text-align: left;
+  }
+
+  .chip2-outcomes__legend {
+    font-size: 11px;
+  }
+
+  .chip2-outcomes__controls {
+    padding-inline: 20px;
+  }
+
+  .chip2-outcomes__arrow {
+    width: 38px;
+    height: 38px;
+  }
+
+  .chip2-outcomes__track {
+    gap: 14px;
+    padding: 20px max(20px, calc((100% - var(--chip2-card-width)) / 2)) 28px;
+  }
+
+  .chip2-outcomes__card {
+    min-height: 590px;
+    padding: 22px 19px 18px;
+    border-radius: 18px;
+  }
+
+  .chip2-outcomes__card-header {
+    padding-bottom: 19px;
+  }
+
+  .chip2-outcomes__card-index {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 18px;
+  }
+
+  .chip2-outcomes__card-header h3 {
+    font-size: 25px;
+  }
+
+  .chip2-outcomes__items {
+    gap: 23px;
+    padding-top: 20px;
+  }
+
+  .chip2-outcomes__item {
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .chip2-outcomes__number {
+    width: 30px;
+    height: 30px;
+    font-size: 11px;
+  }
+
+  .chip2-outcomes__item-content h4 {
+    font-size: 12px;
+  }
+
+  .chip2-outcomes__item-content p {
+    font-size: 11px;
+    line-height: 1.6;
+  }
+
+  .chip2-outcomes__footer-note {
+    padding-inline: 20px;
+    font-size: 11px;
+  }
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .chip2-outcomes__card,
+  .chip2-outcomes__arrow,
+  .chip2-outcomes__pagination-dot,
+  .chip2-outcomes__track {
+    scroll-behavior: auto;
+    transition: none;
+  }
+}
+
+
+
+
+/* =========================================
+   CHIP2EXPERIENCE2OUTCOMES
+   White background + light-blue cards
+========================================= */
+
+.chip2-outcomes {
+  --chip2-bg: #ffffff;
+  --chip2-text: #101a2c;
+  --chip2-muted: #596779;
+  --chip2-blue: #16b9d4;
+  --chip2-card-blue: #dff3ff;
+  --chip2-card-blue-soft: #cceaff;
+
+  background: #ffffff !important;
+  color: var(--chip2-text);
+}
+
+/* Main section container */
+
+.chip2-outcomes__container {
+  background: transparent;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.chip2-outcomes__header {
+  color: var(--chip2-text);
+}
+
+.chip2-outcomes__eyebrow {
+  color: #087d9b;
+}
+
+.chip2-outcomes__header h2 {
+  color: #101a2c;
+}
+
+.chip2-outcomes__intro {
+  color: #566477;
+}
+
+.chip2-outcomes__intro strong {
+  color: #087fa4;
+}
+
+.chip2-outcomes__legend {
+  color: #64748b;
+}
+
+.chip2-outcomes__legend-dot {
+  background: #18b9d2;
+  box-shadow: 0 0 10px rgb(24 185 210 / 20%);
+}
+
+/* =========================================
+   COUNTER AND NAVIGATION
+========================================= */
+
+.chip2-outcomes__counter {
+  color: #6b7789;
+}
+
+.chip2-outcomes__counter strong {
+  color: #101a2c;
+}
+
+.chip2-outcomes__arrows {
+  color: #152c43;
+}
+
+.chip2-outcomes__arrow {
+  border: 1px solid #cfdeeb;
+  background: #ffffff;
+  color: #193d59;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.chip2-outcomes__arrow:hover:not(:disabled) {
+  border-color: #7dc9ee;
+  background: #e2f4ff;
+  color: #075b8f;
+}
+
+.chip2-outcomes__arrow:focus-visible {
+  outline: 2px solid #56b8e8;
+  outline-offset: 3px;
+}
+
+/* =========================================
+   CAPABILITY CARDS
+========================================= */
+
+.chip2-outcomes__card {
+  border: 1px solid #dce8f1;
+  background: #dff3ff !important;
+  color: #183047;
+
+  box-shadow: 0 8px 24px rgb(31 74 108 / 6%);
+
+  transition:
+    opacity 240ms ease,
+    background-color 240ms ease,
+    border-color 240ms ease,
+    box-shadow 240ms ease;
+}
+
+/* Active card: fully visible, light blue */
+
+.chip2-outcomes__card.is-active {
+  opacity: 1 !important;
+  filter: none !important;
+
+  border-color: #8bcff0;
+  background: #dff3ff !important;
+  color: #183047;
+
+  box-shadow: 0 10px 30px rgb(49 124 170 / 12%);
+}
+
+/* Inactive cards: pale blue and reduced opacity */
+
+.chip2-outcomes__card.is-inactive {
+  opacity: 0.52;
+  filter: saturate(0.8);
+
+  border-color: #dce8f1;
+  background: #cceaff !important;
+  color: #29465c;
+
+  box-shadow: 0 4px 14px rgb(31 74 108 / 4%);
+}
+
+/* Keep text readable on both active and inactive cards */
+
+.chip2-outcomes__card h3,
+.chip2-outcomes__card h4 {
+  color: #183047;
+}
+
+.chip2-outcomes__card p {
+  color: #43596d;
+}
+
+/* Capability group number */
+
+.chip2-outcomes__card-index {
+  background: #18394f;
+  color: #ffffff;
+}
+
+/* Small uppercase card label */
+
+.chip2-outcomes__card-kicker {
+  color: #46667c;
+}
+
+/* Separators */
+
+.chip2-outcomes__card-header {
+  border-color: rgb(30 80 110 / 18%);
+}
+
+.chip2-outcomes__card-footer {
+  border-color: rgb(30 80 110 / 18%);
+  color: #466176;
+}
+
+.chip2-outcomes__card-action {
+  color: #246b91;
+}
+
+/* Numbered capabilities */
+
+.chip2-outcomes__number {
+  background: #c1e6fa;
+  color: #163b54;
+}
+
+/* =========================================
+   PAGINATION
+========================================= */
+
+.chip2-outcomes__pagination {
+  color: #53677b;
+}
+
+.chip2-outcomes__pagination-dot {
+  border: 0;
+  background: #cbd9e5;
+  transition:
+    width 200ms ease,
+    background-color 180ms ease;
+}
+
+.chip2-outcomes__pagination-dot:hover {
+  background: #70c8e9;
+}
+
+.chip2-outcomes__pagination-dot.is-active {
+  background: #20b8d5;
+}
+
+.chip2-outcomes__pagination-dot:focus-visible {
+  outline: 2px solid #168bb6;
+  outline-offset: 4px;
+}
+
+/* Footer note */
+
+.chip2-outcomes__footer-note {
+  color: #718096;
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .chip2-outcomes__card,
+  .chip2-outcomes__arrow,
+  .chip2-outcomes__pagination-dot {
+    transition: none;
+  }
+}

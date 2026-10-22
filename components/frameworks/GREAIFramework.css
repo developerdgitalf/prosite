@@ -1,0 +1,266 @@
+
+/* =========================================
+   PROSIGHT — GREAT FRAMEWORK
+========================================= */
+
+.great-framework {
+  width: 100%;
+  overflow: hidden;
+  padding: 28px clamp(24px, 5.5vw, 80px);
+
+  background: linear-gradient(
+    105deg,
+    #ffffff 0%,
+    #ffffff 53%,
+    #f6fbfc 76%,
+    #dff3f6 100%
+  );
+
+  color: #111111;
+  font-family: var(--font-manrope), "Manrope", sans-serif;
+}
+
+.great-framework__container {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: center;
+  gap: clamp(36px, 6vw, 80px);
+
+  width: 100%;
+  max-width: 1350px;
+  min-height: 230px;
+  margin-inline: auto;
+}
+
+/* =========================================
+   LEFT CONTENT
+========================================= */
+
+.great-framework__content {
+  width: 100%;
+  max-width: 470px;
+  justify-self: start;
+}
+
+.great-framework__content h2 {
+  margin: 0 0 5px;
+  color: #080808;
+  font-size: clamp(21px, 1.7vw, 26px);
+  font-weight: 750;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.great-framework__content h3 {
+  margin: 0 0 12px;
+  color: #505050;
+  font-size: clamp(16px, 1.35vw, 20px);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.great-framework__content p {
+  margin: 0;
+  color: #202020;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* =========================================
+   EXPLORE BUTTON
+========================================= */
+
+.great-framework__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 36px;
+  margin-top: 28px;
+  padding: 0 15px;
+
+  border: 1px solid #151515;
+  border-radius: 999px;
+  background: #151515;
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.great-framework__button:hover {
+  background: #ffffff;
+  color: #151515;
+}
+
+.great-framework__button:focus-visible {
+  outline: 3px solid #12b9d2;
+  outline-offset: 4px;
+}
+
+.great-framework__button svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* =========================================
+   RIGHT GLOBE IMAGE
+========================================= */
+
+.great-framework__visual {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 1.4 / 1;
+  justify-self: center;
+  overflow: hidden;
+  border-radius: 5px;
+  background: transparent;
+}
+
+.great-framework__image {
+  display: block;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* =========================================
+   LARGE DESKTOP
+========================================= */
+
+@media (min-width: 1600px) {
+  .great-framework {
+    padding-top: 36px;
+    padding-bottom: 36px;
+  }
+
+  .great-framework__container {
+    max-width: 1600px;
+    min-height: 280px;
+    gap: clamp(70px, 7vw, 120px);
+  }
+
+  .great-framework__content {
+    max-width: 560px;
+  }
+
+  .great-framework__content h2 {
+    font-size: 28px;
+  }
+
+  .great-framework__content h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+
+  .great-framework__content p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .great-framework__button {
+    margin-top: 30px;
+    min-height: 40px;
+    font-size: 13px;
+  }
+
+  .great-framework__visual {
+    max-width: 550px;
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+  .great-framework {
+    padding: 28px 28px;
+  }
+
+  .great-framework__container {
+    gap: 28px;
+    min-height: 220px;
+  }
+
+  .great-framework__content h2 {
+    font-size: 21px;
+  }
+
+  .great-framework__content h3 {
+    font-size: 16px;
+  }
+
+  .great-framework__content p {
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .great-framework__button {
+    margin-top: 20px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 640px) {
+  .great-framework {
+    padding: 30px 20px 36px;
+  }
+
+  .great-framework__container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    min-height: 0;
+  }
+
+  .great-framework__content {
+    max-width: none;
+  }
+
+  .great-framework__content h2 {
+    font-size: 23px;
+  }
+
+  .great-framework__content h3 {
+    margin-bottom: 12px;
+    font-size: 18px;
+  }
+
+  .great-framework__content p {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .great-framework__button {
+    min-height: 40px;
+    margin-top: 20px;
+    font-size: 13px;
+  }
+
+  .great-framework__visual {
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 1.25 / 1;
+    margin-inline: auto;
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .great-framework__button {
+    transition: none;
+  }
+}

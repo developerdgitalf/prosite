@@ -3,7 +3,8 @@ import Link from "next/link";
 import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
 import "./frameworks.css";
-
+import GREAIFramework from "../../components/frameworks/GREAIFramework";
+import Chip2Experience2Outcomes from "../../components/frameworks/Chip2Experience2Outcomes";
 const frameworks = [
   {
     id: "aiswitch",
@@ -114,6 +115,8 @@ function FrameworkFeature({
   );
 }
 
+<GREAIFramework />
+
 export default function FrameworksPage() {
   return (
     <>
@@ -139,7 +142,14 @@ export default function FrameworksPage() {
             />
           ))}
         </div>
+  <Chip2Experience2Outcomes />
+
       </main>
+
+
+
+
+
 
       <SiteFooter />
     </>
