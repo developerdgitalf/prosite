@@ -179,11 +179,11 @@ export default function ServicesPage() {
 
       {/* Services hero banner */}
       <section
-        className="services-hero"
-        aria-labelledby="services-page-title"
+        className="frameworks-page__hero"
+        aria-labelledby="frameworks-page-title"
       >
-        <div className="services-hero__container">
-          <h1 id="services-page-title">Our Services</h1>
+        <div className="frameworks-page__hero-container">
+          <h1 id="frameworks-page-title">Services</h1>
         </div>
       </section>
 

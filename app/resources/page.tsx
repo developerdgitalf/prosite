@@ -1,6 +1,8 @@
 
 "use client";
 
+import Link from "next/link";
+
 import { useState, type CSSProperties } from "react";
 import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
@@ -329,6 +331,17 @@ export default function ResourcesPage() {
                   Clear filters
                 </button>
               )}
+            </div>
+
+            <div className="resources-all-topics">
+              <Link
+                href="/discover"
+                className="resources-all-topics__button"
+                aria-label="Browse all topics"
+              >
+                Browse All Topics
+                <span aria-hidden="true">↗</span>
+              </Link>
             </div>
 
             {filteredResources.length > 0 ? (

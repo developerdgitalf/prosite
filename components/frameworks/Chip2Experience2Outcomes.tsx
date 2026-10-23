@@ -1,8 +1,13 @@
-
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { KeyboardEvent } from "react";
+import type {
+  CSSProperties,
+  KeyboardEvent,
+  MouseEvent as ReactMouseEvent,
+  PointerEvent as ReactPointerEvent,
+} from "react";
+
 import "./Chip2Experience2Outcomes.css";
 
 /* =========================================
@@ -115,205 +120,300 @@ const capabilityGroups: CapabilityGroup[] = [
 ];
 
 const GROUP_COUNT = capabilityGroups.length;
-
-/*
- * Three copies provide cards on both sides of the loop.
- * The middle copy is the normal operating range.
- */
-const repeatedCapabilityGroups = [
+const MIDDLE_COPY_START = GROUP_COUNT;
+const repeatedGroups = [
   ...capabilityGroups,
   ...capabilityGroups,
   ...capabilityGroups,
 ];
+const VISIBLE_RADIUS = 2;
+const DRAG_THRESHOLD = 55;
+const NORMALISE_DELAY = 720;
+
+ type DragState = {
+  active: boolean;
+  pointerId: number;
+  startX: number;
+  deltaX: number;
+  moved: boolean;
+};
+
+const initialDragState: DragState = {
+  active: false,
+  pointerId: -1,
+  startX: 0,
+  deltaX: 0,
+  moved: false,
+};
+
+function getLogicalIndex(index: number) {
+  return ((index % GROUP_COUNT) + GROUP_COUNT) % GROUP_COUNT;
+}
+
+function formatNumber(value: number) {
+  return String(value).padStart(2, "0");
+}
 
 /* =========================================
    MAIN COMPONENT
 ========================================= */
 
 export default function Chip2Experience2Outcomes() {
-  // Start at card 1, in the middle copy.
   const [activeVirtualIndex, setActiveVirtualIndex] = useState(
-    GROUP_COUNT
+    MIDDLE_COPY_START
   );
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isRebasing, setIsRebasing] = useState(false);
+  const [cardStepPercent, setCardStepPercent] = useState(15);
 
-  const trackRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<Array<HTMLElement | null>>([]);
+  const activeIndexRef = useRef(MIDDLE_COPY_START);
+  const dragRef = useRef<DragState>({ ...initialDragState });
+  const suppressClickRef = useRef(false);
+  const normaliseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const suppressClickTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const activeIndexRef = useRef(GROUP_COUNT);
-  const skipSmoothRef = useRef(false);
+  const logicalActiveIndex = getLogicalIndex(activeVirtualIndex);
 
-  const scrollTimerRef =
-    useRef<ReturnType<typeof setTimeout> | null>(null);
+  const updateActiveIndex = useCallback((index: number) => {
+    activeIndexRef.current = index;
+    setActiveVirtualIndex(index);
+  }, []);
+
+  const clearNormaliseTimer = useCallback(() => {
+    if (normaliseTimerRef.current) {
+      clearTimeout(normaliseTimerRef.current);
+      normaliseTimerRef.current = null;
+    }
+  }, []);
+
+  const clearSuppressClickTimer = useCallback(() => {
+    if (suppressClickTimerRef.current) {
+      clearTimeout(suppressClickTimerRef.current);
+      suppressClickTimerRef.current = null;
+    }
+    suppressClickRef.current = false;
+  }, []);
 
   /*
-   * Update the React state and its synchronous reference together.
-   * This prevents rapid arrow clicks from reading stale indices.
+   * Measure once per resize, not on every active-card change.
+   * This keeps the slot positions stable and prevents visual jitter.
    */
-  const setVirtualIndex = useCallback(
-    (index: number, instant = false) => {
-      if (instant) {
-        skipSmoothRef.current = true;
-      }
+  useEffect(() => {
+    const stage = stageRef.current;
+    const sizingCard = cardRefs.current[MIDDLE_COPY_START];
+    if (!stage || !sizingCard) return;
 
-      activeIndexRef.current = index;
-      setActiveVirtualIndex(index);
+    const updateStep = () => {
+      const stageWidth = stage.clientWidth;
+      const cardWidth = sizingCard.getBoundingClientRect().width;
+      if (!stageWidth || !cardWidth) return;
+
+      const nextStep = (cardWidth * 0.62 * 100) / stageWidth;
+      setCardStepPercent((previous) =>
+        Math.abs(previous - nextStep) > 0.15 ? nextStep : previous
+      );
+    };
+
+    updateStep();
+
+    if (typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", updateStep);
+      return () => window.removeEventListener("resize", updateStep);
+    }
+
+    const observer = new ResizeObserver(updateStep);
+    observer.observe(stage);
+    observer.observe(sizingCard);
+
+    return () => observer.disconnect();
+  }, []);
+
+  /*
+   * Once a full transition has finished, rebase the loop to the
+   * middle copy without animating the duplicate-card swap.
+   */
+  useEffect(() => {
+    activeIndexRef.current = activeVirtualIndex;
+
+    if (
+      activeVirtualIndex >= MIDDLE_COPY_START &&
+      activeVirtualIndex < MIDDLE_COPY_START + GROUP_COUNT
+    ) {
+      return;
+    }
+
+    clearNormaliseTimer();
+    const normalisedIndex =
+      MIDDLE_COPY_START + getLogicalIndex(activeVirtualIndex);
+
+    normaliseTimerRef.current = setTimeout(() => {
+      setIsRebasing(true);
+      activeIndexRef.current = normalisedIndex;
+      setActiveVirtualIndex(normalisedIndex);
+      normaliseTimerRef.current = null;
+
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => setIsRebasing(false));
+      });
+    }, NORMALISE_DELAY);
+
+    return clearNormaliseTimer;
+  }, [activeVirtualIndex, clearNormaliseTimer]);
+
+  useEffect(() => {
+    return () => {
+      clearNormaliseTimer();
+      clearSuppressClickTimer();
+    };
+  }, [clearNormaliseTimer, clearSuppressClickTimer]);
+
+  const moveBy = useCallback(
+    (amount: number) => {
+      clearNormaliseTimer();
+      updateActiveIndex(activeIndexRef.current + amount);
     },
-    []
+    [clearNormaliseTimer, updateActiveIndex]
   );
 
-  const activeIndex =
-    ((activeVirtualIndex % GROUP_COUNT) + GROUP_COUNT) %
-    GROUP_COUNT;
+  const moveToLogicalIndex = useCallback(
+    (targetLogicalIndex: number) => {
+      const currentLogical = getLogicalIndex(activeIndexRef.current);
+      let difference = targetLogicalIndex - currentLogical;
+
+      if (difference > GROUP_COUNT / 2) difference -= GROUP_COUNT;
+      if (difference < -GROUP_COUNT / 2) difference += GROUP_COUNT;
+
+      moveBy(difference);
+    },
+    [moveBy]
+  );
+
+  const activateCard = useCallback(
+    (virtualIndex: number) => {
+      if (dragRef.current.moved || suppressClickRef.current) return;
+      clearNormaliseTimer();
+      updateActiveIndex(virtualIndex);
+    },
+    [clearNormaliseTimer, updateActiveIndex]
+  );
 
   /* =========================================
-     CENTRE THE ACTIVE CARD
+     POINTER DRAG
+     Only the centre card follows the pointer.
+     The side cards stay still until release.
   ========================================= */
 
-  useEffect(() => {
-    const track = trackRef.current;
-    const card = cardRefs.current[activeVirtualIndex];
+  const handlePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
 
-    if (!track || !card) return;
-
-    const trackRect = track.getBoundingClientRect();
-    const cardRect = card.getBoundingClientRect();
-
-    const targetLeft =
-      track.scrollLeft +
-      cardRect.left -
-      trackRect.left -
-      (track.clientWidth - card.clientWidth) / 2;
-
-    const maxScroll = track.scrollWidth - track.clientWidth;
-
-    track.scrollTo({
-      left: Math.max(0, Math.min(targetLeft, maxScroll)),
-      behavior: skipSmoothRef.current ? "auto" : "smooth",
-    });
-
-    skipSmoothRef.current = false;
-  }, [activeVirtualIndex]);
-
-  /* =========================================
-     SEAMLESS LOOP NORMALISATION
-  ========================================= */
-
-  useEffect(() => {
-    const track = trackRef.current;
-
-    if (!track) return;
-
-    /*
-     * Once scrolling settles, move cloned cards back into the
-     * equivalent position in the middle copy.
-     *
-     * The reset is instant and retains the same visible card,
-     * so the visitor does not see a jump from card 5 to card 1.
-     */
-    const normalisePosition = () => {
-      if (scrollTimerRef.current) {
-        clearTimeout(scrollTimerRef.current);
-        scrollTimerRef.current = null;
-      }
-
-      const currentIndex = activeIndexRef.current;
-
-      // Already inside the middle copy.
-      if (
-        currentIndex >= GROUP_COUNT &&
-        currentIndex < GROUP_COUNT * 2
-      ) {
-        return;
-      }
-
-      const logicalIndex =
-        ((currentIndex % GROUP_COUNT) + GROUP_COUNT) %
-        GROUP_COUNT;
-
-      setVirtualIndex(GROUP_COUNT + logicalIndex, true);
-    };
-
-    /*
-     * The scrollend listener provides the primary path.
-     * The debounced scroll listener is a fallback for browsers
-     * where scrollend is unavailable or not fired.
-     */
-    const handleScroll = () => {
-      if (scrollTimerRef.current) {
-        clearTimeout(scrollTimerRef.current);
-      }
-
-      scrollTimerRef.current = setTimeout(
-        normalisePosition,
-        180
-      );
-    };
-
-    track.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
-
-    track.addEventListener(
-      "scrollend",
-      normalisePosition as EventListener
-    );
-
-    return () => {
-      track.removeEventListener("scroll", handleScroll);
-      track.removeEventListener(
-        "scrollend",
-        normalisePosition as EventListener
-      );
-
-      if (scrollTimerRef.current) {
-        clearTimeout(scrollTimerRef.current);
-        scrollTimerRef.current = null;
-      }
-    };
-  }, [setVirtualIndex]);
-
-  /* =========================================
-     CARD SELECTION
-  ========================================= */
-
-  const activateCard = (virtualIndex: number) => {
-    if (scrollTimerRef.current) {
-      clearTimeout(scrollTimerRef.current);
-      scrollTimerRef.current = null;
+    const target = event.target;
+    if (
+      target instanceof Element &&
+      target.closest("button, a, input, select, textarea")
+    ) {
+      return;
     }
 
-    setVirtualIndex(virtualIndex);
+    clearNormaliseTimer();
+    clearSuppressClickTimer();
+
+    dragRef.current = {
+      active: true,
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      deltaX: 0,
+      moved: false,
+    };
+
+    setIsDragging(true);
+
+    try {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    } catch {
+      // Continue with pointer events even if capture is unavailable.
+    }
   };
 
-  /* =========================================
-     NEXT — CARD 5 CONTINUES TO CARD 1
-  ========================================= */
+  const handlePointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const drag = dragRef.current;
+    if (!drag.active || drag.pointerId !== event.pointerId) return;
 
-  const goNext = () => {
-    if (scrollTimerRef.current) {
-      clearTimeout(scrollTimerRef.current);
-      scrollTimerRef.current = null;
+    const deltaX = event.clientX - drag.startX;
+    drag.deltaX = deltaX;
+    if (Math.abs(deltaX) > 5) drag.moved = true;
+
+    if (drag.moved) {
+      // Only the active card receives this offset in its inline style.
+      setDragOffset(deltaX);
+      if (event.cancelable) event.preventDefault();
+    }
+  };
+
+  const finishDrag = (
+    event: ReactPointerEvent<HTMLDivElement>,
+    cancelled = false
+  ) => {
+    const drag = dragRef.current;
+    if (!drag.active || drag.pointerId !== event.pointerId) return;
+
+    const deltaX = drag.deltaX;
+    const didMove = drag.moved;
+
+    dragRef.current = { ...initialDragState };
+    setIsDragging(false);
+    setDragOffset(0);
+
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      try {
+        event.currentTarget.releasePointerCapture(event.pointerId);
+      } catch {
+        // The browser may already have released pointer capture.
+      }
     }
 
-    setVirtualIndex(activeIndexRef.current + 1);
-  };
+    if (cancelled || !didMove) return;
 
-  /* =========================================
-     PREVIOUS — CARD 1 CONTINUES TO CARD 5
-  ========================================= */
+    suppressClickRef.current = true;
+    suppressClickTimerRef.current = setTimeout(() => {
+      suppressClickRef.current = false;
+      suppressClickTimerRef.current = null;
+    }, 300);
 
-  const goPrevious = () => {
-    if (scrollTimerRef.current) {
-      clearTimeout(scrollTimerRef.current);
-      scrollTimerRef.current = null;
+    if (deltaX <= -DRAG_THRESHOLD) {
+      moveBy(1);
+    } else if (deltaX >= DRAG_THRESHOLD) {
+      moveBy(-1);
     }
-
-    setVirtualIndex(activeIndexRef.current - 1);
   };
 
-  /* =========================================
-     KEYBOARD NAVIGATION
-  ========================================= */
+  const handlePointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
+    finishDrag(event);
+  };
+
+  const handlePointerCancel = (event: ReactPointerEvent<HTMLDivElement>) => {
+    finishDrag(event, true);
+  };
+
+  const handleLostPointerCapture = (
+    event: ReactPointerEvent<HTMLDivElement>
+  ) => {
+    const drag = dragRef.current;
+    if (!drag.active || drag.pointerId !== event.pointerId) return;
+
+    dragRef.current = { ...initialDragState };
+    setIsDragging(false);
+    setDragOffset(0);
+  };
+
+  const handleClickCapture = (event: ReactMouseEvent<HTMLDivElement>) => {
+    if (!suppressClickRef.current) return;
+    event.preventDefault();
+    event.stopPropagation();
+    clearSuppressClickTimer();
+  };
 
   const handleCardKeyDown = (
     event: KeyboardEvent<HTMLElement>,
@@ -322,22 +422,14 @@ export default function Chip2Experience2Outcomes() {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       activateCard(virtualIndex);
-    }
-
-    if (event.key === "ArrowRight") {
+    } else if (event.key === "ArrowRight") {
       event.preventDefault();
-      goNext();
-    }
-
-    if (event.key === "ArrowLeft") {
+      moveBy(1);
+    } else if (event.key === "ArrowLeft") {
       event.preventDefault();
-      goPrevious();
+      moveBy(-1);
     }
   };
-
-  /* =========================================
-     RENDER
-  ========================================= */
 
   return (
     <section
@@ -345,34 +437,26 @@ export default function Chip2Experience2Outcomes() {
       aria-labelledby="chip2-outcomes-title"
     >
       <div className="chip2-outcomes__container">
-        {/* Header */}
-
         <header className="chip2-outcomes__header">
           <p className="chip2-outcomes__eyebrow">
             FROM INFRASTRUCTURE TO IMPACT
           </p>
-
           <h2 id="chip2-outcomes-title">
             CHIP2EXPERIENCE2OUTCOMES™
           </h2>
-
           <p className="chip2-outcomes__intro">
             <strong>Chip2Experience2Outcomes™</strong> is an intelligent
-            enterprise fabric architecture with two layers:
-            Chip2Experience, converting technology into user experiences,
-            and Experience2Outcomes, turning those experiences into business
-            value. Achieving outcomes requires a top-down strategic approach
-            driven by the C-suite, rather than a bottom-up,
-            technology-first one.
+            enterprise fabric architecture with two layers: Chip2Experience,
+            converting technology into user experiences, and Experience2Outcomes,
+            turning those experiences into business value. Achieving outcomes
+            requires a top-down strategic approach driven by the C-suite, rather
+            than a bottom-up, technology-first one.
           </p>
-
           <div className="chip2-outcomes__legend">
             <span className="chip2-outcomes__legend-dot" />
-            Select a capability to bring it into focus
+            Drag the centre card or select a capability to bring it into focus
           </div>
         </header>
-
-        {/* Current slide and navigation */}
 
         <div className="chip2-outcomes__controls">
           <span
@@ -380,13 +464,8 @@ export default function Chip2Experience2Outcomes() {
             aria-live="polite"
             aria-atomic="true"
           >
-            <strong>
-              {String(activeIndex + 1).padStart(2, "0")}
-            </strong>
-
-            <span>
-              {" "}/ {String(GROUP_COUNT).padStart(2, "0")}
-            </span>
+            <strong>{formatNumber(logicalActiveIndex + 1)}</strong>
+            <span> / {formatNumber(GROUP_COUNT)}</span>
           </span>
 
           <div className="chip2-outcomes__arrows">
@@ -394,35 +473,58 @@ export default function Chip2Experience2Outcomes() {
               type="button"
               className="chip2-outcomes__arrow"
               aria-label="Previous capability"
-              onClick={goPrevious}
+              onClick={() => moveBy(-1)}
             >
               <span aria-hidden="true">←</span>
             </button>
-
             <button
               type="button"
               className="chip2-outcomes__arrow"
               aria-label="Next capability"
-              onClick={goNext}
+              onClick={() => moveBy(1)}
             >
               <span aria-hidden="true">→</span>
             </button>
           </div>
         </div>
 
-        {/* Horizontal looping slider */}
-
         <div
-          className="chip2-outcomes__track"
-          ref={trackRef}
+          ref={stageRef}
+          className={[
+            "chip2-outcomes__stage",
+            isDragging ? "is-dragging" : "",
+            isRebasing ? "is-rebasing" : "",
+          ]
+            .filter(Boolean)
+            .join(" ")}
           role="region"
-          aria-label="CHIP2EXPERIENCE2OUTCOMES capability cards"
+          aria-label="CHIP2EXPERIENCE2OUTCOMES capability carousel"
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerCancel}
+          onLostPointerCapture={handleLostPointerCapture}
+          onClickCapture={handleClickCapture}
+          onDragStart={(event) => event.preventDefault()}
         >
-          {repeatedCapabilityGroups.map((group, virtualIndex) => {
-            const isActive =
-              virtualIndex === activeVirtualIndex;
+          {repeatedGroups.map((group, virtualIndex) => {
+            const offset = virtualIndex - activeVirtualIndex;
+            const visible = Math.abs(offset) <= VISIBLE_RADIUS;
+            const isActive = offset === 0;
+            const distance = Math.abs(offset);
+            const scale = isActive ? 1 : distance === 1 ? 0.9 : 0.8;
+            const opacity = isActive ? 1 : distance === 1 ? 0.8 : 0.42;
+            const logicalIndex = getLogicalIndex(virtualIndex);
+            const activeDragOffset = isActive && isDragging ? dragOffset : 0;
 
-            const logicalIndex = virtualIndex % GROUP_COUNT;
+            const cardStyle: CSSProperties = {
+              left: `${50 + offset * cardStepPercent}%`,
+              transform: `translate3d(calc(-50% + ${activeDragOffset}px), -50%, 0) scale(${scale})`,
+              zIndex: 20 - distance,
+              opacity: visible ? opacity : 0,
+              visibility: visible ? "visible" : "hidden",
+              pointerEvents: visible ? "auto" : "none",
+            };
 
             return (
               <article
@@ -434,31 +536,33 @@ export default function Chip2Experience2Outcomes() {
                   "chip2-outcomes__card",
                   `chip2-outcomes__card--${group.id}`,
                   isActive ? "is-active" : "is-inactive",
-                ].join(" ")}
+                  distance === 1 ? "is-neighbour" : "",
+                  distance === 2 ? "is-outer" : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+                style={cardStyle}
                 role="button"
-                tabIndex={0}
+                tabIndex={visible ? 0 : -1}
                 aria-pressed={isActive}
-                aria-label={`${group.title}${isActive ? ", active card" : ", activate card"}`}
+                aria-hidden={!visible}
+                aria-label={`${group.title}${
+                  isActive ? ", active capability" : ", select capability"
+                }`}
                 onClick={() => activateCard(virtualIndex)}
                 onKeyDown={(event) =>
                   handleCardKeyDown(event, virtualIndex)
                 }
               >
-                {/* Card header */}
-
                 <div className="chip2-outcomes__card-header">
                   <span className="chip2-outcomes__card-index">
-                    {String(logicalIndex + 1).padStart(2, "0")}
+                    {formatNumber(logicalIndex + 1)}
                   </span>
-
                   <span className="chip2-outcomes__card-kicker">
                     CAPABILITY GROUP
                   </span>
-
                   <h3>{group.title}</h3>
                 </div>
-
-                {/* Numbered capability items */}
 
                 <div className="chip2-outcomes__items">
                   {group.items.map((item) => (
@@ -467,9 +571,8 @@ export default function Chip2Experience2Outcomes() {
                       key={item.number}
                     >
                       <span className="chip2-outcomes__number">
-                        {String(item.number).padStart(2, "0")}
+                        {formatNumber(item.number)}
                       </span>
-
                       <div className="chip2-outcomes__item-content">
                         <h4>{item.title}</h4>
                         <p>{item.description}</p>
@@ -478,16 +581,11 @@ export default function Chip2Experience2Outcomes() {
                   ))}
                 </div>
 
-                {/* Card footer */}
-
                 <div className="chip2-outcomes__card-footer">
                   <span>
-                    {String(group.items.length).padStart(2, "0")}{" "}
-                    {group.items.length === 1
-                      ? "CAPABILITY"
-                      : "CAPABILITIES"}
+                    {formatNumber(group.items.length)}{" "}
+                    {group.items.length === 1 ? "CAPABILITY" : "CAPABILITIES"}
                   </span>
-
                   <span
                     className="chip2-outcomes__card-action"
                     aria-hidden="true"
@@ -500,8 +598,6 @@ export default function Chip2Experience2Outcomes() {
           })}
         </div>
 
-        {/* Pagination */}
-
         <div
           className="chip2-outcomes__pagination"
           aria-label="Choose capability group"
@@ -510,19 +606,14 @@ export default function Chip2Experience2Outcomes() {
             <button
               key={group.id}
               type="button"
+              className={`chip2-outcomes__pagination-dot ${
+                index === logicalActiveIndex ? "is-active" : ""
+              }`}
               aria-label={`Show ${group.title}`}
               aria-current={
-                index === activeIndex ? "true" : undefined
+                index === logicalActiveIndex ? "true" : undefined
               }
-              className={[
-                "chip2-outcomes__pagination-dot",
-                index === activeIndex ? "is-active" : "",
-              ]
-                .filter(Boolean)
-                .join(" ")}
-              onClick={() =>
-                activateCard(GROUP_COUNT + index)
-              }
+              onClick={() => moveToLogicalIndex(index)}
             />
           ))}
         </div>

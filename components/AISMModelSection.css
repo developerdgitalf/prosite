@@ -1,0 +1,446 @@
+/* =====================================================
+   PROSIGHT — AISM™ MODEL / SIX DIMENSIONS
+   Desktop proportion: 40% introduction / 20% core / 40% dimensions
+===================================================== */
+
+.aism-model {
+  --aism-ink: #080b10;
+  --aism-muted: #5d6268;
+  --aism-line: #cecece;
+
+  width: 100%;
+  min-height: 780px;
+  display: grid;
+  align-items: center;
+  padding: clamp(42px, 4.2vw, 76px) 0;
+  overflow: hidden;
+  color: var(--aism-ink);
+  background:
+    radial-gradient(ellipse at 3% 55%, rgb(198 237 246 / 62%), transparent 33%),
+    linear-gradient(110deg, #f5fbfc 0%, #ffffff 31%, #ffffff 100%);
+  font-family: var(--font-manrope), "Manrope", Arial, sans-serif;
+}
+
+.aism-model,
+.aism-model * {
+  box-sizing: border-box;
+}
+
+/* The shared website container remains centered and wide. */
+.aism-model__inner {
+  width: min(calc(100% - 128px), 1760px);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(230px, 1fr) minmax(0, 2fr);
+  align-items: center;
+  gap: 0;
+}
+
+/* LEFT — 40% */
+.aism-model__intro {
+  width: 100%;
+  max-width: 500px;
+  min-width: 0;
+  justify-self: start;
+  padding-right: clamp(22px, 2.6vw, 48px);
+}
+
+.aism-model__eyebrow {
+  margin: 0 0 20px;
+  color: #17191c;
+  font-size: clamp(12px, 0.78vw, 15px);
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: 0.015em;
+}
+
+.aism-model__heading {
+  margin: 0;
+  color: #07090b;
+  font-size: clamp(38px, 2.65vw, 54px);
+  font-weight: 650;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.aism-model__summary {
+  max-width: 440px;
+  margin: 22px 0 0;
+  color: var(--aism-muted);
+  font-size: clamp(15px, 1.02vw, 19px);
+  font-weight: 550;
+  line-height: 1.48;
+}
+
+/* CENTER — 20%. Circle is in front of its connector. */
+.aism-model__core-column {
+  position: relative;
+  display: grid;
+  place-items: center;
+  align-self: stretch;
+  min-width: 0;
+  min-height: 720px;
+}
+
+.aism-model__core-column::after {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  right: 0;
+  left: 50%;
+  height: 6px;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: var(--aism-line);
+  content: "";
+}
+
+.aism-model__core-wrap {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  justify-self: center;
+  width: clamp(210px, 14vw, 270px);
+  aspect-ratio: 1;
+  padding: 9px;
+  border: 7px solid #cecece;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.aism-model__core {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  border-radius: 50%;
+  background: #334580;
+  color: #ffffff;
+  text-align: center;
+}
+
+.aism-model__core span {
+  white-space: nowrap;
+  font-size: clamp(18px, 1.18vw, 24px);
+  font-weight: 750;
+  letter-spacing: -0.02em;
+}
+
+/* RIGHT — 40% */
+.aism-model__dimension-list {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  align-self: center;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0 0 0 clamp(44px, 4vw, 68px);
+  list-style: none;
+}
+
+/* Rail is at the right of the core — never left of the circle. */
+.aism-model__dimension-list::before {
+  position: absolute;
+  top: 66px;
+  bottom: 66px;
+  left: 0;
+  width: 6px;
+  border-radius: 999px;
+  background: var(--aism-line);
+  content: "";
+}
+
+.aism-model__dimension {
+  position: relative;
+  display: grid;
+  grid-template-columns: clamp(88px, 6.2vw, 116px) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(18px, 1.25vw, 26px);
+  width: 100%;
+  min-width: 0;
+  min-height: clamp(132px, 9.2vw, 156px);
+  padding: 9px 0;
+}
+
+/* Short branch from the continuous rail to each icon. */
+.aism-model__dimension::before {
+  position: absolute;
+  top: 50%;
+  left: calc(-1 * clamp(44px, 4vw, 68px));
+  width: clamp(44px, 4vw, 68px);
+  height: 6px;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: var(--aism-line);
+  content: "";
+}
+
+.aism-model__icon-circle {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: clamp(88px, 6.2vw, 116px);
+  height: clamp(88px, 6.2vw, 116px);
+  border: 6px solid var(--dimension-color);
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--dimension-color);
+}
+
+.aism-model__icon-art {
+  display: block;
+  width: 64%;
+  height: 64%;
+}
+
+.aism-model__dimension-copy {
+  width: 100%;
+  max-width: 390px;
+  min-width: 0;
+  padding: 1px 0;
+}
+
+.aism-model__dimension-copy h3 {
+  margin: 0 0 7px;
+  color: var(--dimension-color);
+  font-size: clamp(15px, 0.98vw, 19px);
+  font-weight: 750;
+  line-height: 1.22;
+  letter-spacing: -0.015em;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.aism-model__dimension-copy p {
+  margin: 0;
+  color: #17191c;
+  font-size: clamp(12px, 0.75vw, 14px);
+  font-weight: 550;
+  line-height: 1.36;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+/* Large monitors */
+@media (min-width: 1800px) {
+  .aism-model__inner {
+    width: min(calc(100% - 160px), 1760px);
+  }
+
+  .aism-model__intro {
+    max-width: 540px;
+  }
+
+  .aism-model__heading {
+    font-size: clamp(50px, 2.8vw, 58px);
+  }
+
+  .aism-model__core-wrap {
+    width: 280px;
+  }
+
+  .aism-model__dimension {
+    min-height: 150px;
+  }
+
+  .aism-model__dimension-copy {
+    max-width: 410px;
+  }
+}
+
+/* Tablet — intro above, core and list in two columns. */
+@media (max-width: 1100px) {
+  .aism-model {
+    min-height: 0;
+    padding: 48px 0 54px;
+  }
+
+  .aism-model__inner {
+    width: min(calc(100% - 64px), 920px);
+    grid-template-columns: minmax(170px, 0.42fr) minmax(0, 1fr);
+    row-gap: 34px;
+    align-items: center;
+  }
+
+  .aism-model__intro {
+    grid-column: 1 / -1;
+    max-width: 760px;
+    padding-right: 0;
+  }
+
+  .aism-model__heading br {
+    display: none;
+  }
+
+  .aism-model__summary {
+    max-width: 620px;
+    margin-top: 15px;
+  }
+
+  .aism-model__core-column {
+    grid-column: 1;
+    grid-row: 2;
+    min-height: 0;
+    align-self: stretch;
+  }
+
+  .aism-model__core-column::after {
+    display: none;
+  }
+
+  .aism-model__core-wrap {
+    width: clamp(160px, 22vw, 220px);
+  }
+
+  .aism-model__dimension-list {
+    grid-column: 2;
+    grid-row: 2;
+    padding-left: 30px;
+  }
+
+  .aism-model__dimension-list::before {
+    top: 44px;
+    bottom: 44px;
+    width: 4px;
+  }
+
+  .aism-model__dimension {
+    grid-template-columns: 70px minmax(0, 1fr);
+    gap: 14px;
+    min-height: 92px;
+  }
+
+  .aism-model__dimension::before {
+    left: -30px;
+    width: 30px;
+    height: 4px;
+  }
+
+  .aism-model__icon-circle {
+    width: 70px;
+    height: 70px;
+    border-width: 4px;
+  }
+
+  .aism-model__dimension-copy {
+    max-width: none;
+  }
+
+  .aism-model__dimension-copy h3 {
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+
+  .aism-model__dimension-copy p {
+    font-size: 11px;
+    line-height: 1.38;
+  }
+}
+
+/* Mobile — intro, core circle, then six full-width cards. */
+@media (max-width: 640px) {
+  .aism-model {
+    padding: 36px 0 42px;
+    background:
+      radial-gradient(ellipse at 0% 8%, rgb(197 236 245 / 48%), transparent 36%),
+      #ffffff;
+  }
+
+  .aism-model__inner {
+    width: calc(100% - 36px);
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 25px;
+  }
+
+  .aism-model__intro,
+  .aism-model__core-column,
+  .aism-model__dimension-list {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .aism-model__eyebrow {
+    margin-bottom: 12px;
+    font-size: 11px;
+  }
+
+  .aism-model__heading {
+    font-size: clamp(32px, 8.5vw, 42px);
+    line-height: 1.1;
+  }
+
+  .aism-model__heading br {
+    display: initial;
+  }
+
+  .aism-model__summary {
+    max-width: 440px;
+    margin-top: 14px;
+    font-size: 14px;
+  }
+
+  .aism-model__core-column {
+    min-height: 0;
+  }
+
+  .aism-model__core-wrap {
+    width: 164px;
+    padding: 7px;
+    border-width: 4px;
+  }
+
+  .aism-model__core-column::after {
+    display: none;
+  }
+
+  .aism-model__core span {
+    font-size: 16px;
+  }
+
+  .aism-model__dimension-list {
+    gap: 12px;
+    padding: 0;
+  }
+
+  .aism-model__dimension-list::before,
+  .aism-model__dimension::before {
+    display: none;
+  }
+
+  .aism-model__dimension {
+    grid-template-columns: 62px minmax(0, 1fr);
+    gap: 14px;
+    min-height: 0;
+    padding: 15px;
+    border: 1px solid #e5eef3;
+    border-radius: 15px;
+    background: rgb(255 255 255 / 96%);
+    box-shadow: 0 5px 18px rgb(24 66 91 / 5%);
+  }
+
+  .aism-model__icon-circle {
+    width: 62px;
+    height: 62px;
+    border-width: 4px;
+  }
+
+  .aism-model__dimension-copy h3 {
+    margin-bottom: 5px;
+    font-size: 13px;
+  }
+
+  .aism-model__dimension-copy p {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aism-model * {
+    scroll-behavior: auto;
+  }
+}

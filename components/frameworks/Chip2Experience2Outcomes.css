@@ -1,31 +1,28 @@
-
 /* =========================================
-   CHIP2EXPERIENCE2OUTCOMES™
-   Interactive horizontal capability slider
+   PROSIGHT — CHIP2EXPERIENCE2OUTCOMES
+   White coverflow carousel
+   Centre card crisp; side cards softly blurred
 ========================================= */
 
 .chip2-outcomes {
-  --chip2-card-width: clamp(310px, 31vw, 460px);
-  --chip2-navy: #0e192b;
-  --chip2-cyan: #69d7f4;
-  --chip2-ink: #173540;
+  --chip2-bg: #ffffff;
+  --chip2-text: #172536;
+  --chip2-muted: #66788a;
+  --chip2-blue: #31b8e2;
+  --chip2-card-width: clamp(280px, 25vw, 430px);
+  --chip2-card-height: 500px;
 
+  position: relative;
   width: 100%;
   overflow: hidden;
-  padding: 76px 0 52px;
+  padding: clamp(44px, 5vw, 76px) 0 38px;
 
-  background:
-    radial-gradient(
-      ellipse at 85% 12%,
-      rgb(28 92 111 / 24%),
-      transparent 34%
-    ),
-    linear-gradient(135deg, #0b1526 0%, #112238 58%, #0c1b2c 100%);
-
-  color: #ffffff;
+  color: var(--chip2-text);
+  background: #ffffff;
   font-family: var(--font-manrope), "Manrope", sans-serif;
 }
 
+.chip2-outcomes,
 .chip2-outcomes *,
 .chip2-outcomes *::before,
 .chip2-outcomes *::after {
@@ -33,51 +30,50 @@
 }
 
 .chip2-outcomes__container {
-  width: 100%;
-  max-width: 1920px;
+  width: calc(100% - 48px);
+  max-width: 1600px;
   margin-inline: auto;
 }
 
 /* =========================================
-   SECTION INTRO
+   HEADER
 ========================================= */
 
 .chip2-outcomes__header {
-  max-width: 1280px;
-  margin: 0 auto 34px;
-  padding: 0 36px;
+  max-width: 1000px;
+  margin: 0 auto 25px;
   text-align: center;
 }
 
 .chip2-outcomes__eyebrow {
-  margin: 0 0 14px;
-  color: var(--chip2-cyan);
-  font-size: 12px;
+  margin: 0 0 13px;
+  color: #1483ae;
+  font-size: 10px;
   font-weight: 800;
   line-height: 1.4;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
 }
 
 .chip2-outcomes__header h2 {
   margin: 0;
-  color: #e9f8ff;
-  font-size: clamp(30px, 3vw, 48px);
-  font-weight: 800;
-  line-height: 1.12;
-  letter-spacing: -0.04em;
+  color: #101b2d;
+  font-size: clamp(28px, 3.2vw, 46px);
+  font-weight: 750;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
 }
 
 .chip2-outcomes__intro {
-  max-width: 1120px;
-  margin: 20px auto 0;
-  color: #d8e3ed;
-  font-size: clamp(14px, 1.15vw, 17px);
+  max-width: 900px;
+  margin: 18px auto 0;
+  color: #5a6878;
+  font-size: 13px;
   font-weight: 400;
   line-height: 1.75;
 }
 
 .chip2-outcomes__intro strong {
-  color: #69d7f4;
+  color: #087da7;
   font-weight: 750;
 }
 
@@ -86,48 +82,49 @@
   align-items: center;
   justify-content: center;
   gap: 9px;
-  margin-top: 22px;
-  color: #acbdce;
-  font-size: 12px;
+  margin-top: 17px;
+  color: #7a8997;
+  font-size: 10px;
   line-height: 1.5;
 }
 
 .chip2-outcomes__legend-dot {
-  width: 8px;
-  height: 8px;
-  flex: 0 0 8px;
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
   border-radius: 50%;
-  background: #71e6c0;
-  box-shadow: 0 0 15px rgb(113 230 192 / 55%);
+  background: #29b99c;
 }
 
 /* =========================================
-   SLIDER CONTROLS
+   COUNTER AND ARROWS
 ========================================= */
 
 .chip2-outcomes__controls {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  max-width: 1540px;
-  margin: 0 auto;
-  padding: 0 28px 12px;
+  gap: 20px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 24px auto 8px;
+  padding: 0 4px;
 }
 
 .chip2-outcomes__counter {
   display: inline-flex;
   align-items: baseline;
   gap: 5px;
-  color: #8fa5b8;
-  font-size: 14px;
+  color: #8290a0;
+  font-size: 13px;
   font-variant-numeric: tabular-nums;
 }
 
 .chip2-outcomes__counter strong {
-  color: #ffffff;
-  font-size: 21px;
-  font-weight: 800;
+  color: #162539;
+  font-size: 20px;
+  font-weight: 750;
+  letter-spacing: -0.02em;
 }
 
 .chip2-outcomes__arrows {
@@ -138,198 +135,204 @@
 
 .chip2-outcomes__arrow {
   display: grid;
-  width: 42px;
-  height: 42px;
+  width: 43px;
+  height: 43px;
+  flex: 0 0 43px;
   place-items: center;
+  padding: 0;
 
-  border: 1px solid rgb(153 211 231 / 30%);
+  border: 1px solid #d9e5ee;
   border-radius: 50%;
-  background: rgb(255 255 255 / 5%);
-  color: #ffffff;
-
-  font-size: 21px;
+  background: #ffffff;
+  color: #193b55;
+  font-family: inherit;
+  font-size: 23px;
+  line-height: 1;
   cursor: pointer;
 
   transition:
     background-color 180ms ease,
     border-color 180ms ease,
-    color 180ms ease;
+    color 180ms ease,
+    transform 180ms ease;
 }
 
-.chip2-outcomes__arrow:hover:not(:disabled) {
-  border-color: #69d7f4;
-  background: #69d7f4;
-  color: #0e192b;
-}
-
-.chip2-outcomes__arrow:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
+.chip2-outcomes__arrow:hover {
+  transform: translateY(-1px);
+  border-color: #8ad8f2;
+  background: #eefaff;
+  color: #087da7;
 }
 
 .chip2-outcomes__arrow:focus-visible {
-  outline: 2px solid #69d7f4;
+  outline: 2px solid #48bce7;
+  outline-offset: 3px;
+}
+
+/* =========================================
+   COVERFLOW STAGE
+========================================= */
+
+.chip2-outcomes__stage {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: 1500px;
+  height: 610px;
+  margin: 0 auto;
+  overflow: hidden;
+
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.chip2-outcomes__stage.is-dragging {
+  cursor: grabbing;
+}
+
+/* Side cards remain still while the centre card follows the pointer. */
+.chip2-outcomes__stage.is-dragging .chip2-outcomes__card {
+  transition: none !important;
+}
+
+/* Seamless duplicate rebase: no transition while swapping loop copies. */
+.chip2-outcomes__stage.is-rebasing .chip2-outcomes__card {
+  transition: none !important;
+}
+
+.chip2-outcomes__stage.is-dragging,
+.chip2-outcomes__stage.is-dragging * {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
+
+/* =========================================
+   CARDS — OVERLAPPING STACK
+========================================= */
+
+.chip2-outcomes__card {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+
+  width: var(--chip2-card-width);
+  height: var(--chip2-card-height);
+  min-height: var(--chip2-card-height);
+  padding: 25px 24px 20px;
+  overflow: hidden;
+
+  border: 1px solid #e4ebf0;
+  border-radius: 18px;
+  background: #ffffff;
+  color: #172536;
+  box-shadow: 0 14px 38px rgb(28 62 88 / 9%);
+
+  text-align: left;
+  transform-origin: center center;
+  will-change: left, transform, opacity;
+
+  transition:
+    left 620ms cubic-bezier(0.22, 0.72, 0.22, 1),
+    transform 620ms cubic-bezier(0.22, 0.72, 0.22, 1),
+    opacity 420ms ease,
+    filter 420ms ease,
+    box-shadow 420ms ease,
+    border-color 300ms ease;
+}
+
+/* Active card: clear and visually dominant */
+
+.chip2-outcomes__card.is-active {
+  border-color: #b8e5f6;
+  background: #ffffff;
+  color: #172536;
+  filter: none;
+  box-shadow:
+    0 22px 55px rgb(32 90 126 / 16%),
+    0 0 0 1px rgb(83 184 224 / 10%);
+}
+
+/* Neighbouring cards: muted, softly blurred, and layered behind */
+
+.chip2-outcomes__card.is-inactive {
+  border-color: #e0e9ef;
+  background: #f7fafc;
+  color: #4d5e6c;
+  box-shadow: 0 12px 30px rgb(28 62 88 / 7%);
+}
+
+.chip2-outcomes__card.is-neighbour {
+  filter: blur(0.55px) saturate(0.82);
+}
+
+.chip2-outcomes__card.is-outer {
+  filter: blur(1.3px) saturate(0.7);
+}
+
+.chip2-outcomes__card:focus-visible {
+  outline: 2px solid #48bce7;
   outline-offset: 4px;
 }
 
 /* =========================================
-   HORIZONTAL SLIDER TRACK
-========================================= */
-
-.chip2-outcomes__track {
-  display: flex;
-  align-items: stretch;
-  gap: 20px;
-
-  width: 100%;
-  padding:
-    28px
-    max(24px, calc((100% - var(--chip2-card-width)) / 2))
-    36px;
-
-  overflow-x: auto;
-  overflow-y: hidden;
-
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.chip2-outcomes__track::-webkit-scrollbar {
-  display: none;
-}
-
-/* =========================================
-   CAPABILITY CARDS
-========================================= */
-
-.chip2-outcomes__card {
-  position: relative;
-  display: flex;
-  flex: 0 0 var(--chip2-card-width);
-  flex-direction: column;
-
-  width: var(--chip2-card-width);
-  min-width: 0;
-  min-height: 650px;
-
-  padding: 28px 24px 20px;
-  overflow: hidden;
-
-  border: 1px solid rgb(255 255 255 / 12%);
-  border-radius: 22px;
-
-  color: var(--chip2-ink);
-  text-align: left;
-  cursor: pointer;
-
-  scroll-snap-align: center;
-  transform: scale(0.965);
-  transform-origin: center center;
-  opacity: 0.5;
-  filter: saturate(0.72);
-
-  transition:
-    opacity 250ms ease,
-    transform 250ms ease,
-    box-shadow 250ms ease,
-    filter 250ms ease,
-    border-color 250ms ease;
-}
-
-.chip2-outcomes__card::before {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-
-  height: 4px;
-  content: "";
-  background: rgb(19 65 76 / 18%);
-}
-
-.chip2-outcomes__card.is-active {
-  z-index: 1;
-  transform: translateY(-5px) scale(1);
-  opacity: 1;
-  filter: saturate(1);
-
-  border-color: rgb(255 255 255 / 55%);
-  box-shadow:
-    0 24px 65px rgb(0 0 0 / 32%),
-    0 0 0 1px rgb(105 215 244 / 20%);
-}
-
-.chip2-outcomes__card:focus-visible {
-  outline: 3px solid #69d7f4;
-  outline-offset: 5px;
-}
-
-/* Coordinated mint palette */
-
-.chip2-outcomes__card--hybrid-cloud {
-  background: #a7e8d0;
-}
-
-.chip2-outcomes__card--integrated-network {
-  background: #98dfc6;
-}
-
-.chip2-outcomes__card--output-outcomes {
-  background: #7dcbb2;
-}
-
-.chip2-outcomes__card--operational-outcomes {
-  background: #65baa3;
-}
-
-.chip2-outcomes__card--business-outcomes {
-  background: #4ca994;
-}
-
-/* =========================================
-   CARD HEADERS
+   CARD HEADER
 ========================================= */
 
 .chip2-outcomes__card-header {
-  padding-bottom: 22px;
-  border-bottom: 1px solid rgb(23 53 64 / 35%);
+  flex: 0 0 auto;
+  padding-bottom: 17px;
+  border-bottom: 1px solid #e6edf2;
 }
 
 .chip2-outcomes__card-index {
-  display: inline-flex;
+  display: grid;
   width: 42px;
   height: 42px;
-  align-items: center;
-  justify-content: center;
+  place-items: center;
+  margin-bottom: 23px;
 
-  margin-bottom: 22px;
   border-radius: 50%;
-  background: #173943;
+  background: #18384f;
   color: #ffffff;
-
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
 
 .chip2-outcomes__card-kicker {
   display: block;
-  margin-bottom: 10px;
-  color: rgb(23 53 64 / 72%);
+  margin-bottom: 11px;
+  color: #70879a;
   font-size: 9px;
   font-weight: 800;
-  letter-spacing: 0.16em;
+  line-height: 1.4;
+  letter-spacing: 0.15em;
 }
 
 .chip2-outcomes__card-header h3 {
   margin: 0;
-  color: #173540;
-  font-size: clamp(23px, 2vw, 31px);
-  font-weight: 800;
-  line-height: 1.12;
-  letter-spacing: -0.035em;
+  color: #172536;
+  font-size: clamp(21px, 1.55vw, 27px);
+  font-weight: 750;
+  line-height: 1.23;
+  letter-spacing: -0.025em;
+  overflow-wrap: anywhere;
+}
+
+.chip2-outcomes__card.is-inactive .chip2-outcomes__card-index {
+  background: #b6c4ce;
+  color: #ffffff;
+}
+
+.chip2-outcomes__card.is-inactive .chip2-outcomes__card-kicker {
+  color: #a0adb7;
+}
+
+.chip2-outcomes__card.is-inactive .chip2-outcomes__card-header h3 {
+  color: #748390;
 }
 
 /* =========================================
@@ -338,50 +341,70 @@
 
 .chip2-outcomes__items {
   display: flex;
-  flex: 1;
+  flex: 1 1 auto;
   flex-direction: column;
-  gap: 24px;
-
-  padding-top: 24px;
+  gap: 20px;
+  min-height: 0;
+  padding: 20px 0 18px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #d2e0e9 transparent;
 }
 
 .chip2-outcomes__item {
   display: grid;
-  grid-template-columns: 38px minmax(0, 1fr);
+  grid-template-columns: 36px minmax(0, 1fr);
   align-items: start;
   gap: 12px;
 }
 
 .chip2-outcomes__number {
-  display: inline-flex;
+  display: grid;
   width: 36px;
   height: 36px;
-  align-items: center;
-  justify-content: center;
-
+  flex: 0 0 36px;
+  place-items: center;
   border-radius: 50%;
-  background: #173943;
-  color: #ffffff;
-
-  font-size: 13px;
+  background: #dff3fb;
+  color: #18384f;
+  font-size: 12px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
 
+.chip2-outcomes__item-content {
+  min-width: 0;
+}
+
 .chip2-outcomes__item-content h4 {
-  margin: 2px 0 7px;
-  color: #173540;
-  font-size: 14px;
-  font-weight: 800;
-  line-height: 1.45;
+  margin: 3px 0 7px;
+  color: #172536;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
 .chip2-outcomes__item-content p {
   margin: 0;
-  color: #203b43;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1.6;
+  color: #566a7b;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.chip2-outcomes__card.is-inactive .chip2-outcomes__number {
+  background: #e8eef2;
+  color: #8795a0;
+}
+
+.chip2-outcomes__card.is-inactive .chip2-outcomes__item-content h4 {
+  color: #71808c;
+}
+
+.chip2-outcomes__card.is-inactive .chip2-outcomes__item-content p {
+  color: #8f9ba5;
 }
 
 /* =========================================
@@ -393,20 +416,30 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-
+  flex: 0 0 auto;
   margin-top: auto;
-  padding-top: 22px;
-
-  border-top: 1px solid rgb(23 53 64 / 25%);
-
-  color: rgb(23 53 64 / 80%);
+  padding-top: 15px;
+  border-top: 1px solid #e6edf2;
+  color: #6e8292;
   font-size: 9px;
   font-weight: 800;
+  line-height: 1.4;
   letter-spacing: 0.08em;
 }
 
 .chip2-outcomes__card-action {
+  color: #187ca8;
+  text-align: right;
   white-space: nowrap;
+}
+
+.chip2-outcomes__card.is-inactive .chip2-outcomes__card-footer {
+  border-color: #e3eaf0;
+  color: #a1adb7;
+}
+
+.chip2-outcomes__card.is-inactive .chip2-outcomes__card-action {
+  color: #8798a5;
 }
 
 /* =========================================
@@ -417,41 +450,45 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-
-  margin: 4px auto 0;
+  gap: 9px;
+  margin: 18px auto 0;
 }
 
 .chip2-outcomes__pagination-dot {
+  display: block;
   width: 8px;
   height: 8px;
+  flex: 0 0 8px;
   padding: 0;
-
   border: 0;
   border-radius: 999px;
-  background: rgb(201 226 238 / 35%);
+  background: #cbd8e1;
   cursor: pointer;
-
   transition:
     width 200ms ease,
-    background-color 200ms ease;
+    background-color 180ms ease;
+}
+
+.chip2-outcomes__pagination-dot:hover {
+  background: #82cde9;
 }
 
 .chip2-outcomes__pagination-dot.is-active {
-  width: 28px;
-  background: #69d7f4;
+  width: 30px;
+  flex-basis: 30px;
+  background: #27b5dc;
 }
 
 .chip2-outcomes__pagination-dot:focus-visible {
-  outline: 2px solid #ffffff;
+  outline: 2px solid #168bb6;
   outline-offset: 4px;
 }
 
 .chip2-outcomes__footer-note {
-  margin: 22px 20px 0;
-  color: #9bb0c1;
+  margin: 24px 0 0;
+  color: #7a8996;
   font-size: 12px;
-  line-height: 1.5;
+  line-height: 1.6;
   text-align: center;
 }
 
@@ -460,107 +497,34 @@
 ========================================= */
 
 @media (min-width: 1600px) {
-  .chip2-outcomes {
-    --chip2-card-width: clamp(390px, 26vw, 490px);
-
-    padding-top: 90px;
-    padding-bottom: 64px;
+  .chip2-outcomes__container {
+    width: calc(100% - 100px);
   }
 
-  .chip2-outcomes__header {
-    margin-bottom: 44px;
-  }
-
-  .chip2-outcomes__header h2 {
-    font-size: clamp(42px, 2.7vw, 56px);
-  }
-
-  .chip2-outcomes__intro {
-    font-size: 17px;
-  }
-
-  .chip2-outcomes__track {
-    gap: 26px;
-    padding-top: 34px;
-    padding-bottom: 44px;
+  .chip2-outcomes__stage {
+    height: 650px;
   }
 
   .chip2-outcomes__card {
-    min-height: 700px;
-    padding: 32px 30px 24px;
-    border-radius: 26px;
+    --chip2-card-height: 520px;
+    height: 520px;
+    min-height: 520px;
+    padding: 28px 27px 22px;
   }
 
-  .chip2-outcomes__card-header h3 {
-    font-size: 32px;
-  }
-
-  .chip2-outcomes__items {
-    gap: 28px;
-  }
-
-  .chip2-outcomes__item {
-    grid-template-columns: 42px minmax(0, 1fr);
-    gap: 15px;
-  }
-
-  .chip2-outcomes__number {
-    width: 40px;
-    height: 40px;
+  .chip2-outcomes__card-index {
+    width: 46px;
+    height: 46px;
+    margin-bottom: 25px;
     font-size: 14px;
   }
 
-  .chip2-outcomes__item-content h4 {
-    font-size: 15px;
-  }
-
-  .chip2-outcomes__item-content p {
-    font-size: 13px;
-    line-height: 1.7;
-  }
-}
-
-/* =========================================
-   TABLET
-========================================= */
-
-@media (max-width: 900px) {
-  .chip2-outcomes {
-    --chip2-card-width: clamp(310px, 55vw, 430px);
-
-    padding-top: 58px;
-    padding-bottom: 46px;
-  }
-
-  .chip2-outcomes__header {
-    margin-bottom: 28px;
-  }
-
-  .chip2-outcomes__header h2 {
-    font-size: clamp(27px, 4.5vw, 40px);
-  }
-
-  .chip2-outcomes__intro {
-    font-size: 14px;
-    line-height: 1.7;
-  }
-
-  .chip2-outcomes__track {
-    gap: 16px;
-  }
-
-  .chip2-outcomes__card {
-    min-height: 610px;
-    padding: 23px 20px 18px;
-    border-radius: 18px;
-  }
-
   .chip2-outcomes__card-header h3 {
-    font-size: 25px;
+    font-size: 27px;
   }
 
   .chip2-outcomes__item-content h4 {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .chip2-outcomes__item-content p {
@@ -569,64 +533,29 @@
 }
 
 /* =========================================
-   MOBILE
+   LAPTOP
 ========================================= */
 
-@media (max-width: 600px) {
-  .chip2-outcomes {
-    --chip2-card-width: min(84vw, 390px);
-
-    padding-top: 44px;
-    padding-bottom: 36px;
+@media (max-width: 1100px) {
+  .chip2-outcomes__container {
+    width: calc(100% - 32px);
   }
 
-  .chip2-outcomes__header {
-    padding-inline: 20px;
-    margin-bottom: 24px;
-  }
-
-  .chip2-outcomes__eyebrow {
-    font-size: 10px;
-    letter-spacing: 0.12em;
-  }
-
-  .chip2-outcomes__header h2 {
-    font-size: clamp(25px, 7vw, 34px);
-    overflow-wrap: anywhere;
-  }
-
-  .chip2-outcomes__intro {
-    margin-top: 15px;
-    font-size: 13px;
-    text-align: left;
-  }
-
-  .chip2-outcomes__legend {
-    font-size: 11px;
-  }
-
-  .chip2-outcomes__controls {
-    padding-inline: 20px;
-  }
-
-  .chip2-outcomes__arrow {
-    width: 38px;
-    height: 38px;
-  }
-
-  .chip2-outcomes__track {
-    gap: 14px;
-    padding: 20px max(20px, calc((100% - var(--chip2-card-width)) / 2)) 28px;
+  .chip2-outcomes__stage {
+    height: 555px;
   }
 
   .chip2-outcomes__card {
-    min-height: 590px;
-    padding: 22px 19px 18px;
-    border-radius: 18px;
+    --chip2-card-width: clamp(255px, 28vw, 315px);
+    --chip2-card-height: 470px;
+    height: 470px;
+    min-height: 470px;
+    padding: 20px 19px 17px;
+    border-radius: 15px;
   }
 
   .chip2-outcomes__card-header {
-    padding-bottom: 19px;
+    padding-bottom: 14px;
   }
 
   .chip2-outcomes__card-index {
@@ -636,22 +565,22 @@
   }
 
   .chip2-outcomes__card-header h3 {
-    font-size: 25px;
+    font-size: 21px;
   }
 
   .chip2-outcomes__items {
-    gap: 23px;
-    padding-top: 20px;
+    gap: 15px;
+    padding-block: 16px;
   }
 
   .chip2-outcomes__item {
-    grid-template-columns: 32px minmax(0, 1fr);
+    grid-template-columns: 31px minmax(0, 1fr);
     gap: 10px;
   }
 
   .chip2-outcomes__number {
-    width: 30px;
-    height: 30px;
+    width: 31px;
+    height: 31px;
     font-size: 11px;
   }
 
@@ -660,259 +589,173 @@
   }
 
   .chip2-outcomes__item-content p {
+    font-size: 10px;
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 760px) {
+  .chip2-outcomes {
+    padding: 42px 0 32px;
+  }
+
+  .chip2-outcomes__container {
+    width: calc(100% - 24px);
+  }
+
+  .chip2-outcomes__header {
+    margin-bottom: 20px;
+  }
+
+  .chip2-outcomes__header h2 {
+    font-size: clamp(25px, 5vw, 34px);
+  }
+
+  .chip2-outcomes__intro {
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  .chip2-outcomes__controls {
+    margin-top: 18px;
+  }
+
+  .chip2-outcomes__stage {
+    height: 535px;
+  }
+
+  .chip2-outcomes__card {
+    --chip2-card-width: clamp(250px, 36vw, 300px);
+    --chip2-card-height: 455px;
+    height: 455px;
+    min-height: 455px;
+    padding: 18px 17px 16px;
+  }
+
+  .chip2-outcomes__card-header h3 {
+    font-size: 20px;
+  }
+
+  .chip2-outcomes__item-content h4 {
     font-size: 11px;
-    line-height: 1.6;
+  }
+
+  .chip2-outcomes__item-content p {
+    font-size: 9px;
+  }
+
+  .chip2-outcomes__card.is-neighbour {
+    filter: blur(0.35px) saturate(0.86);
+  }
+
+  .chip2-outcomes__card.is-outer {
+    filter: blur(0.85px) saturate(0.76);
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 520px) {
+  .chip2-outcomes {
+    padding: 36px 0 28px;
+  }
+
+  .chip2-outcomes__container {
+    width: 100%;
+  }
+
+  .chip2-outcomes__header {
+    width: calc(100% - 32px);
+    margin-inline: auto;
+  }
+
+  .chip2-outcomes__eyebrow {
+    font-size: 9px;
+  }
+
+  .chip2-outcomes__header h2 {
+    font-size: 25px;
+  }
+
+  .chip2-outcomes__intro {
+    font-size: 11px;
+  }
+
+  .chip2-outcomes__controls {
+    width: calc(100% - 28px);
+    margin-inline: auto;
+  }
+
+  .chip2-outcomes__counter strong {
+    font-size: 18px;
+  }
+
+  .chip2-outcomes__arrow {
+    width: 38px;
+    height: 38px;
+    flex-basis: 38px;
+  }
+
+  .chip2-outcomes__stage {
+    height: 510px;
+  }
+
+  .chip2-outcomes__card {
+    --chip2-card-width: min(82vw, 325px);
+    --chip2-card-height: 450px;
+    height: 450px;
+    min-height: 450px;
+    padding: 19px 18px 16px;
+    border-radius: 15px;
+  }
+
+  .chip2-outcomes__card-header h3 {
+    font-size: 21px;
+  }
+
+  .chip2-outcomes__card-index {
+    width: 35px;
+    height: 35px;
+    margin-bottom: 17px;
+  }
+
+  .chip2-outcomes__item-content h4 {
+    font-size: 12px;
+  }
+
+  .chip2-outcomes__item-content p {
+    font-size: 10px;
+    line-height: 1.55;
+  }
+
+  .chip2-outcomes__card.is-neighbour {
+    filter: blur(0.25px) saturate(0.9);
+  }
+
+  .chip2-outcomes__card.is-outer {
+    filter: blur(0.55px) saturate(0.8);
   }
 
   .chip2-outcomes__footer-note {
-    padding-inline: 20px;
+    width: calc(100% - 28px);
+    margin-inline: auto;
     font-size: 11px;
   }
 }
 
-/* Reduced motion */
-
-@media (prefers-reduced-motion: reduce) {
-  .chip2-outcomes__card,
-  .chip2-outcomes__arrow,
-  .chip2-outcomes__pagination-dot,
-  .chip2-outcomes__track {
-    scroll-behavior: auto;
-    transition: none;
-  }
-}
-
-
-
-
 /* =========================================
-   CHIP2EXPERIENCE2OUTCOMES
-   White background + light-blue cards
-========================================= */
-
-.chip2-outcomes {
-  --chip2-bg: #ffffff;
-  --chip2-text: #101a2c;
-  --chip2-muted: #596779;
-  --chip2-blue: #16b9d4;
-  --chip2-card-blue: #dff3ff;
-  --chip2-card-blue-soft: #cceaff;
-
-  background: #ffffff !important;
-  color: var(--chip2-text);
-}
-
-/* Main section container */
-
-.chip2-outcomes__container {
-  background: transparent;
-}
-
-/* =========================================
-   HEADER
-========================================= */
-
-.chip2-outcomes__header {
-  color: var(--chip2-text);
-}
-
-.chip2-outcomes__eyebrow {
-  color: #087d9b;
-}
-
-.chip2-outcomes__header h2 {
-  color: #101a2c;
-}
-
-.chip2-outcomes__intro {
-  color: #566477;
-}
-
-.chip2-outcomes__intro strong {
-  color: #087fa4;
-}
-
-.chip2-outcomes__legend {
-  color: #64748b;
-}
-
-.chip2-outcomes__legend-dot {
-  background: #18b9d2;
-  box-shadow: 0 0 10px rgb(24 185 210 / 20%);
-}
-
-/* =========================================
-   COUNTER AND NAVIGATION
-========================================= */
-
-.chip2-outcomes__counter {
-  color: #6b7789;
-}
-
-.chip2-outcomes__counter strong {
-  color: #101a2c;
-}
-
-.chip2-outcomes__arrows {
-  color: #152c43;
-}
-
-.chip2-outcomes__arrow {
-  border: 1px solid #cfdeeb;
-  background: #ffffff;
-  color: #193d59;
-
-  transition:
-    background-color 180ms ease,
-    border-color 180ms ease,
-    color 180ms ease,
-    transform 180ms ease;
-}
-
-.chip2-outcomes__arrow:hover:not(:disabled) {
-  border-color: #7dc9ee;
-  background: #e2f4ff;
-  color: #075b8f;
-}
-
-.chip2-outcomes__arrow:focus-visible {
-  outline: 2px solid #56b8e8;
-  outline-offset: 3px;
-}
-
-/* =========================================
-   CAPABILITY CARDS
-========================================= */
-
-.chip2-outcomes__card {
-  border: 1px solid #dce8f1;
-  background: #dff3ff !important;
-  color: #183047;
-
-  box-shadow: 0 8px 24px rgb(31 74 108 / 6%);
-
-  transition:
-    opacity 240ms ease,
-    background-color 240ms ease,
-    border-color 240ms ease,
-    box-shadow 240ms ease;
-}
-
-/* Active card: fully visible, light blue */
-
-.chip2-outcomes__card.is-active {
-  opacity: 1 !important;
-  filter: none !important;
-
-  border-color: #8bcff0;
-  background: #dff3ff !important;
-  color: #183047;
-
-  box-shadow: 0 10px 30px rgb(49 124 170 / 12%);
-}
-
-/* Inactive cards: pale blue and reduced opacity */
-
-.chip2-outcomes__card.is-inactive {
-  opacity: 0.52;
-  filter: saturate(0.8);
-
-  border-color: #dce8f1;
-  background: #cceaff !important;
-  color: #29465c;
-
-  box-shadow: 0 4px 14px rgb(31 74 108 / 4%);
-}
-
-/* Keep text readable on both active and inactive cards */
-
-.chip2-outcomes__card h3,
-.chip2-outcomes__card h4 {
-  color: #183047;
-}
-
-.chip2-outcomes__card p {
-  color: #43596d;
-}
-
-/* Capability group number */
-
-.chip2-outcomes__card-index {
-  background: #18394f;
-  color: #ffffff;
-}
-
-/* Small uppercase card label */
-
-.chip2-outcomes__card-kicker {
-  color: #46667c;
-}
-
-/* Separators */
-
-.chip2-outcomes__card-header {
-  border-color: rgb(30 80 110 / 18%);
-}
-
-.chip2-outcomes__card-footer {
-  border-color: rgb(30 80 110 / 18%);
-  color: #466176;
-}
-
-.chip2-outcomes__card-action {
-  color: #246b91;
-}
-
-/* Numbered capabilities */
-
-.chip2-outcomes__number {
-  background: #c1e6fa;
-  color: #163b54;
-}
-
-/* =========================================
-   PAGINATION
-========================================= */
-
-.chip2-outcomes__pagination {
-  color: #53677b;
-}
-
-.chip2-outcomes__pagination-dot {
-  border: 0;
-  background: #cbd9e5;
-  transition:
-    width 200ms ease,
-    background-color 180ms ease;
-}
-
-.chip2-outcomes__pagination-dot:hover {
-  background: #70c8e9;
-}
-
-.chip2-outcomes__pagination-dot.is-active {
-  background: #20b8d5;
-}
-
-.chip2-outcomes__pagination-dot:focus-visible {
-  outline: 2px solid #168bb6;
-  outline-offset: 4px;
-}
-
-/* Footer note */
-
-.chip2-outcomes__footer-note {
-  color: #718096;
-}
-
-/* =========================================
-   ACCESSIBILITY
+   REDUCED MOTION
 ========================================= */
 
 @media (prefers-reduced-motion: reduce) {
   .chip2-outcomes__card,
   .chip2-outcomes__arrow,
   .chip2-outcomes__pagination-dot {
-    transition: none;
+    transition: none !important;
   }
 }

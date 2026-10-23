@@ -5,14 +5,14 @@ import Hero from "../components/Hero";
 import EnterpriseAIDilemma from "../components/EnterpriseAIDilemma";
 import AismIntroduction from "../components/AismIntroduction";
 import EnterpriseAIComparison from "../components/EnterpriseAIComparison";
-import AismModel from "../components/AismModel";
+import FrameworksOverview from "../components/FrameworksOverview";
 import CapabilitiesSection from "../components/CapabilitiesSection";
 import AismFrameworksSection from "../components/AismFrameworksSection";
 import AIMaturityAssessment from "../components/AIMaturityAssessment";
 import InsightsSection from "../components/InsightsSection";
 import FinalCTASection from "../components/FinalCTASection";
 import SiteFooter from "../components/SiteFooter";
-
+import AISMModelSection from "../components/AISMModelSection";
 import Hero2 from "../components/Hero2";
 
 export default function HomePage() {
@@ -25,17 +25,15 @@ export default function HomePage() {
          <Hero2 />
         </div>
 
-
-
         {/* Homepage sections */}
-
           
         <EnterpriseAIDilemma />
         <AismIntroduction />
         <EnterpriseAIComparison />
-        <AismModel />
+     
+        <AISMModelSection />
         <CapabilitiesSection />
-        <AismFrameworksSection />
+      <FrameworksOverview />
         <AIMaturityAssessment />
         <InsightsSection />
         <FinalCTASection />
