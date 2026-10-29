@@ -1,4 +1,3 @@
-
 import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
 import "./services.css";
@@ -14,6 +13,31 @@ type ServicesSectionProps = {
   description: string;
   cards: ServiceCardData[];
   variant: "engineering" | "practice" | "assessment";
+};
+
+/* Image paths must match the filenames inside public/images/services/. */
+const serviceImages: Record<ServicesSectionProps["variant"], string[]> = {
+  engineering: [
+    "/images/services/AI-Engineering-Capabilities-Setup-1.jpg",
+    "/images/services/AI-Engineering-Capabilities-Setup-2.jpg",
+    "/images/services/AI-Engineering-Capabilities-Setup-3.jpg",
+    "/images/services/AI-Engineering-Capabilities-Setup-4.jpg",
+    "/images/services/AI-Engineering-Capabilities-Setup-5.jpg",
+  ],
+  practice: [
+    "/images/services/AI-Practice-Setup-1.jpg",
+    "/images/services/AI-Practice-Setup-2.jpg",
+    "/images/services/AI-Practice-Setup-3.jpg",
+    "/images/services/AI-Practice-Setup-4.jpg",
+    "/images/services/AI-Practice-Setup-5.jpg",
+  ],
+  assessment: [
+    "/images/services/AI-Assessment-and-Benchmarking-1.jpg",
+    "/images/services/AI-Assessment-and-Benchmarking-2.jpg",
+    "/images/services/AI-Assessment-and-Benchmarking-3.jpg",
+    "/images/services/AI-Assessment-and-Benchmarking-4.jpg",
+    "/images/services/AI-Assessment-and-Benchmarking-5.jpg",
+  ],
 };
 
 /* =========================================
@@ -116,14 +140,27 @@ const assessmentServices: ServiceCardData[] = [
    REUSABLE SERVICE CARD
 ========================================= */
 
-function ServiceCard({ card }: { card: ServiceCardData }) {
+function ServiceCard({
+  card,
+  image,
+  imageIndex,
+}: {
+  card: ServiceCardData;
+  image: string;
+  imageIndex: number;
+}) {
   return (
     <article className="services-card">
-      {/* Reserved for your image */}
       <div
         className="services-card__image"
-        aria-hidden="true"
-      />
+        style={{ backgroundImage: `url("${image}")` }}
+        role="img"
+        aria-label={`${card.title} image`}
+      >
+        <span className="services-card__image-count" aria-hidden="true">
+          {String(imageIndex + 1).padStart(2, "0")}
+        </span>
+      </div>
 
       <div className="services-card__content">
         <h3>{card.title}</h3>
@@ -156,8 +193,13 @@ function ServicesSection({
         </header>
 
         <div className="services-section__grid">
-          {cards.map((card) => (
-            <ServiceCard key={card.title} card={card} />
+          {cards.map((card, index) => (
+            <ServiceCard
+              key={card.title}
+              card={card}
+              image={serviceImages[variant][index]}
+              imageIndex={index}
+            />
           ))}
         </div>
       </div>
@@ -172,23 +214,20 @@ function ServicesSection({
 export default function ServicesPage() {
   return (
     <>
-      {/* Shared website header */}
       <div className="services-page__header">
         <SiteHeader />
       </div>
 
-      {/* Services hero banner */}
       <section
         className="frameworks-page__hero"
-        aria-labelledby="frameworks-page-title"
+        aria-labelledby="services-page-title"
       >
         <div className="frameworks-page__hero-container">
-          <h1 id="frameworks-page-title">Services</h1>
+          <h1 id="services-page-title">Services</h1>
         </div>
       </section>
 
       <main className="prosight-services-page">
-        {/* First section */}
         <ServicesSection
           id="ai-engineering-setup"
           title="AI Engineering Capabilities Setup"
@@ -197,7 +236,6 @@ export default function ServicesPage() {
           variant="engineering"
         />
 
-        {/* Second section */}
         <ServicesSection
           id="ai-practice-setup"
           title="AI Practice Setup"
@@ -206,7 +244,6 @@ export default function ServicesPage() {
           variant="practice"
         />
 
-        {/* Third section */}
         <ServicesSection
           id="ai-assessment-benchmarking"
           title="AI Assessment and Benchmarking"
@@ -216,7 +253,6 @@ export default function ServicesPage() {
         />
       </main>
 
-      {/* Shared website footer */}
       <SiteFooter />
     </>
   );

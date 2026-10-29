@@ -391,3 +391,36 @@ text-align: center;
     transition: none;
   }
 }
+
+
+/* Framework images */
+.frameworks-page__visual {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  min-width: 0;
+  background: linear-gradient(
+    135deg,
+    #eef2ff 0%,
+    #f6fbff 55%,
+    #e4f7fb 100%
+  );
+  border-radius: 5px;
+}
+
+.frameworks-page__visual-image {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 450ms ease;
+}
+
+.frameworks-page__visual:hover
+.frameworks-page__visual-image {
+  transform: scale(1.025);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frameworks-page__visual-image {
+    transition: none;
+  }
+}

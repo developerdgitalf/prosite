@@ -111,15 +111,18 @@ export default function FrameworksOverview() {
           ))}
         </div>
 
-        <div className="frameworks-overview__action">
-          <Link
-            href="/frameworks"
-            className="frameworks-overview__button"
-            aria-label="Explore all PROSIGHT frameworks"
-          >
-            Explore All Frameworks
-          </Link>
-        </div>
+      
+<div className="frameworks-overview__action">
+  <a
+    href="/frameworks"
+    className="frameworks-overview__button"
+    aria-label="Explore all PROSIGHT frameworks"
+  >
+    Explore All Frameworks
+    <span aria-hidden="true">→</span>
+  </a>
+</div>
+
       </div>
     </section>
   );

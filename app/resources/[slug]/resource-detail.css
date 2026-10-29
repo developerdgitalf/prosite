@@ -1,0 +1,585 @@
+/* =====================================================
+   PROSIGHT — RESOURCE DETAIL PAGE
+   Portrait book cover + responsive PDF viewer
+===================================================== */
+
+.resource-detail {
+  --resource-detail-ink: #102238;
+  --resource-detail-muted: #5d6d7d;
+  --resource-detail-blue: #078fc0;
+
+  width: 100%;
+  min-height: 70vh;
+  color: var(--resource-detail-ink);
+  background: linear-gradient(
+    180deg,
+    #f4fbfe 0%,
+    #ffffff 470px
+  );
+  font-family: var(--font-manrope), "Manrope", Arial, sans-serif;
+}
+
+.resource-detail,
+.resource-detail * {
+  box-sizing: border-box;
+}
+
+/* =====================================================
+   01. MAIN CONTAINER
+===================================================== */
+
+.resource-detail__container {
+  width: min(calc(100% - 48px), 1480px);
+  margin: 0 auto;
+  padding: 28px 0 76px;
+}
+
+/* =====================================================
+   02. BREADCRUMBS
+===================================================== */
+
+.resource-detail__breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 34px;
+
+  color: #6b7b89;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.resource-detail__breadcrumbs a {
+  color: #176b91;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.resource-detail__breadcrumbs a:hover {
+  color: #064d70;
+  text-decoration: underline;
+}
+
+.resource-detail__breadcrumbs [aria-current="page"] {
+  max-width: 60ch;
+  overflow-wrap: anywhere;
+}
+
+/* =====================================================
+   03. FEATURED RESOURCE HERO
+===================================================== */
+
+.resource-detail__hero {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.15fr)
+    minmax(320px, 0.85fr);
+  gap: clamp(32px, 5vw, 78px);
+  align-items: center;
+
+  padding:
+    clamp(28px, 4vw, 60px)
+    0
+    clamp(48px, 6vw, 86px);
+}
+
+.resource-detail__copy {
+  min-width: 0;
+}
+
+/* =====================================================
+   04. CATEGORY BADGE
+===================================================== */
+
+.resource-detail__category {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 9px 13px;
+  border: 1px solid #c4e7f6;
+  border-radius: 999px;
+
+  background: #eaf8ff;
+  color: var(--resource-detail-blue);
+
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+/* =====================================================
+   05. RESOURCE TITLE
+===================================================== */
+
+.resource-detail__copy h1 {
+  margin: 22px 0 0;
+
+  color: #102238;
+  font-size: clamp(34px, 4vw, 58px);
+  font-weight: 750;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+/* =====================================================
+   06. INTRODUCTION
+===================================================== */
+
+.resource-detail__copy > p {
+  max-width: 720px;
+  margin: 20px 0 0;
+
+  color: var(--resource-detail-muted);
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 400;
+  line-height: 1.75;
+
+  text-wrap: pretty;
+}
+
+/* =====================================================
+   07. ACTION BUTTONS
+===================================================== */
+
+.resource-detail__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.resource-detail__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  min-height: 50px;
+  padding: 0 23px;
+
+  border: 1px solid transparent;
+  border-radius: 999px;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.resource-detail__button:hover {
+  transform: translateY(-2px);
+}
+
+.resource-detail__button:focus-visible,
+.resource-detail__text-link:focus-visible {
+  outline: 3px solid #35b9e5;
+  outline-offset: 4px;
+}
+
+/* Primary button */
+
+.resource-detail__button--primary {
+  border-color: #141414;
+  background: #141414;
+  color: #ffffff;
+}
+
+.resource-detail__button--primary:hover {
+  border-color: #244477;
+  background: #244477;
+  color: #ffffff;
+}
+
+/* Secondary button */
+
+.resource-detail__button--secondary {
+  border-color: #cbdce8;
+  background: #ffffff;
+  color: #18364d;
+}
+
+.resource-detail__button--secondary:hover {
+  border-color: #9fc8dd;
+  background: #f1f8fb;
+}
+
+/* Unavailable PDF */
+
+.resource-detail__button--disabled {
+  border-color: #e1eaf0;
+  background: #edf2f6;
+  color: #7c8797;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   08. PORTRAIT BOOK COVER
+
+   The parent is portrait.
+   The complete image is shown without cropping.
+===================================================== */
+
+.resource-detail__cover {
+  position: relative;
+
+  display: block;
+  width: 100%;
+  max-width: 390px;
+
+  /* Actual book-cover proportion */
+  aspect-ratio: 460 / 745;
+
+  min-width: 0;
+  min-height: 0;
+
+  margin-inline: auto;
+  overflow: hidden;
+
+  border: 0;
+  border-radius: 4px;
+
+  background: #f5f8fc;
+
+  box-shadow:
+    0 18px 42px rgb(16 26 59 / 14%),
+    0 3px 9px rgb(16 26 59 / 5%);
+}
+
+/*
+  IMPORTANT:
+  Your JSX uses Next.js Image with fill.
+  Keep object-fit: contain so the whole cover is visible.
+*/
+
+.resource-detail__cover-image {
+  display: block;
+  object-fit: contain !important;
+  object-position: center center;
+}
+
+/* No cropping or zoom effect on the book cover */
+
+.resource-detail__cover:hover .resource-detail__cover-image {
+  transform: none;
+}
+
+/* =====================================================
+   09. DOCUMENT VIEWER SECTION
+===================================================== */
+
+.resource-detail__document {
+  padding-top: clamp(32px, 4vw, 56px);
+  border-top: 1px solid #e1ebf0;
+}
+
+.resource-detail__document-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 22px;
+}
+
+/* Small section label */
+
+.resource-detail__eyebrow {
+  margin: 0 0 8px;
+
+  color: var(--resource-detail-blue);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+/* Read the resource heading */
+
+.resource-detail__document-heading h2 {
+  margin: 0;
+
+  color: #102238;
+  font-size: clamp(25px, 2.6vw, 36px);
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+/* Download link */
+
+.resource-detail__text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  flex: 0 0 auto;
+  color: #087eac;
+
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.resource-detail__text-link:hover {
+  color: #075a9c;
+  text-decoration: underline;
+}
+
+/* =====================================================
+   10. EMBEDDED PDF VIEWER
+===================================================== */
+
+.resource-detail__pdf-frame {
+  position: relative;
+
+  width: 100%;
+  height: min(82vh, 1000px);
+  min-height: 520px;
+
+  overflow: hidden;
+
+  border: 1px solid #dbe6ee;
+  border-radius: 14px;
+
+  background: #ffffff;
+
+  box-shadow: 0 12px 36px rgb(16 48 69 / 7%);
+}
+
+/* Actual PDF iframe */
+
+.resource-detail__pdf-frame iframe {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  border: 0;
+  background: #ffffff;
+}
+
+/* Fallback content below the viewer */
+
+.resource-detail__pdf-fallback {
+  padding: 12px 20px;
+  border-top: 1px solid #e1eaf2;
+
+  color: #687488;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.resource-detail__pdf-fallback p {
+  margin: 0 0 6px;
+}
+
+.resource-detail__pdf-fallback a {
+  color: #075a9c;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.resource-detail__pdf-fallback a:hover {
+  text-decoration: underline;
+}
+
+/* PDF missing */
+
+.resource-detail__pdf-unavailable {
+  padding: 40px 20px;
+
+  border: 1px dashed #c5d9e9;
+  border-radius: 12px;
+
+  background: #ffffff;
+  color: #687488;
+
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Path note beneath the document viewer */
+
+.resource-detail__pdf-note {
+  margin: 12px 2px 0;
+
+  color: #71808c;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.resource-detail__pdf-note code {
+  overflow-wrap: anywhere;
+}
+
+/* =====================================================
+   11. LARGE DESKTOP
+===================================================== */
+
+@media (min-width: 1200px) {
+  .resource-detail__cover {
+    max-width: 390px;
+  }
+
+  .resource-detail__pdf-frame {
+    height: min(82vh, 1000px);
+  }
+}
+
+/* =====================================================
+   12. TABLET
+===================================================== */
+
+@media (max-width: 800px) {
+  .resource-detail__container {
+    width: min(calc(100% - 36px), 680px);
+    padding-top: 24px;
+  }
+
+  .resource-detail__breadcrumbs {
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .resource-detail__hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+    padding-top: 24px;
+    padding-bottom: 48px;
+  }
+
+  .resource-detail__cover {
+    order: -1;
+    width: min(100%, 340px);
+    max-width: 340px;
+    aspect-ratio: 460 / 745;
+    min-height: 0;
+  }
+
+  .resource-detail__copy h1 {
+    font-size: clamp(32px, 6vw, 44px);
+  }
+
+  .resource-detail__document-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .resource-detail__pdf-frame {
+    height: 70vh;
+    min-height: 460px;
+  }
+}
+
+/* =====================================================
+   13. MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+  .resource-detail__container {
+    width: calc(100% - 32px);
+    padding-top: 20px;
+    padding-bottom: 48px;
+  }
+
+  .resource-detail__breadcrumbs {
+    gap: 7px;
+    margin-bottom: 20px;
+    font-size: 12px;
+  }
+
+  .resource-detail__hero {
+    gap: 22px;
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
+
+  .resource-detail__cover {
+    width: min(100%, 280px);
+    max-width: 280px;
+    aspect-ratio: 460 / 745;
+    min-height: 0;
+    border-radius: 4px;
+  }
+
+  .resource-detail__copy h1 {
+    margin-top: 16px;
+    font-size: clamp(30px, 8vw, 36px);
+    line-height: 1.12;
+  }
+
+  .resource-detail__copy > p {
+    margin-top: 14px;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .resource-detail__actions {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .resource-detail__button {
+    width: 100%;
+    min-height: 50px;
+  }
+
+  .resource-detail__document {
+    padding-top: 30px;
+  }
+
+  .resource-detail__document-heading h2 {
+    font-size: 27px;
+  }
+
+  .resource-detail__pdf-frame {
+    height: 65vh;
+    min-height: 400px;
+    border-radius: 10px;
+  }
+
+  .resource-detail__pdf-frame iframe {
+    height: 100%;
+  }
+
+  .resource-detail__pdf-fallback {
+    padding: 12px;
+  }
+}
+
+/* =====================================================
+   14. ACCESSIBILITY
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .resource-detail__button,
+  .resource-detail__cover-image {
+    transition: none;
+  }
+
+  .resource-detail__button:hover,
+  .resource-detail__cover:hover .resource-detail__cover-image {
+    transform: none;
+  }
+}

@@ -1,20 +1,24 @@
-
+import type { CSSProperties } from "react";
 import "./EnterpriseAIDilemma.css";
 
 type CardIconName = "governance" | "skills" | "roi" | "data";
 
-const gapCards: {
+type GapCard = {
   title: string;
   description: string;
   icon: CardIconName;
   className: string;
-}[] = [
+  image: string;
+};
+
+const gapCards: GapCard[] = [
   {
     title: "No Governance",
     description:
       "AI initiatives can scale faster than the governance structures required to manage them responsibly.",
     icon: "governance",
     className: "enterprise-gap-card--governance",
+    image: "/images/enterprise-ai-dilemma/governance.jpg",
   },
   {
     title: "Skill Gaps",
@@ -22,6 +26,7 @@ const gapCards: {
       "Organisations need the right capabilities, roles and operating structures to turn AI investments into sustained impact.",
     icon: "skills",
     className: "enterprise-gap-card--skills",
+    image: "/images/enterprise-ai-dilemma/skills.jpg",
   },
   {
     title: "Unclear ROI",
@@ -29,6 +34,7 @@ const gapCards: {
       "AI investment needs clear metrics, accountability and a connection to measurable business outcomes.",
     icon: "roi",
     className: "enterprise-gap-card--roi",
+    image: "/images/enterprise-ai-dilemma/roi.jpg",
   },
   {
     title: "Data & Information Challenges",
@@ -36,8 +42,13 @@ const gapCards: {
       "AI outcomes depend on trusted, governed and accessible information.",
     icon: "data",
     className: "enterprise-gap-card--data",
+    image: "/images/enterprise-ai-dilemma/data.jpg",
   },
 ];
+
+type GapCardStyle = CSSProperties & {
+  "--gap-card-image": string;
+};
 
 function GapIcon({ name }: { name: CardIconName }) {
   const common = {
@@ -105,7 +116,7 @@ export default function EnterpriseAIDilemma() {
       <div className="enterprise-ai-dilemma__container">
         <header className="enterprise-ai-dilemma__header">
           <p className="enterprise-ai-dilemma__eyebrow">
-            The Enterprise AI Dilemma
+            THE ENTERPRISE AI DILEMMA
           </p>
 
           <h2
@@ -117,10 +128,6 @@ export default function EnterpriseAIDilemma() {
             Not AI outcomes.
           </h2>
 
-          <p className="enterprise-ai-dilemma__lead">
-            Most enterprises are scaling AI access. Not AI outcomes.
-          </p>
-
           <p className="enterprise-ai-dilemma__description">
             AI investments are growing, but technology alone doesn’t create
             enterprise value. Without the right practices, governance and
@@ -129,24 +136,40 @@ export default function EnterpriseAIDilemma() {
           </p>
         </header>
 
-        <h3 className="enterprise-ai-dilemma__subheading">
-          The Enterprise AI Gap
-        </h3>
+        <header className="enterprise-ai-dilemma__image-header">
+          <h3 className="enterprise-ai-dilemma__image-title">
+            The Enterprise AI Gap
+          </h3>
+          <p className="enterprise-ai-dilemma__image-subtitle">
+           
+          </p>
+          <p className="enterprise-ai-dilemma__image-description">
+            
+          </p>
+        </header>
 
         <div className="enterprise-ai-gap-grid">
           {gapCards.map((card) => (
             <article
               key={card.icon}
               className={`enterprise-gap-card ${card.className}`}
+              style={
+                {
+                  "--gap-card-image": `url("${card.image}")`,
+                } as GapCardStyle
+              }
+              tabIndex={0}
+              aria-label={`${card.title}. ${card.description}`}
             >
+              <div className="enterprise-gap-card__image" aria-hidden="true" />
+              <div className="enterprise-gap-card__overlay" aria-hidden="true" />
+
               <div className="enterprise-gap-card__content">
                 <div className="enterprise-gap-card__icon">
                   <GapIcon name={card.icon} />
                 </div>
 
-                <h4 className="enterprise-gap-card__title">
-                  {card.title}
-                </h4>
+                <h4 className="enterprise-gap-card__title">{card.title}</h4>
 
                 <p className="enterprise-gap-card__description">
                   {card.description}

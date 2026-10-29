@@ -67,7 +67,7 @@ export default function FinalCTASection() {
         {/* Right: AI illustration */}
         <div className="prosight-final-cta__visual">
           <Image
-            src="/images/ai-cta-illustration.png"
+            src="/images/ai-cta-illustration-prosite.png"
             alt="AI chip with connected technology, analytics and gears"
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1000px) 48vw, 560px"

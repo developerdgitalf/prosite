@@ -1,429 +1,561 @@
-
-/* =========================================
+/* =====================================================
    PROSIGHT — ENTERPRISE AI DILEMMA
-========================================= */
+   Images are visible by default; copy reveals on hover.
+===================================================== */
 
 .enterprise-ai-dilemma {
   width: 100%;
-  padding: 46px 24px 54px;
+  padding: clamp(52px, 5.5vw, 88px) 0 clamp(58px, 6vw, 96px);
+  color: #101a2a;
   background: #ffffff;
-  color: #202020;
-  font-family: var(--font-manrope), "Manrope", sans-serif;
+  font-family: var(--font-manrope), "Manrope", Arial, sans-serif;
+}
+
+.enterprise-ai-dilemma,
+.enterprise-ai-dilemma * {
+  box-sizing: border-box;
 }
 
 .enterprise-ai-dilemma__container {
-  width: 100%;
-  max-width: 1440px;
+  width: min(calc(100% - 48px), 1760px);
   margin-inline: auto;
 }
 
+/* Introductory copy */
 .enterprise-ai-dilemma__header {
-  max-width: 1050px;
-  margin-inline: auto;
+  width: min(100%, 1050px);
+  margin: 0 auto;
   text-align: center;
 }
 
 .enterprise-ai-dilemma__eyebrow {
-  margin: 0 0 19px;
-  color: #111111;
-  font-size: 20px;
-  font-weight: 500;
+  margin: 0 0 14px;
+  color: #079fbe;
+  font-size: 12px;
+  font-weight: 800;
   line-height: 1.4;
+  letter-spacing: 0.13em;
 }
 
 .enterprise-ai-dilemma__title {
   margin: 0;
-  color: #202020;
-  font-size: clamp(32px, 3.3vw, 42px);
-  font-weight: 650;
-  line-height: 1.12;
-  letter-spacing: -0.035em;
-}
-
-.enterprise-ai-dilemma__lead {
-  margin: 24px 0 0;
-  color: #202020;
-  font-size: clamp(20px, 2.1vw, 26px);
-  font-weight: 500;
-  line-height: 1.4;
+  color: #101a2a;
+  font-size: clamp(34px, 3vw, 48px);
+  font-weight: 750;
+  line-height: 1.13;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
 }
 
 .enterprise-ai-dilemma__description {
-  max-width: 900px;
-  margin: 24px auto 0;
-  color: #777777;
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1.6;
+  max-width: 850px;
+  margin: 20px auto 0;
+  color: #5e6875;
+  font-size: clamp(14px, 1vw, 16px);
+  font-weight: 500;
+  line-height: 1.7;
+  text-wrap: pretty;
 }
 
-.enterprise-ai-dilemma__subheading {
-  margin: 38px 0 24px;
-  color: #111111;
-  font-size: 25px;
-  font-weight: 500;
-  line-height: 1.35;
+/* Heading immediately above the four image cards */
+.enterprise-ai-dilemma__image-header {
+  width: min(100%, 1120px);
+  margin: clamp(44px, 4.6vw, 72px) auto 32px;
   text-align: center;
 }
 
-/* =========================================
-   FOUR-CARD GRID
-========================================= */
+.enterprise-ai-dilemma__image-title {
+  margin: 0;
+  color: #101a2a;
+  font-size: clamp(30px, 2.7vw, 44px);
+  font-weight: 750;
+  line-height: 1.16;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
 
+.enterprise-ai-dilemma__image-subtitle {
+  margin: 12px 0 0;
+  color: #2b3a4d;
+  font-size: clamp(17px, 1.5vw, 23px);
+  font-weight: 650;
+  line-height: 1.4;
+  text-wrap: balance;
+}
+
+.enterprise-ai-dilemma__image-description {
+  max-width: 880px;
+  margin: 12px auto 0;
+  color: #697586;
+  font-size: clamp(13px, 0.98vw, 15px);
+  font-weight: 500;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+/* Cards: four equal columns on desktop */
 .enterprise-ai-gap-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+  align-items: stretch;
+  gap: clamp(12px, 1.2vw, 22px);
   width: 100%;
 }
-
-/* Default card */
 
 .enterprise-gap-card {
   position: relative;
   isolation: isolate;
   min-width: 0;
-  min-height: 197px;
+  min-height: 340px;
+  aspect-ratio: 0.98 / 1;
   overflow: hidden;
-  padding: 17px 16px;
-  border-radius: 5px;
-
-  background-color: #d1f0fd;
-  color: #090909;
-
-  transition:
-    color 250ms ease,
-    transform 250ms ease,
-    box-shadow 250ms ease,
-    padding 250ms ease;
+  border: 1px solid rgb(24 52 67 / 24%);
+  border-radius: 12px;
+  background: #12232c;
+  color: #ffffff;
+  outline: none;
+  box-shadow: 0 12px 32px rgb(17 42 58 / 8%);
+  cursor: default;
 }
 
-/* Hover photograph and dark overlay */
+/* Individual background image */
+.enterprise-gap-card__image {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  background-image: var(--gap-card-image);
+  background-color: #d9eaf4;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 1;
+  transform: scale(1.001);
+  transition: transform 650ms cubic-bezier(0.2, 0.75, 0.25, 1);
+}
 
-.enterprise-gap-card::before {
+/* Keep the image clean at rest, add contrast on hover */
+.enterprise-gap-card__overlay {
   position: absolute;
   z-index: -1;
   inset: 0;
-
-  content: "";
+  background: linear-gradient(
+    180deg,
+    rgb(4 19 28 / 0%) 10%,
+    rgb(4 19 28 / 4%) 47%,
+    rgb(4 19 28 / 84%) 100%
+  );
   opacity: 0;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-
   transition: opacity 300ms ease;
 }
 
-/* Individual photo paths.
-   Put the corresponding image files in public/images/ai-gap/. */
-
-.enterprise-gap-card--governance::before {
-  background-image:
-    linear-gradient(
-      110deg,
-      rgb(12 24 32 / 88%),
-      rgb(12 24 32 / 57%)
-    ),
-    url("/images/ai-gap/no-governance.webp");
-}
-
-.enterprise-gap-card--skills::before {
-  background-image:
-    linear-gradient(
-      110deg,
-      rgb(12 24 32 / 88%),
-      rgb(12 24 32 / 57%)
-    ),
-    url("/images/ai-gap/skill-gaps.webp");
-}
-
-.enterprise-gap-card--roi::before {
-  background-image:
-    linear-gradient(
-      110deg,
-      rgb(12 24 32 / 88%),
-      rgb(12 24 32 / 57%)
-    ),
-    url("/images/ai-gap/unclear-roi.webp");
-}
-
-.enterprise-gap-card--data::before {
-  background-image:
-    linear-gradient(
-      110deg,
-      rgb(12 24 32 / 88%),
-      rgb(12 24 32 / 57%)
-    ),
-    url("/images/ai-gap/data-information.webp");
-}
-
-/* Card content */
-
+/* Text layer is hidden until hover/focus */
 .enterprise-gap-card__content {
-  position: relative;
-  z-index: 1;
+  position: absolute;
+  inset: 0;
   display: flex;
-  height: 100%;
-  min-height: 163px;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: flex-end;
+  min-width: 0;
+  padding: clamp(20px, 2vw, 32px);
+  color: #ffffff;
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 280ms ease,
+    transform 350ms ease;
 }
 
 .enterprise-gap-card__icon {
-  display: flex;
-  width: 36px;
-  height: 38px;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: flex-start;
-  margin-bottom: 14px;
-  color: #111111;
-
-  transition:
-    color 250ms ease,
-    margin 250ms ease;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 28px;
+  color: #ffffff;
+  flex: 0 0 auto;
 }
 
 .enterprise-gap-card__icon svg {
   display: block;
-  width: 36px;
-  height: 36px;
+  width: 100%;
+  height: 100%;
 }
 
 .enterprise-gap-card__title {
+  max-width: 100%;
   margin: 0;
-  color: inherit;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.4;
-
-  transition: color 250ms ease;
+  color: #ffffff;
+  font-size: clamp(18px, 1.25vw, 24px);
+  font-weight: 750;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 
 .enterprise-gap-card__description {
-  max-width: 100%;
-  max-height: 100px;
+  max-width: 420px;
   margin: 12px 0 0;
-  overflow: hidden;
+  color: rgb(255 255 255 / 94%);
+  font-size: clamp(13px, 0.9vw, 15px);
+  font-weight: 500;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
 
-  color: #454e53;
-  font-size: 13.5px;
-  font-weight: 400;
-  line-height: 1.45;
+/* Hover and keyboard focus reveal the copy */
+.enterprise-gap-card:hover .enterprise-gap-card__image,
+.enterprise-gap-card:focus-visible .enterprise-gap-card__image {
+  transform: scale(1.055);
+}
 
+.enterprise-gap-card:hover .enterprise-gap-card__overlay,
+.enterprise-gap-card:focus-visible .enterprise-gap-card__overlay {
+  opacity: 1;
+}
+
+.enterprise-gap-card:hover .enterprise-gap-card__content,
+.enterprise-gap-card:focus-visible .enterprise-gap-card__content {
   opacity: 1;
   transform: translateY(0);
-
-  transition:
-    opacity 180ms ease,
-    transform 200ms ease,
-    max-height 250ms ease,
-    margin 250ms ease;
 }
 
-/* =========================================
-   HOVER STATE
-   Image background, white icon and heading
-========================================= */
-
-.enterprise-gap-card:hover {
-  padding-top: 46px;
-  color: #ffffff;
-  box-shadow: 0 8px 24px rgb(12 24 32 / 14%);
-  transform: translateY(-2px);
+.enterprise-gap-card:focus-visible {
+  outline: 3px solid #159ec5;
+  outline-offset: 4px;
 }
 
-.enterprise-gap-card:hover::before {
-  opacity: 1;
-}
-
-.enterprise-gap-card:hover .enterprise-gap-card__icon {
-  margin-bottom: 31px;
-  color: #ffffff;
-}
-
-.enterprise-gap-card:hover .enterprise-gap-card__description {
-  max-height: 0;
-  margin-top: 0;
-  opacity: 0;
-  transform: translateY(5px);
-}
-
-/* =========================================
-   LARGE DESKTOP
-========================================= */
-
-@media (min-width: 1600px) {
+/* Tablet: two cards per row */
+@media (max-width: 1050px) {
   .enterprise-ai-dilemma__container {
-    max-width: 1760px;
-  }
-
-  .enterprise-ai-gap-grid {
-    gap: 12px;
-  }
-
-  .enterprise-gap-card {
-    min-height: 205px;
-    padding: 20px;
-  }
-
-  .enterprise-gap-card:hover {
-    padding-top: 49px;
-  }
-
-  .enterprise-gap-card__title {
-    font-size: 17px;
-  }
-
-  .enterprise-gap-card__description {
-    font-size: 14px;
-  }
-}
-
-/* =========================================
-   TABLET
-========================================= */
-
-@media (max-width: 900px) {
-  .enterprise-ai-dilemma {
-    padding-inline: 20px;
+    width: min(calc(100% - 40px), 820px);
   }
 
   .enterprise-ai-gap-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-  }
-
-  .enterprise-ai-dilemma__description {
-    max-width: 720px;
+    gap: 18px;
   }
 
   .enterprise-gap-card {
-    min-height: 190px;
+    min-height: 320px;
+    aspect-ratio: 1.12 / 1;
+  }
+
+  .enterprise-gap-card__content {
+    padding: 24px;
   }
 }
 
-/* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 520px) {
+/* Mobile: one image card per row */
+@media (max-width: 640px) {
   .enterprise-ai-dilemma {
-    padding: 35px 16px 40px;
+    padding: 42px 0 54px;
+  }
+
+  .enterprise-ai-dilemma__container {
+    width: calc(100% - 36px);
   }
 
   .enterprise-ai-dilemma__eyebrow {
-    margin-bottom: 14px;
-    font-size: 16px;
+    margin-bottom: 10px;
+    font-size: 10px;
   }
 
   .enterprise-ai-dilemma__title {
-    font-size: clamp(28px, 7vw, 34px);
-    line-height: 1.15;
+    font-size: clamp(29px, 8vw, 37px);
   }
 
   .enterprise-ai-dilemma__desktop-break {
     display: none;
   }
 
-  .enterprise-ai-dilemma__lead {
-    margin-top: 18px;
-    font-size: 18px;
-  }
-
   .enterprise-ai-dilemma__description {
-    margin-top: 16px;
+    margin-top: 14px;
     font-size: 14px;
+    line-height: 1.6;
   }
 
-  .enterprise-ai-dilemma__subheading {
-    margin: 28px 0 17px;
-    font-size: 21px;
+  .enterprise-ai-dilemma__image-header {
+    margin: 36px auto 22px;
+  }
+
+  .enterprise-ai-dilemma__image-title {
+    font-size: clamp(27px, 7.5vw, 34px);
+  }
+
+  .enterprise-ai-dilemma__image-subtitle {
+    margin-top: 10px;
+    font-size: 17px;
+  }
+
+  .enterprise-ai-dilemma__image-description {
+    margin-top: 9px;
+    font-size: 13px;
+    line-height: 1.55;
   }
 
   .enterprise-ai-gap-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
   }
 
   .enterprise-gap-card {
-    min-height: 180px;
-    padding: 17px;
+    min-height: 310px;
+    aspect-ratio: 1.2 / 1;
   }
 
-  .enterprise-gap-card:hover {
-    padding-top: 38px;
+  .enterprise-gap-card__content {
+    padding: 22px;
+  }
+
+  .enterprise-gap-card__icon {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 18px;
+  }
+
+  .enterprise-gap-card__title {
+    font-size: 20px;
+  }
+
+  .enterprise-gap-card__description {
+    margin-top: 9px;
+    font-size: 13px;
   }
 }
 
-/* Respect reduced-motion preferences */
+/* Touchscreens do not have reliable hover: keep text visible */
+@media (hover: none) {
+  .enterprise-gap-card__overlay {
+    opacity: 0.92;
+  }
+
+  .enterprise-gap-card__content {
+    opacity: 1;
+    transform: none;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .enterprise-gap-card,
-  .enterprise-gap-card::before,
-  .enterprise-gap-card__icon,
-  .enterprise-gap-card__description,
-  .enterprise-gap-card__title {
+  .enterprise-gap-card__image,
+  .enterprise-gap-card__overlay,
+  .enterprise-gap-card__content {
     transition: none;
   }
 }
 
+/* =====================================================
+   FINAL CARD POLISH — CLEAR BLACK TEXT ON IMAGE CARDS
+   Visible icon + heading by default; description on hover.
+===================================================== */
 
-
-/* =========================================
-   REVERSED CARD HOVER BEHAVIOUR
-   Default: Image + icon + title
-   Hover:   Blue card + full description
-========================================= */
-
-/* Default state: show image, icon and title */
 .enterprise-gap-card {
-  padding-top: 46px;
-  color: #ffffff;
-  background-color: #25343b;
-  transform: none;
-  box-shadow: none;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-width: 0;
+  border: 1px solid rgb(13 41 58 / 28%);
+  border-radius: 14px;
+  background: #dcecf5;
+  box-shadow: 0 16px 36px rgb(12 34 49 / 10%);
 }
 
-.enterprise-gap-card::before {
+.enterprise-gap-card__image {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background-image: var(--gap-card-image);
+  background-color: #dcecf5;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   opacity: 1;
+  transform: scale(1.001);
+  transition: transform 650ms cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+/* A subtle blue shade protects the image while keeping it vivid. */
+.enterprise-gap-card__overlay {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  opacity: 1;
+  background: linear-gradient(
+    180deg,
+    rgb(8 31 48 / 0%) 35%,
+    rgb(8 31 48 / 10%) 100%
+  );
+  transition: background 300ms ease;
+}
+
+/* Separate the black text from the busy image with a frosted panel. */
+.enterprise-gap-card__content {
+  position: absolute;
+  z-index: 2;
+  inset: auto 13px 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-width: 0;
+  padding: 17px 18px 18px;
+  border: 1px solid rgb(255 255 255 / 82%);
+  border-radius: 12px;
+  background: linear-gradient(
+    135deg,
+    rgb(255 255 255 / 94%),
+    rgb(249 253 255 / 88%)
+  );
+  box-shadow: 0 8px 24px rgb(8 31 48 / 13%);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  color: #101820;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition:
+    background 280ms ease,
+    box-shadow 280ms ease,
+    border-color 280ms ease;
 }
 
 .enterprise-gap-card__icon {
-  margin-bottom: 31px;
-  color: #ffffff;
+  display: grid;
+  flex: 0 0 46px;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin: 0 0 12px;
+  padding: 9px;
+  border: 1px solid #b7e5f4;
+  border-radius: 13px;
+  background: #eaf8fd;
+  color: #083c56;
+  box-shadow: 0 3px 9px rgb(8 68 94 / 8%);
 }
 
+.enterprise-gap-card__icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.enterprise-gap-card__title {
+  max-width: 100%;
+  margin: 0;
+  color: #071a29;
+  font-size: clamp(18px, 1.25vw, 23px);
+  font-weight: 800;
+  line-height: 1.24;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  text-shadow: none;
+}
+
+/* Keep descriptions out of the initial card face. */
 .enterprise-gap-card__description {
+  max-width: 420px;
   max-height: 0;
-  margin-top: 0;
+  margin: 0;
+  overflow: hidden;
+  color: #263b4b;
+  font-size: clamp(13px, 0.9vw, 15px);
+  font-weight: 550;
+  line-height: 1.5;
+  text-wrap: pretty;
   opacity: 0;
-  transform: translateY(5px);
-  pointer-events: none;
+  visibility: hidden;
+  transition:
+    max-height 350ms ease,
+    margin-top 280ms ease,
+    opacity 250ms ease,
+    visibility 250ms ease;
 }
 
-/* Hover state: reveal description on the blue card */
-.enterprise-gap-card:hover {
-  padding-top: 17px;
-  color: #090909;
-  background-color: #d1f0fd;
-  transform: none;
-  box-shadow: none;
+.enterprise-gap-card:hover .enterprise-gap-card__image,
+.enterprise-gap-card:focus-visible .enterprise-gap-card__image {
+  transform: scale(1.045);
 }
 
-.enterprise-gap-card:hover::before {
-  opacity: 0;
+.enterprise-gap-card:hover .enterprise-gap-card__overlay,
+.enterprise-gap-card:focus-visible .enterprise-gap-card__overlay {
+  background: linear-gradient(
+    180deg,
+    rgb(8 31 48 / 2%) 20%,
+    rgb(8 31 48 / 20%) 100%
+  );
 }
 
-.enterprise-gap-card:hover .enterprise-gap-card__icon {
-  margin-bottom: 14px;
-  color: #111111;
+.enterprise-gap-card:hover .enterprise-gap-card__content,
+.enterprise-gap-card:focus-visible .enterprise-gap-card__content {
+  border-color: #ffffff;
+  background: rgb(255 255 255 / 96%);
+  box-shadow: 0 12px 32px rgb(8 31 48 / 17%);
 }
 
-.enterprise-gap-card:hover .enterprise-gap-card__description {
-  max-height: 120px;
-  margin-top: 12px;
+.enterprise-gap-card:hover .enterprise-gap-card__description,
+.enterprise-gap-card:focus-visible .enterprise-gap-card__description {
+  max-height: 180px;
+  margin-top: 10px;
   opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+  visibility: visible;
+}
+
+.enterprise-gap-card:focus-visible {
+  outline: 3px solid #159ec5;
+  outline-offset: 4px;
+}
+
+/* Tablet */
+@media (max-width: 1050px) {
+  .enterprise-gap-card__content {
+    inset: auto 10px 10px;
+    padding: 15px;
+  }
+
+  .enterprise-gap-card__icon {
+    flex-basis: 42px;
+    width: 42px;
+    height: 42px;
+    margin-bottom: 10px;
+    padding: 8px;
+  }
+
+  .enterprise-gap-card__title {
+    font-size: clamp(17px, 2.1vw, 21px);
+  }
+}
+
+/* Mobile/touch devices: show all text without hover. */
+@media (max-width: 640px) {
+  .enterprise-gap-card__content {
+    inset: auto 10px 10px;
+    padding: 16px;
+  }
+
+  .enterprise-gap-card__title {
+    font-size: 20px;
+  }
+
+  .enterprise-gap-card__description {
+    font-size: 13px;
+  }
+}
+
+@media (hover: none) {
+  .enterprise-gap-card__description {
+    max-height: 180px;
+    margin-top: 10px;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enterprise-gap-card__image,
+  .enterprise-gap-card__overlay,
+  .enterprise-gap-card__content,
+  .enterprise-gap-card__description {
+    transition: none;
+  }
 }

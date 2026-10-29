@@ -1,166 +1,120 @@
-
 "use client";
 
 import Link from "next/link";
+import { useMemo, useState, type CSSProperties } from "react";
 
-import { useState, type CSSProperties } from "react";
 import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
+
+import {
+  categories,
+  resources,
+  type Resource,
+} from "./resource-data";
+
 import "./resources.css";
 
-type Resource = {
-  id: string;
-  category: string;
-  title: string;
-  image: string;
-  theme: string;
-};
-
-const categories = [
-  "All Categories",
-  "AI for CXO",
-  "AI Storytelling",
-  "Platform Engineering",
-];
-
-const resources: Resource[] = [
-  {
-    id: "ai-first-ceo",
-    category: "AI for CXO",
-    title: "The AI-FIRST CEO/CXO: Why AI Must Be CEO-Led-PROSIGHT",
-    image: "/images/resources/ai-first-ceo.webp",
-    theme: "network",
-  },
-  {
-    id: "ai-narrative-checklist",
-    category: "AI Storytelling",
-    title: "CHECKLIST AI NARRATIVE-PROSIGHT",
-    image: "/images/resources/ai-narrative.webp",
-    theme: "editorial",
-  },
-  {
-    id: "unique-ai-stories",
-    category: "AI Storytelling",
-    title: "UNIQUE AI STORIES- PROSIGHT",
-    image: "/images/resources/unique-ai-stories.webp",
-    theme: "technology",
-  },
-  {
-    id: "five-cs-ai-data-cloud",
-    category: "AI Storytelling",
-    title: "THE 5 CS OF AI-DATA-CLOUD-PROSIGHT",
-    image: "/images/resources/ai-data-cloud.webp",
-    theme: "datacenter",
-  },
-  {
-    id: "ai-story",
-    category: "AI Storytelling",
-    title: "WHAT'S YOUR AI STORY-PROSIGHT",
-    image: "/images/resources/ai-story.webp",
-    theme: "robotics",
-  },
-  {
-    id: "ai-cloud-change",
-    category: "AI Storytelling",
-    title: "AI-CLOUD CHANGE PILOT-PROSIGHT",
-    image: "/images/resources/ai-cloud-change.webp",
-    theme: "network",
-  },
-  {
-    id: "gestalt-storytelling",
-    category: "AI Storytelling",
-    title: "GESTALT'S PRINCIPLES IN AI STORYTELLING- PROSIGHT",
-    image: "/images/resources/gestalt-storytelling.webp",
-    theme: "editorial",
-  },
-  {
-    id: "your-platform",
-    category: "Platform Engineering",
-    title: "WHAT'S YOUR PLATFORM-PROSIGHT",
-    image: "/images/resources/your-platform.webp",
-    theme: "platform",
-  },
-  {
-    id: "platformizing-businesses",
-    category: "Platform Engineering",
-    title: "PLATFORMIZING BUSINESSES-PROSIGHT",
-    image: "/images/resources/platformizing-businesses.webp",
-    theme: "architecture",
-  },
-  {
-    id: "greenprinting-platforms",
-    category: "Platform Engineering",
-    title: "GREENPRINTING PLATFORMS-PROSIGHT",
-    image: "/images/resources/greenprinting-platforms.webp",
-    theme: "planning",
-  },
-  {
-    id: "win-on-platforms",
-    category: "Platform Engineering",
-    title: "How to Win on Platforms-PROSIGHT",
-    image: "/images/resources/win-on-platforms.webp",
-    theme: "strategy",
-  },
-  {
-    id: "service-providers",
-    category: "AI for CXO",
-    title:
-      "How AI-First CEOs must align with the Right Service Providers (SPS)-PROSIGHT",
-    image: "/images/resources/service-providers.webp",
-    theme: "code",
-  },
-  {
-    id: "agentic-genai-coe",
-    category: "AI for CXO",
-    title:
-      "Building a Future-Ready Agentic & GenAI Centre of Excellence (CoE)-PROSIGHT",
-    image: "/images/resources/agentic-genai-coe.webp",
-    theme: "architecture",
-  },
-  {
-    id: "ai-cloud-partners",
-    category: "AI for CXO",
-    title: "How CEOs Must Select the Right AI-Cloud Partners-PROSIGHT",
-    image: "/images/resources/ai-cloud-partners.webp",
-    theme: "cloud",
-  },
-];
-
+type ResourceCategory = (typeof categories)[number];
 
 function ResourceCard({ resource }: { resource: Resource }) {
-  const imageStyle = {
+  const imageStyle: CSSProperties & {
+    "--resource-image": string;
+  } = {
     "--resource-image": `url("${resource.image}")`,
-  } as CSSProperties;
+  };
 
   return (
-    <article className="resource-card">
+    <Link
+      href={resource.href}
+      className="resource-card"
+      aria-label={`Open resource: ${resource.title}`}
+    >
+      {/* Resource thumbnail: no decorative arrow overlay */}
       <div
         className={`resource-card__image resource-card__image--${resource.theme}`}
         style={imageStyle}
         role="img"
-        aria-label={`Image for ${resource.title}`}
+        aria-label={`Thumbnail for ${resource.title}`}
       >
         <span className="resource-card__category">
           {resource.category}
         </span>
       </div>
 
+      {/* Resource title and visual action */}
       <div className="resource-card__body">
-        <h2>{resource.title}</h2>
+        <h2 className="resource-card__title">
+          {resource.title}
+        </h2>
+
+        {/*
+          This is intentionally a span, not a Link.
+          The outer card Link already makes the entire card clickable.
+        */}
+        <span
+          className="resource-card__link"
+          aria-hidden="true"
+        >
+          <span className="resource-card__link-text">
+            View resource
+          </span>
+
+          <span className="resource-card__link-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9 5L16 12L9 19"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
+        </span>
       </div>
-    </article>
+    </Link>
   );
 }
 
-
 export default function ResourcesPage() {
   const [categoryDraft, setCategoryDraft] =
-    useState("All Categories");
+    useState<ResourceCategory>("All Categories");
+
   const [queryDraft, setQueryDraft] = useState("");
 
   const [appliedCategory, setAppliedCategory] =
-    useState("All Categories");
+    useState<ResourceCategory>("All Categories");
+
   const [appliedQuery, setAppliedQuery] = useState("");
+
+  const filteredResources = useMemo(() => {
+    const normalizedQuery = appliedQuery
+      .trim()
+      .toLowerCase();
+
+    return resources.filter((resource) => {
+      const matchesCategory =
+        appliedCategory === "All Categories" ||
+        resource.category === appliedCategory;
+
+      const searchableText =
+        `${resource.title} ${resource.category}`.toLowerCase();
+
+      const matchesSearch =
+        normalizedQuery.length === 0 ||
+        searchableText.includes(normalizedQuery);
+
+      return matchesCategory && matchesSearch;
+    });
+  }, [appliedCategory, appliedQuery]);
+
+  const hasActiveFilters =
+    appliedCategory !== "All Categories" ||
+    appliedQuery.length > 0;
 
   const applyFilters = () => {
     setAppliedCategory(categoryDraft);
@@ -174,25 +128,6 @@ export default function ResourcesPage() {
     setAppliedQuery("");
   };
 
-  const normalizedQuery = appliedQuery.toLowerCase();
-
-  const filteredResources = resources.filter((resource) => {
-    const matchesCategory =
-      appliedCategory === "All Categories" ||
-      resource.category === appliedCategory;
-
-    const matchesSearch =
-      normalizedQuery.length === 0 ||
-      `${resource.title} ${resource.category}`
-        .toLowerCase()
-        .includes(normalizedQuery);
-
-    return matchesCategory && matchesSearch;
-  });
-
-  const hasActiveFilters =
-    appliedCategory !== "All Categories" || appliedQuery.length > 0;
-
   return (
     <>
       <div className="resources-page__header">
@@ -200,24 +135,40 @@ export default function ResourcesPage() {
       </div>
 
       <main className="prosight-resources-page">
-        {/* Resources page introduction */}
+        {/* =========================================
+            HERO
+        ========================================= */}
         <section
           className="resources-hero"
           aria-labelledby="resources-page-title"
         >
-          <p className="resources-hero__eyebrow">PROSIGHT INSIGHTS</p>
+          <p className="resources-hero__eyebrow">
+            PROSIGHT INSIGHTS
+          </p>
 
-          <h1 id="resources-page-title">Resources</h1>
+          <h1 id="resources-page-title">
+            Resources
+          </h1>
 
-          <p className="resources-hero__subtitle">Perspectives</p>
+          <p className="resources-hero__subtitle">
+            Perspectives
+          </p>
+
+          <p className="resources-hero__description">
+            Explore practical perspectives, AI frameworks
+            and resources for enterprise transformation.
+          </p>
         </section>
 
-        {/* Resource library */}
+        {/* =========================================
+            RESOURCE LIBRARY
+        ========================================= */}
         <section
           className="resources-library"
           aria-label="Browse PROSIGHT resources"
         >
           <div className="resources-library__panel">
+            {/* Search and category filter */}
             <form
               className="resources-toolbar"
               onSubmit={(event) => {
@@ -225,6 +176,7 @@ export default function ResourcesPage() {
                 applyFilters();
               }}
             >
+              {/* Category selector */}
               <div className="resources-toolbar__select-wrap">
                 <label
                   className="resources-sr-only"
@@ -238,11 +190,16 @@ export default function ResourcesPage() {
                   className="resources-toolbar__select"
                   value={categoryDraft}
                   onChange={(event) =>
-                    setCategoryDraft(event.target.value)
+                    setCategoryDraft(
+                      event.target.value as ResourceCategory
+                    )
                   }
                 >
                   {categories.map((category) => (
-                    <option key={category} value={category}>
+                    <option
+                      key={category}
+                      value={category}
+                    >
                       {category}
                     </option>
                   ))}
@@ -264,6 +221,7 @@ export default function ResourcesPage() {
                 </svg>
               </div>
 
+              {/* Search input */}
               <div className="resources-toolbar__search-wrap">
                 <svg
                   className="resources-toolbar__search-icon"
@@ -278,6 +236,7 @@ export default function ResourcesPage() {
                     stroke="currentColor"
                     strokeWidth="1.7"
                   />
+
                   <path
                     d="m16 16 4.5 4.5"
                     fill="none"
@@ -298,7 +257,7 @@ export default function ResourcesPage() {
                   id="resource-search"
                   className="resources-toolbar__search"
                   type="search"
-                  placeholder="Search..."
+                  placeholder="Search articles and documents..."
                   value={queryDraft}
                   onChange={(event) =>
                     setQueryDraft(event.target.value)
@@ -314,7 +273,11 @@ export default function ResourcesPage() {
               </button>
             </form>
 
-            <div className="resources-library__meta" aria-live="polite">
+            {/* Results count */}
+            <div
+              className="resources-library__meta"
+              aria-live="polite"
+            >
               <span>
                 {filteredResources.length}{" "}
                 {filteredResources.length === 1
@@ -333,6 +296,7 @@ export default function ResourcesPage() {
               )}
             </div>
 
+            {/* Browse all topics */}
             <div className="resources-all-topics">
               <Link
                 href="/discover"
@@ -344,6 +308,7 @@ export default function ResourcesPage() {
               </Link>
             </div>
 
+            {/* Resource cards */}
             {filteredResources.length > 0 ? (
               <div className="resources-grid">
                 {filteredResources.map((resource) => (
@@ -356,11 +321,16 @@ export default function ResourcesPage() {
             ) : (
               <div className="resources-empty">
                 <h2>No resources found</h2>
+
                 <p>
-                  Try a different keyword or choose another category.
+                  Try a different keyword or choose another
+                  category.
                 </p>
 
-                <button type="button" onClick={clearFilters}>
+                <button
+                  type="button"
+                  onClick={clearFilters}
+                >
                   Show all resources
                 </button>
               </div>

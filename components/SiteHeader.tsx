@@ -9,6 +9,7 @@ const navigationBeforeResources = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Framework", href: "/frameworks" },
+   { label: "Discover", href: "/discover" },
 ];
 
 const navigationAfterResources = [

@@ -39,15 +39,19 @@
 .ai-maturity__visual {
   position: relative;
   width: 100%;
-  max-width: 440px;
-  aspect-ratio: 1 / 0.92;
+  max-width: 650px;
+  min-width: 0;
+  aspect-ratio: 1 / 1;
   justify-self: center;
+  overflow: visible;
 }
 
 .ai-maturity__image {
   display: block;
   object-fit: contain;
   object-position: center;
+    transform: scale(1.25);
+  transform-origin: center;
 }
 
 /* =========================================
@@ -154,8 +158,9 @@
     gap: clamp(70px, 7vw, 120px);
   }
 
+
   .ai-maturity__visual {
-    max-width: 500px;
+    max-width: 720px;
   }
 
   .ai-maturity__content {
@@ -201,6 +206,31 @@
 
   .ai-maturity__paragraph {
     font-size: 12px;
+  }
+}
+
+
+
+@media (max-width: 900px) {
+  .ai-maturity__visual {
+    max-width: 520px;
+  }
+
+  .ai-maturity__image {
+    transform: scale(1.1);
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .ai-maturity__visual {
+    width: 100%;
+    max-width: 440px;
+    margin-inline: auto;
+  }
+
+  .ai-maturity__image {
+    transform: scale(1.05);
   }
 }
 

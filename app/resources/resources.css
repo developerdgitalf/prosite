@@ -1,7 +1,6 @@
-
-/* =========================================
+/* =========================================================
    PROSIGHT — RESOURCES / PERSPECTIVES
-========================================= */
+========================================================= */
 
 .prosight-resources-page {
   width: 100%;
@@ -16,9 +15,9 @@
   background: #ffffff;
 }
 
-/* =========================================
-   RESOURCES HERO
-========================================= */
+/* =========================================================
+   01. HERO
+========================================================= */
 
 .resources-hero {
   width: 100%;
@@ -55,9 +54,17 @@
   letter-spacing: -0.025em;
 }
 
-/* =========================================
-   WHITE RESOURCE LIBRARY
-========================================= */
+.resources-hero__description {
+  margin: 7px 0 0;
+  color: #172544;
+  font-size: clamp(14px, 1.3vw, 17px);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   02. RESOURCE LIBRARY
+========================================================= */
 
 .resources-library {
   width: 100%;
@@ -75,14 +82,13 @@
   max-width: 1760px;
   margin-inline: auto;
   padding: 0;
-
   background: transparent;
   box-shadow: none;
 }
 
-/* =========================================
-   FILTER + SEARCH
-========================================= */
+/* =========================================================
+   03. TOOLBAR
+========================================================= */
 
 .resources-toolbar {
   display: grid;
@@ -100,11 +106,9 @@
   align-items: center;
   height: 54px;
   min-width: 0;
-
   border: 1px solid #c5e2fb;
   border-radius: 9px;
   background: #ffffff;
-
   transition:
     border-color 180ms ease,
     box-shadow 180ms ease;
@@ -116,19 +120,17 @@
   box-shadow: 0 0 0 3px rgb(101 183 238 / 12%);
 }
 
-/* Category dropdown */
+/* Category selector */
 
 .resources-toolbar__select {
   width: 100%;
   height: 100%;
   min-width: 0;
   padding: 0 44px 0 16px;
-
   appearance: none;
   border: 0;
   outline: none;
   border-radius: inherit;
-
   background: transparent;
   color: #151515;
   font: inherit;
@@ -145,7 +147,7 @@
   pointer-events: none;
 }
 
-/* Search field */
+/* Search */
 
 .resources-toolbar__search-wrap {
   gap: 12px;
@@ -164,11 +166,9 @@
   min-width: 0;
   height: 100%;
   padding: 0;
-
   border: 0;
   outline: none;
   background: transparent;
-
   color: #101a3b;
   font: inherit;
   font-size: 14px;
@@ -184,16 +184,13 @@
 .resources-toolbar__filter {
   min-width: 64px;
   padding: 0 15px;
-
   border: 1px solid #c5d6e6;
   border-radius: 9px;
   background: #ffffff;
   color: #24364d;
-
   font: inherit;
   font-size: 13px;
   font-weight: 650;
-
   cursor: pointer;
   transition:
     background-color 180ms ease,
@@ -212,7 +209,7 @@
   outline-offset: 3px;
 }
 
-/* Accessible labels */
+/* Screen-reader-only labels */
 
 .resources-sr-only {
   position: absolute;
@@ -226,19 +223,17 @@
   border: 0;
 }
 
-/* =========================================
-   RESULTS COUNT
-========================================= */
+/* =========================================================
+   04. RESULTS COUNT
+========================================================= */
 
 .resources-library__meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-
   min-height: 22px;
   margin: 16px 0 12px;
-
   color: #7c8797;
   font-size: 12px;
 }
@@ -258,10 +253,70 @@
   text-decoration: underline;
 }
 
-/* =========================================
-   RESOURCE GRID
-   Equal-sized cards and consistent rows
-========================================= */
+/* =========================================================
+   05. BROWSE ALL TOPICS
+========================================================= */
+
+.resources-all-topics {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  margin: 0 0 24px;
+}
+
+.resources-all-topics__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 46px;
+  padding: 12px 20px;
+  border: 1px solid #c8e4f5;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #075985;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgb(15 70 110 / 6%);
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.resources-all-topics__button:hover {
+  transform: translateY(-2px);
+  border-color: #7dc8ed;
+  background: #eaf7ff;
+  color: #034f78;
+  box-shadow: 0 7px 18px rgb(15 70 110 / 10%);
+}
+
+.resources-all-topics__button:focus-visible {
+  outline: 3px solid rgb(101 183 238 / 55%);
+  outline-offset: 3px;
+}
+
+.resources-all-topics__button span {
+  font-size: 17px;
+  line-height: 1;
+  transition: transform 180ms ease;
+}
+
+.resources-all-topics__button:hover span {
+  transform: translate(2px, -2px);
+}
+
+/* =========================================================
+   06. RESOURCE GRID
+========================================================= */
 
 .resources-grid {
   display: grid;
@@ -272,23 +327,22 @@
   width: 100%;
 }
 
-/* =========================================
-   RESOURCE CARD
-========================================= */
+/* =========================================================
+   07. RESOURCE CARD
+========================================================= */
 
 .resource-card {
   display: flex;
   flex-direction: column;
-  height: 100%;
   min-width: 0;
-
+  height: 100%;
   overflow: hidden;
   border: 1px solid #e1eaf2;
   border-radius: 10px;
   background: #ffffff;
-
+  color: inherit;
+  text-decoration: none;
   box-shadow: 0 5px 18px rgb(35 70 100 / 7%);
-
   transition:
     transform 180ms ease,
     box-shadow 180ms ease;
@@ -299,31 +353,35 @@
   box-shadow: 0 10px 24px rgb(35 70 100 / 12%);
 }
 
-/* =========================================
-   IMAGE AREA
-========================================= */
+.resource-card:focus-visible {
+  outline: 3px solid #65b7ee;
+  outline-offset: 4px;
+}
+
+/* =========================================================
+   08. THUMBNAIL IMAGE
+
+   Images are CSS backgrounds. No giant arrow overlay.
+========================================================= */
 
 .resource-card__image {
   position: relative;
   isolation: isolate;
-
   width: 100%;
   aspect-ratio: 1.85 / 1;
   flex: 0 0 auto;
-
   overflow: visible;
   border-radius: 9px 9px 0 0;
-
   background-color: #e5f0f6;
+
   background-image:
     linear-gradient(
       180deg,
-      rgb(8 22 42 / 0%) 40%,
-      rgb(8 22 42 / 12%) 100%
+      rgb(8 22 42 / 2%) 42%,
+      rgb(8 22 42 / 15%) 100%
     ),
-    var(--resource-image, none),
     var(
-      --resource-fallback,
+      --resource-image,
       linear-gradient(135deg, #dceef6, #adcddd)
     );
 
@@ -332,7 +390,20 @@
   background-size: cover;
 }
 
-/* Image fallbacks for missing local artwork */
+/*
+ * These pseudo-elements are deliberately empty.
+ * No decorative arrow is added to the thumbnail.
+ */
+
+.resource-card__image::before,
+.resource-card__image::after {
+  content: none;
+  display: none;
+}
+
+/* =========================================================
+   09. THUMBNAIL FALLBACK BACKGROUNDS
+========================================================= */
 
 .resource-card__image--network {
   --resource-fallback:
@@ -399,77 +470,137 @@
     linear-gradient(135deg, #477e9c, #a8d7e9 65%, #d9eef7);
 }
 
-/* =========================================
-   CATEGORY BADGE
-   Slight overlap with the white title area
-========================================= */
+/* =========================================================
+   10. CATEGORY BADGE
+========================================================= */
 
 .resource-card__category {
   position: absolute;
   z-index: 2;
   bottom: -12px;
   left: 10px;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   max-width: calc(100% - 20px);
   min-height: 30px;
   padding: 6px 12px;
-
   overflow: hidden;
   border: 1px solid #ffffff;
   border-radius: 9px;
-
   background: #d7f4ff;
   color: #0752e9;
-
   font-size: 10px;
   font-weight: 750;
   line-height: 1.2;
   text-overflow: ellipsis;
   white-space: nowrap;
-
   box-shadow: 0 2px 5px rgb(19 62 101 / 8%);
 }
 
-/* =========================================
-   WHITE TITLE AREA
-   Same height across cards in each row
-========================================= */
+/* =========================================================
+   11. RESOURCE CARD FOOTER
+
+   Title is on the left.
+   Text and circular arrow are on the right.
+========================================================= */
 
 .resource-card__body {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 124px;
+  align-items: start;
+  gap: 12px;
   flex: 1 0 auto;
-  align-items: flex-start;
-
-  min-height: 78px;
-  padding: 22px 13px 14px;
-
+  min-width: 0;
+  min-height: 88px;
+  padding: 18px 13px 14px;
   background: #ffffff;
 }
 
-.resource-card__body h2 {
+/* Resource title */
+
+.resource-card__title {
   display: -webkit-box;
+  min-width: 0;
   margin: 0;
   overflow: hidden;
-
   color: #101a3b;
+  font-family: inherit;
   font-size: 13px;
   font-weight: 600;
-  line-height: 1.45;
+  line-height: 1.5;
   letter-spacing: 0.005em;
   overflow-wrap: anywhere;
-
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   line-clamp: 3;
 }
 
-/* =========================================
-   EMPTY SEARCH RESULTS
-========================================= */
+/* Visual link label */
+
+.resource-card__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 124px;
+  min-width: 0;
+  color: #075a9c;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+/* View resource text */
+
+.resource-card__link-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Small circular arrow button */
+
+.resource-card__link-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border: 1.5px solid #0784f8;
+  border-radius: 50%;
+  background: #dff5ff;
+  color: #0784f8;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.resource-card__link-icon svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+/* Hover interaction */
+
+.resource-card:hover .resource-card__link-icon {
+  transform: translateX(2px);
+  border-color: #006dcc;
+  background: #0784f8;
+  color: #ffffff;
+}
+
+.resource-card:hover .resource-card__link {
+  color: #075a9c;
+}
+
+/* =========================================================
+   12. EMPTY SEARCH RESULTS
+========================================================= */
 
 .resources-empty {
   padding: 60px 20px;
@@ -501,9 +632,9 @@
   cursor: pointer;
 }
 
-/* =========================================
-   LARGE DESKTOP
-========================================= */
+/* =========================================================
+   13. LARGE DESKTOP: 1600px+
+========================================================= */
 
 @media (min-width: 1600px) {
   .resources-hero {
@@ -535,12 +666,28 @@
   }
 
   .resource-card__body {
-    min-height: 86px;
-    padding: 23px 16px 16px;
+    min-height: 92px;
+    padding: 22px 16px 16px;
   }
 
-  .resource-card__body h2 {
-    font-size: 15px;
+  .resource-card__title {
+    font-size: 14px;
+  }
+
+  .resource-card__link {
+    width: 124px;
+    font-size: 14px;
+  }
+
+  .resource-card__link-icon {
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+  }
+
+  .resource-card__link-icon svg {
+    width: 21px;
+    height: 21px;
   }
 
   .resource-card__category {
@@ -549,9 +696,9 @@
   }
 }
 
-/* =========================================
-   LAPTOP
-========================================= */
+/* =========================================================
+   14. LAPTOP: UP TO 1100px
+========================================================= */
 
 @media (max-width: 1100px) {
   .resources-library {
@@ -563,17 +710,36 @@
   }
 
   .resource-card__body {
+    grid-template-columns: minmax(0, 1fr) 112px;
+    gap: 8px;
     min-height: 76px;
+    padding: 18px 11px 13px;
   }
 
-  .resource-card__body h2 {
+  .resource-card__title {
     font-size: 12px;
+  }
+
+  .resource-card__link {
+    width: 112px;
+    font-size: 12px;
+  }
+
+  .resource-card__link-icon {
+    width: 30px;
+    height: 30px;
+    flex-basis: 30px;
+  }
+
+  .resource-card__link-icon svg {
+    width: 18px;
+    height: 18px;
   }
 }
 
-/* =========================================
-   TABLET
-========================================= */
+/* =========================================================
+   15. TABLET: UP TO 760px
+========================================================= */
 
 @media (max-width: 760px) {
   .resources-hero {
@@ -615,18 +781,24 @@
   }
 
   .resource-card__body {
+    grid-template-columns: minmax(0, 1fr) 112px;
     min-height: 80px;
-    padding: 22px 12px 14px;
+    padding: 18px 12px 14px;
   }
 
-  .resource-card__body h2 {
+  .resource-card__title {
     font-size: 13px;
+  }
+
+  .resource-card__link {
+    width: 112px;
+    font-size: 12px;
   }
 }
 
-/* =========================================
-   MOBILE
-========================================= */
+/* =========================================================
+   16. MOBILE: UP TO 480px
+========================================================= */
 
 @media (max-width: 480px) {
   .resources-hero {
@@ -639,6 +811,10 @@
 
   .resources-hero__subtitle {
     font-size: 27px;
+  }
+
+  .resources-hero__description {
+    font-size: 14px;
   }
 
   .resources-library {
@@ -657,10 +833,22 @@
 
   .resources-toolbar__filter {
     grid-column: auto;
+    min-height: 42px;
   }
 
   .resources-library__meta {
     margin: 14px 0 12px;
+  }
+
+  .resources-all-topics {
+    justify-content: flex-start;
+    margin-bottom: 18px;
+  }
+
+  .resources-all-topics__button {
+    min-height: 44px;
+    padding: 11px 17px;
+    font-size: 13px;
   }
 
   .resources-grid {
@@ -674,12 +862,25 @@
   }
 
   .resource-card__body {
-    min-height: 76px;
-    padding: 22px 13px 14px;
+    grid-template-columns: minmax(0, 1fr) 124px;
+    gap: 10px;
+    min-height: 78px;
+    padding: 18px 13px 14px;
   }
 
-  .resource-card__body h2 {
+  .resource-card__title {
     font-size: 14px;
+  }
+
+  .resource-card__link {
+    width: 124px;
+    font-size: 13px;
+  }
+
+  .resource-card__link-icon {
+    width: 32px;
+    height: 32px;
+    flex-basis: 32px;
   }
 
   .resource-card__category {
@@ -687,101 +888,21 @@
   }
 }
 
-/* =========================================
-   ACCESSIBILITY
-========================================= */
+/* =========================================================
+   17. ACCESSIBILITY
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .resource-card {
-    transition: none;
-  }
-}
-
-
-/* =========================================
-   BROWSE ALL TOPICS LINK
-========================================= */
-
-.resources-all-topics {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%;
-  margin: 0 0 24px;
-}
-
-.resources-all-topics__button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  min-height: 46px;
-  padding: 12px 20px;
-
-  border: 1px solid #c8e4f5;
-  border-radius: 10px;
-  background: #ffffff;
-  color: #075985;
-
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.2;
-  text-decoration: none;
-  white-space: nowrap;
-
-  box-shadow: 0 4px 16px rgb(15 70 110 / 6%);
-  transition:
-    background-color 180ms ease,
-    color 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms ease;
-}
-
-.resources-all-topics__button:hover {
-  transform: translateY(-2px);
-  border-color: #7dc8ed;
-  background: #eaf7ff;
-  color: #034f78;
-  box-shadow: 0 7px 18px rgb(15 70 110 / 10%);
-}
-
-.resources-all-topics__button:focus-visible {
-  outline: 3px solid rgb(101 183 238 / 55%);
-  outline-offset: 3px;
-}
-
-.resources-all-topics__button span {
-  font-size: 17px;
-  line-height: 1;
-  transition: transform 180ms ease;
-}
-
-.resources-all-topics__button:hover span {
-  transform: translate(2px, -2px);
-}
-
-@media (max-width: 640px) {
-  .resources-all-topics {
-    justify-content: flex-start;
-    margin-bottom: 18px;
-  }
-
-  .resources-all-topics__button {
-    min-height: 44px;
-    padding: 11px 17px;
-    font-size: 13px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
+  .resource-card,
+  .resource-card__link-icon,
   .resources-all-topics__button,
   .resources-all-topics__button span {
     transition: none;
   }
 
-  .resources-all-topics__button:hover {
+  .resource-card:hover,
+  .resources-all-topics__button:hover,
+  .resource-card:hover .resource-card__link-icon {
     transform: none;
   }
 }
