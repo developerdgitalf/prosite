@@ -183,7 +183,8 @@ export const resources: Resource[] = [
 
     theme: "editorial",
 
-    // No matching PDF was visible in the latest screenshot.
+      pdfPath:
+      "/documents/GREENPRINTING-PLATFORMS-PROSIGHT.pdf",
 
     href: "/resources/gestalt-storytelling",
   },
