@@ -112,16 +112,40 @@ export default function FrameworksOverview() {
         </div>
 
       
+
 <div className="frameworks-overview__action">
   <a
     href="/frameworks"
     className="frameworks-overview__button"
     aria-label="Explore all PROSIGHT frameworks"
   >
-    Explore All Frameworks
-    <span aria-hidden="true">→</span>
+    <span>Explore All Frameworks</span>
+
+    <span className="frameworks-overview__button-icon" aria-hidden="true">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="12"
+          cy="12"
+          r="9"
+          stroke="currentColor"
+          strokeWidth="1.7"
+        />
+        <path
+          d="M10 8L14 12L10 16"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </span>
   </a>
 </div>
+
 
       </div>
     </section>
