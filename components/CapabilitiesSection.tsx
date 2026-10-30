@@ -116,15 +116,7 @@ export default function CapabilitiesSection() {
               className={`prosight-capability-card prosight-capability-card--${capability.theme}`}
             >
               <div className="prosight-capability-card__content">
-                <div className="prosight-capability-card__number">
-                  <span>
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span
-                    className="prosight-capability-card__line"
-                    aria-hidden="true"
-                  />
-                </div>
+              
 
                 <h4>{capability.title}</h4>
 

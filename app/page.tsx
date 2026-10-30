@@ -15,6 +15,7 @@ import SiteFooter from "../components/SiteFooter";
 import AISMModelSection from "../components/AISMModelSection";
 import Hero2 from "../components/Hero2";
 
+import Hero3 from "../components/Hero3";
 export default function HomePage() {
   return (
     <>
@@ -22,7 +23,8 @@ export default function HomePage() {
         {/* Header and hero share the gradient background */}
         <div className="prosight-home__top">
           <SiteHeader />
-         <Hero2 />
+            <Hero3 />
+     
         </div>
 
         {/* Homepage sections */}

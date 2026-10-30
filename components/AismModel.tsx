@@ -31,9 +31,7 @@ export default function AismModel() {
           <h2 id="aism-model-heading">
             Six dimensions.
             <br />
-            A smarter
-            <br />
-            enterprise.
+            A smarter enterprise.
           </h2>
 
           <p className="aism-model-section__description">
