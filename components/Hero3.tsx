@@ -10,7 +10,7 @@ type Hero3Props = {
 };
 
 export default function Hero3({
-  imageSrc = "/images/home-hero-visual.png",
+  imageSrc = "/images/prosight-aism-3.jpg",
   imageAlt = "PROSIGHT AI engineering and technology visual",
 }: Hero3Props) {
   return (
