@@ -660,8 +660,10 @@
 }
 
 .frameworks-overview__button:hover {
-  background: #0756a5;
+  background: #eff1f2;
   transform: translateY(-2px);
+  border: 1px solid #111;
+
 }
 
 .frameworks-overview__button-icon {

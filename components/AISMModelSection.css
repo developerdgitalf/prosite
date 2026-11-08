@@ -57,7 +57,7 @@
 .aism-model__heading {
   margin: 0;
   color: #07090b;
-  font-size: clamp(55px, 3.65vw, 57px);
+  font-size: clamp(49px, 3.65vw, 49px);
   font-weight: 650;
   line-height: 1.1;
   letter-spacing: -0.04em;

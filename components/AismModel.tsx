@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import "./AismModel.css";
 
@@ -9,7 +8,7 @@ export default function AismModel() {
       aria-labelledby="aism-model-heading"
     >
       <div className="aism-model-section__container">
-        {/* LEFT: Your complete SVG diagram */}
+        {/* The graphic is placed on the right on desktop and below the copy on mobile. */}
         <div className="aism-model-section__visual">
           <Image
             src="/images/aism-model-diagram.svg"
@@ -18,27 +17,27 @@ export default function AismModel() {
             height={4200}
             priority={false}
             className="aism-model__svg-image"
-            sizes="(max-width: 700px) 100vw, (max-width: 1100px) 65vw, 65vw"
+            sizes="(max-width: 700px) 100vw, (max-width: 1100px) 92vw, 68vw"
           />
         </div>
 
-        {/* RIGHT: Existing heading and description */}
         <div className="aism-model-section__content">
-          <p className="aism-model-section__eyebrow">
-            THE AISM™ MODEL
-          </p>
+  <p className="aism-model__eyebrow">
+    THE AISM™ MODEL
+  </p>
 
-          <h2 id="aism-model-heading">
-            Six dimensions.
-            <br />
-            A smarter enterprise.
-          </h2>
+  <h2 id="aism-model-heading" className="aism-model__heading">
+    <span>Six dimensions.</span>
+    <span className="aism-model__heading-line">
+      A smarterd enterprise.
+    </span>
+  </h2>
 
-          <p className="aism-model-section__description">
-            AISM™ connects the dimensions that determine whether AI can
-            scale responsibly and create business value.
-          </p>
-        </div>
+  <p className="aism-model__summary">
+    AISM™ connects the dimensions that determine whether AI can
+    scale responsibly and create business value.
+  </p>
+</div>
       </div>
     </section>
   );

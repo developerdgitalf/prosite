@@ -80,8 +80,7 @@ export default function AISMModelSection() {
           >
             Six dimensions.
             <br />
-            A smarter
-            <br />
+            A smarter 
             enterprise.
           </h2>
 
@@ -120,7 +119,7 @@ export default function AISMModelSection() {
                 <Image
              src={`/images/icons/${dimension.icon}.svg`}
                   alt=""
-                  width={52}
+                  width={65}
                   height={52}
                   className="aism-model__icon-image"
                   aria-hidden="true"

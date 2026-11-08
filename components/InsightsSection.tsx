@@ -46,39 +46,41 @@ const insights: Insight[] = [
 ];
 
 function InsightIcon({ type }: { type: Insight["icon"] }) {
-  if (type === "leadership") {
-    return (
-      <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
-        <circle cx="24" cy="14" r="6" />
-        <circle cx="10" cy="19" r="4.5" />
-        <circle cx="38" cy="19" r="4.5" />
-        <path d="M13 36v-4a11 11 0 0 1 22 0v4H13Z" />
-        <path d="M3 35v-3a7 7 0 0 1 9-6.7M45 35v-3a7 7 0 0 0-9-6.7" />
-      </svg>
-    );
-  }
+  switch (type) {
+    case "leadership":
+      return (
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <circle cx="24" cy="14" r="6" />
+          <circle cx="10" cy="19" r="4.5" />
+          <circle cx="38" cy="19" r="4.5" />
+          <path d="M13 36v-4a11 11 0 0 1 22 0v4H13Z" />
+          <path d="M3 35v-3a7 7 0 0 1 9-6.7M45 35v-3a7 7 0 0 0-9-6.7" />
+        </svg>
+      );
 
-  if (type === "communication") {
-    return (
-      <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
-        <path d="M8 11h32a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H22l-10 6v-6H8a4 4 0 0 1-4-4V15a4 4 0 0 1 4-4Z" />
-        <circle cx="16" cy="24" r="1.5" />
-        <circle cx="24" cy="24" r="1.5" />
-        <circle cx="32" cy="24" r="1.5" />
-      </svg>
-    );
-  }
+    case "communication":
+      return (
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M8 11h32a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H22l-10 6v-6H8a4 4 0 0 1-4-4V15a4 4 0 0 1 4-4Z" />
+          <circle cx="16" cy="24" r="1.5" />
+          <circle cx="24" cy="24" r="1.5" />
+          <circle cx="32" cy="24" r="1.5" />
+        </svg>
+      );
 
-  return (
-    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
-      <path d="m24 5 19 10-19 10L5 15 24 5Z" />
-      <path d="m7 23 17 9 17-9" />
-      <path d="m7 31 17 10 17-10" />
-    </svg>
-  );
+    case "engineering":
+      return (
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="m24 5 19 10-19 10L5 15 24 5Z" />
+          <path d="m7 23 17 9 17-9" />
+          <path d="m7 31 17 10 17-10" />
+        </svg>
+      );
+
+    default:
+      return null;
+  }
 }
-
-/* Circular chevron icon matching your reference button */
 
 function ArrowIcon() {
   return (
@@ -94,7 +96,6 @@ function ArrowIcon() {
   );
 }
 
-
 export default function InsightsSection() {
   return (
     <section
@@ -102,6 +103,7 @@ export default function InsightsSection() {
       aria-labelledby="prosight-insights-title"
     >
       <div className="prosight-insights__container">
+        {/* Section header */}
         <header className="prosight-insights__header">
           <div className="prosight-insights__heading">
             <p className="prosight-insights__eyebrow">
@@ -118,8 +120,8 @@ export default function InsightsSection() {
 
           <div className="prosight-insights__intro">
             <p>
-              Expert perspectives, practical frameworks and
-              emerging ideas for leaders navigating enterprise AI.
+              Expert perspectives, practical frameworks and emerging
+              ideas for leaders navigating enterprise AI.
             </p>
 
             <span
@@ -129,10 +131,12 @@ export default function InsightsSection() {
           </div>
         </header>
 
+        {/* Perspective heading */}
         <div className="prosight-insights__section-heading">
           <h3>Explore by perspective</h3>
         </div>
 
+        {/* Insight cards */}
         <div className="prosight-insights__grid">
           {insights.map((insight) => (
             <article
@@ -140,7 +144,7 @@ export default function InsightsSection() {
               className={`insights-card insights-card--${insight.theme}`}
             >
               <div className="insights-card__top">
-                <div className="insights-card__icon">
+                <div className="insights-card__icon" aria-hidden="true">
                   <InsightIcon type={insight.icon} />
                 </div>
 
@@ -157,7 +161,7 @@ export default function InsightsSection() {
               <Link
                 className="insights-card__link"
                 href={insight.href}
-                aria-label={`Explore ${insight.title}`}
+                aria-label={`Explore ${insight.title} perspective`}
               >
                 <span>Explore perspective</span>
 
@@ -169,6 +173,7 @@ export default function InsightsSection() {
           ))}
         </div>
 
+        {/* Main CTA */}
         <footer className="prosight-insights__footer">
           <Link
             className="prosight-insights__button"
