@@ -14,8 +14,8 @@ export default function AismModel() {
           <Image
             src="/images/aism-model-diagram.svg"
             alt="AISM model illustrating the six dimensions of AI capability"
-            width={1200}
-            height={1000}
+            width={4200}
+            height={4200}
             priority={false}
             className="aism-model__svg-image"
             sizes="(max-width: 700px) 100vw, (max-width: 1100px) 65vw, 65vw"
