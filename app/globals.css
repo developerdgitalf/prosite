@@ -287,3 +287,327 @@ svg {
     transition: none;
   }
 }
+
+
+.prosight-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 54px;
+  padding: 8px 24px;
+  border: 1px solid #151515;
+  border-radius: 999px;
+  background: #151515;
+  color: #ffffff;
+  font-family: var(--font-manrope), "Manrope", Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 220ms ease, border-color 220ms ease,
+    color 220ms ease, transform 220ms ease;
+}
+
+.prosight-button--with-icon {
+  justify-content: space-between;
+  padding: 8px 10px 8px 24px;
+}
+
+.prosight-button__icon {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  place-items: center;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  color: inherit;
+  transition: transform 220ms ease;
+}
+
+.prosight-button__icon svg {
+  display: block;
+  width: 19px;
+  height: 19px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .prosight-button:hover {
+    transform: translateY(-2px);
+  }
+
+  .prosight-button:hover .prosight-button__icon {
+    transform: translateX(2px);
+  }
+}
+
+.prosight-button:focus-visible {
+  outline: 3px solid #35bde8;
+  outline-offset: 4px;
+}
+
+
+/* =====================================================
+   PROSIGHT — SHARED CTA BUTTON
+   Used by Insights, Frameworks and other sections
+===================================================== */
+
+.prosight-insights__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+
+  width: auto;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 54px;
+
+  margin: 0 auto;
+  padding: 8px 10px 8px 24px;
+
+  border: 1px solid #151515;
+  border-radius: 999px;
+
+  background: #151515;
+  color: #ffffff;
+
+  box-shadow: none;
+
+  font-family: var(--font-manrope), "Manrope", Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.2;
+
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+
+  transform: none;
+
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    transform 220ms ease;
+}
+
+/* SINGLE CIRCULAR ARROW */
+
+.prosight-insights__button-arrow {
+  display: grid;
+
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+
+  place-items: center;
+
+  border: 1.5px solid #ffffff;
+  border-radius: 50%;
+
+  background: transparent;
+  color: #ffffff;
+
+  transition: transform 220ms ease;
+}
+
+.prosight-insights__button-arrow svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* HOVER */
+
+@media (hover: hover) and (pointer: fine) {
+  .prosight-insights__button:hover {
+    transform: translateY(-2px);
+  }
+
+  .prosight-insights__button:hover
+  .prosight-insights__button-arrow {
+    transform: translateX(2px);
+  }
+}
+
+/* KEYBOARD ACCESSIBILITY */
+
+.prosight-insights__button:focus-visible {
+  outline: 3px solid #35bde8;
+  outline-offset: 4px;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .prosight-insights__button {
+    min-height: 50px;
+    padding: 7px 9px 7px 20px;
+    font-size: 14px;
+  }
+
+  .prosight-insights__button-arrow {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+  }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+  .prosight-insights__button,
+  .prosight-insights__button-arrow {
+    transition: none;
+  }
+
+  .prosight-insights__button:hover {
+    transform: none;
+  }
+}
+
+
+/* =========================================
+   PROSIGHT — GLOBAL BUTTON
+   Reusable across all website sections
+========================================= */
+
+.prosight-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  min-height: 54px;
+  padding: 8px 24px;
+
+  border: 1px solid #151515;
+  border-radius: 999px;
+
+  background: #151515;
+  color: #ffffff;
+
+  font-family: var(--font-manrope), "Manrope", Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.2;
+
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+
+  box-shadow: none;
+
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    transform 220ms ease;
+}
+
+/* Button with right-side icon */
+
+.prosight-button--with-icon {
+  justify-content: space-between;
+  gap: 14px;
+  padding: 8px 10px 8px 24px;
+}
+
+/* Hover */
+
+@media (hover: hover) and (pointer: fine) {
+  .prosight-button:hover:not(:disabled) {
+    background: #151515;
+    border-color: #151515;
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  .prosight-button:hover .prosight-button__icon {
+    transform: translateX(2px);
+  }
+}
+
+/* Circular icon */
+
+.prosight-button__icon {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  place-items: center;
+
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+
+  color: inherit;
+
+  transition: transform 220ms ease;
+}
+
+.prosight-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 54px;
+  padding: 8px 10px 8px 24px;
+  border: 1px solid #151515;
+  border-radius: 999px;
+  background: #151515;
+  color: #fff;
+  font-family: var(--font-manrope), "Manrope", Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    transform 220ms ease;
+}
+
+.prosight-button__icon {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  place-items: center;
+  border: 1.5px solid #fff;
+  border-radius: 50%;
+  color: #fff;
+  transition: transform 220ms ease;
+}
+
+.prosight-button__icon svg {
+  width: 19px;
+  height: 19px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .prosight-button:hover {
+    transform: translateY(-2px);
+  }
+
+  .prosight-button:hover .prosight-button__icon {
+    transform: translateX(2px);
+  }
+}
+
+@media (max-width: 600px) {
+  .prosight-button {
+    min-height: 50px;
+    padding: 7px 9px 7px 20px;
+    font-size: 14px;
+  }
+}

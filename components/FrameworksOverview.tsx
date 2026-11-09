@@ -1,3 +1,4 @@
+
 import type { CSSProperties } from "react";
 import Link from "next/link";
 import "./FrameworksOverview.css";
@@ -50,6 +51,21 @@ const frameworks: Framework[] = [
   },
 ];
 
+/* SAME ARROW ICON USED IN INSIGHTS SECTION */
+function ArrowIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="m10 6 6 6-6 6"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function FrameworksOverview() {
   return (
     <section
@@ -57,6 +73,8 @@ export default function FrameworksOverview() {
       aria-labelledby="frameworks-overview-title"
     >
       <div className="frameworks-overview__container">
+
+        {/* SECTION HEADER */}
         <header className="frameworks-overview__header">
           <h2 id="frameworks-overview-title">
             Proprietary Intelligence. Prescriptive Frameworks.
@@ -73,6 +91,7 @@ export default function FrameworksOverview() {
           </p>
         </header>
 
+        {/* FRAMEWORK CARDS */}
         <div className="frameworks-overview__grid">
           {frameworks.map((framework) => (
             <article
@@ -84,6 +103,7 @@ export default function FrameworksOverview() {
                 } as CSSProperties
               }
             >
+              {/* CARD VISUAL */}
               <div
                 className="framework-card__visual"
                 aria-hidden="true"
@@ -96,6 +116,7 @@ export default function FrameworksOverview() {
                 <span className="framework-card__rule" />
               </div>
 
+              {/* CARD CONTENT */}
               <div className="framework-card__content">
                 <p className="framework-card__name">
                   {framework.name}
@@ -111,41 +132,21 @@ export default function FrameworksOverview() {
           ))}
         </div>
 
-      
-
+        {/* EXPLORE ALL FRAMEWORKS CTA */}
+       {/* EXPLORE ALL FRAMEWORKS CTA */}
 <div className="frameworks-overview__action">
-  <a
+  <Link
+    className="prosight-btn prosight-btn--dark"
     href="/frameworks"
-    className="frameworks-overview__button"
     aria-label="Explore all PROSIGHT frameworks"
   >
-    <span>Explore All Frameworks</span>
+    <span>Explore all frameworks</span>
 
-    <span className="frameworks-overview__button-icon" aria-hidden="true">
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <circle
-          cx="12"
-          cy="12"
-          r="9"
-          stroke="currentColor"
-          strokeWidth="1.7"
-        />
-        <path
-          d="M10 8L14 12L10 16"
-          stroke="currentColor"
-          strokeWidth="1.7"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+    <span className="prosight-btn__arrow" aria-hidden="true">
+      <ArrowIcon />
     </span>
-  </a>
+  </Link>
 </div>
-
 
       </div>
     </section>
