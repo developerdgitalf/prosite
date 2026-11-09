@@ -80,8 +80,7 @@ export default function AISMModelSection() {
           >
             Six dimensions.
             <br />
-            A smarter 
-            enterprise.
+            A smarter enterprise.
           </h2>
 
           <p className="aism-model__summary">
