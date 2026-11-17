@@ -611,3 +611,86 @@ svg {
     font-size: 14px;
   }
 }
+
+
+/* =========================================
+   PROSIGHT — GLOBAL BUTTON
+   Reusable across all website sections
+========================================= */
+
+.prosight-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  min-height: 54px;
+  padding: 8px 24px;
+
+  border: 1px solid #151515;
+  border-radius: 999px;
+
+  background: #151515;
+  color: #ffffff;
+
+  font-family: var(--font-manrope), "Manrope", Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.2;
+
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+
+  box-shadow: none;
+
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    transform 220ms ease;
+}
+
+/* Button with right-side icon */
+
+.prosight-button--with-icon {
+  justify-content: space-between;
+  gap: 14px;
+  padding: 8px 10px 8px 24px;
+}
+
+/* Hover */
+
+@media (hover: hover) and (pointer: fine) {
+  .prosight-button:hover:not(:disabled) {
+    background: #151515;
+    border-color: #151515;
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  .prosight-button:hover .prosight-button__icon {
+    transform: translateX(2px);
+  }
+}
+
+/* Circular icon */
+
+.prosight-button__icon {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  place-items: center;
+
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+
+  color: inherit;
+
+  transition: transform 220ms ease;
+}
+
+.prosight-button__icon svg {
+  display: block;
+   }
