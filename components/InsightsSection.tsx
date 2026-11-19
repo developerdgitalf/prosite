@@ -177,7 +177,7 @@ export default function InsightsSection() {
         <footer className="prosight-insights__footer">
           <Link
             className="prosight-insights__button"
-            href="/insights"
+            href="/frameworks"
           >
             <span>Explore all insights</span>
 
