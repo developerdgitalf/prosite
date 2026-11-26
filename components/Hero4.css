@@ -1,0 +1,763 @@
+
+/* =====================================================
+   PROSIGHT — HERO 4
+   AISM™ SIX DIMENSIONS INTERACTIVE HERO
+   White / Cyan / Blue visual identity
+===================================================== */
+
+.hero4 {
+  --hero4-ink: #0b1930;
+  --hero4-blue: #078fd0;
+  --hero4-cyan: #22c7ec;
+  --hero4-light: #e5f6fc;
+  --hero4-border: #d5edf7;
+
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  padding: clamp(64px, 3vw, 110px) 28px clamp(60px, 7vw, 100px);
+
+  background:
+    radial-gradient(
+      ellipse at 82% 42%,
+      rgb(211 237 255 / 76%) 0%,
+      rgb(232 246 255 / 34%) 29%,
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse at 4% 90%,
+      rgb(206 246 248 / 48%) 0%,
+      transparent 48%
+    ),
+    #ffffff;
+
+  color: var(--hero4-ink);
+  font-family: var(--font-manrope), "Manrope", Arial, sans-serif;
+}
+
+.hero4 *,
+.hero4 *::before,
+.hero4 *::after {
+  box-sizing: border-box;
+}
+
+/* =====================================================
+   MAIN LAYOUT
+===================================================== */
+
+.hero4__container {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 0.88fr)
+    minmax(0, 1.12fr);
+
+  align-items: center;
+
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+
+  gap: clamp(32px, 5vw, 78px);
+}
+
+/* =====================================================
+   LEFT CONTENT
+===================================================== */
+
+.hero4__content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 540px;
+}
+
+.hero4__eyebrow {
+  margin: 0 0 25px;
+
+  color: #078fc2;
+
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: 0.19em;
+}
+
+.hero4__title {
+  margin: 0;
+
+  color: #0b1930;
+
+  font-size: clamp(42px, 4.7vw, 68px);
+  font-weight: 800;
+  line-height: 1.01;
+  letter-spacing: -0.055em;
+
+  text-wrap: balance;
+}
+
+.hero4__title span {
+  display: inline-block;
+  color: #31a9d8;
+}
+
+.hero4__description {
+  max-width: 510px;
+  margin: 24px 0 0;
+
+  color: #60748c;
+
+  font-size: clamp(15px, 1.15vw, 17px);
+  font-weight: 400;
+  line-height: 1.75;
+
+  text-wrap: pretty;
+}
+
+/* =====================================================
+   CTA BUTTON
+===================================================== */
+
+.hero4__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  min-width: 190px;
+  min-height: 48px;
+  margin-top: 26px;
+  padding: 5px 7px 5px 21px;
+
+  border: 1px solid #111111;
+  border-radius: 999px;
+
+  background: #111111;
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition:
+    transform 220ms ease,
+    background-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.hero4__cta:hover {
+  transform: translateY(-2px);
+  background: #173c76;
+
+  box-shadow: 0 8px 22px rgb(20 66 120 / 17%);
+}
+
+.hero4__cta-arrow {
+  display: grid;
+  flex: 0 0 30px;
+
+  width: 30px;
+  height: 30px;
+
+  place-items: center;
+
+  border: 1.3px solid #ffffff;
+  border-radius: 50%;
+}
+
+.hero4__cta-arrow svg {
+  display: block;
+  width: 17px;
+  height: 17px;
+
+  max-width: none;
+}
+
+/* =====================================================
+   HIGHLIGHT TAGS
+===================================================== */
+
+.hero4__highlights {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 19px;
+
+  margin-top: 30px;
+}
+
+.hero4__highlights span {
+  position: relative;
+
+  padding-left: 13px;
+
+  color: #6a829a;
+
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.hero4__highlights span::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+
+  width: 6px;
+  height: 6px;
+
+  transform: translateY(-50%);
+
+  border-radius: 50%;
+  background: #10b8d7;
+
+  content: "";
+}
+
+/* =====================================================
+   RIGHT VISUAL
+===================================================== */
+
+.hero4__visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+/* =====================================================
+   INTERACTIVE ORBIT STAGE
+
+   Pointer dragging rotates all six boxes.
+   Individual dimension boxes stay upright.
+===================================================== */
+
+.hero4__orbit-stage {
+  position: relative;
+
+  width: min(100%, 590px);
+  aspect-ratio: 1 / 1;
+
+  margin-inline: auto;
+
+  isolation: isolate;
+
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.hero4__orbit-stage.is-dragging {
+  cursor: grabbing;
+}
+
+/* =====================================================
+   ORBIT RINGS
+===================================================== */
+
+.hero4__orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero4__orbit--outer {
+  width: 77%;
+  height: 77%;
+
+  border: 1.5px dashed rgb(97 196 237 / 65%);
+
+  box-shadow:
+    0 0 18px rgb(116 206 244 / 9%),
+    inset 0 0 16px rgb(116 206 244 / 5%);
+}
+
+.hero4__orbit--inner {
+  width: 70%;
+  height: 70%;
+
+  border: 1px dotted rgb(82 191 237 / 65%);
+}
+
+/* =====================================================
+   CENTRAL AISM CIRCLE
+===================================================== */
+
+.hero4__core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+
+  display: grid;
+
+  width: 34%;
+  max-width: 190px;
+  min-width: 135px;
+
+  aspect-ratio: 1 / 1;
+
+  place-items: center;
+
+  transform: translate(-50%, -50%);
+
+  border: 2px solid rgb(255 255 255 / 90%);
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      #50c8f1 0%,
+      #27a9db 50%,
+      #0786c4 100%
+    );
+
+  box-shadow:
+    0 15px 42px rgb(25 139 199 / 19%),
+    0 0 0 9px rgb(124 216 248 / 9%),
+    0 0 40px rgb(59 190 235 / 17%);
+
+  pointer-events: none;
+}
+
+.hero4__core-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.hero4__core-name {
+  color: #ffffff;
+
+  font-size: clamp(22px, 2.5vw, 31px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.hero4__core-subtitle {
+  margin-top: 5px;
+
+  color: rgb(255 255 255 / 94%);
+
+  font-size: clamp(9px, 1vw, 12px);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+/* =====================================================
+   SIX DIMENSION BOXES
+===================================================== */
+
+.hero4__dimension {
+  position: absolute;
+  z-index: 4;
+
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  width: clamp(148px, 15vw, 184px);
+  min-height: 58px;
+
+  padding: 9px 12px;
+
+  transform: translate(-50%, -50%);
+
+  border: 1px solid rgb(221 235 245 / 90%);
+  border-radius: 7px;
+
+  background: rgb(255 255 255 / 96%);
+
+  box-shadow:
+    0 5px 13px rgb(21 59 88 / 9%),
+    0 1px 3px rgb(21 59 88 / 5%);
+
+  color: #193451;
+
+  transition:
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+
+  pointer-events: none;
+}
+
+.hero4__dimension-icon {
+  display: grid;
+  flex: 0 0 34px;
+
+  width: 34px;
+  height: 34px;
+
+  place-items: center;
+
+  border: 1px solid #dceff8;
+  border-radius: 6px;
+
+  background: #e8f7fc;
+  color: #0a9fce;
+}
+
+.hero4__dimension-icon svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  max-width: none;
+
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hero4__dimension-label {
+  color: #183450;
+
+  font-size: clamp(12px, 1vw, 14px);
+  font-weight: 750;
+  line-height: 1.3;
+
+  white-space: nowrap;
+}
+
+/* =====================================================
+   MANUAL ROTATION CONTROLS
+===================================================== */
+
+.hero4__rotation-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  margin-top: 4px;
+}
+
+.hero4__rotate-button {
+  display: grid;
+
+  width: 38px;
+  height: 38px;
+
+  place-items: center;
+
+  border: 1px solid #d7e8f2;
+  border-radius: 50%;
+
+  background: #ffffff;
+  color: #183c5b;
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.hero4__rotate-button:hover {
+  transform: translateY(-2px);
+
+  background: #e9f8fc;
+  border-color: #66c7e7;
+  color: #078fc2;
+}
+
+.hero4__rotate-button svg {
+  display: block;
+  width: 19px;
+  height: 19px;
+  max-width: none;
+}
+
+.hero4__rotate-button:focus-visible,
+.hero4__rotate-reset:focus-visible {
+  outline: 3px solid #35bde8;
+  outline-offset: 3px;
+}
+
+.hero4__rotate-reset {
+  min-height: 34px;
+  padding: 0 12px;
+
+  border: 1px solid #d7e8f2;
+  border-radius: 999px;
+
+  background: #ffffff;
+  color: #51718e;
+
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.hero4__rotate-reset:hover {
+  background: #e9f8fc;
+  border-color: #66c7e7;
+  color: #078fc2;
+}
+
+/* =====================================================
+   DRAG HINT
+===================================================== */
+
+.hero4__drag-hint {
+  margin: 10px 0 0;
+
+  color: #8a9eaf;
+
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.5;
+
+  text-align: center;
+}
+
+/* =====================================================
+   RESPONSIVE — LAPTOP AND TABLET
+===================================================== */
+
+@media (max-width: 1100px) {
+  .hero4 {
+    padding-inline: 24px;
+  }
+
+  .hero4__container {
+    grid-template-columns:
+      minmax(0, 0.9fr)
+      minmax(0, 1.1fr);
+
+    gap: 24px;
+  }
+
+  .hero4__title {
+    font-size: clamp(38px, 4.5vw, 54px);
+  }
+
+  .hero4__orbit-stage {
+    width: min(100%, 510px);
+  }
+
+  .hero4__dimension {
+    width: clamp(142px, 16vw, 168px);
+    min-height: 54px;
+    padding: 8px 9px;
+    gap: 8px;
+  }
+
+  .hero4__dimension-icon {
+    flex-basis: 30px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .hero4__dimension-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* =====================================================
+   RESPONSIVE — TABLET / SMALL LAPTOP
+===================================================== */
+
+@media (max-width: 850px) {
+  .hero4 {
+    padding: 66px 24px 65px;
+  }
+
+  .hero4__container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+
+  .hero4__content {
+    max-width: 650px;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .hero4__description {
+    margin-inline: auto;
+  }
+
+  .hero4__highlights {
+    justify-content: center;
+  }
+
+  .hero4__visual {
+    max-width: 620px;
+    margin-inline: auto;
+  }
+
+  .hero4__orbit-stage {
+    width: min(100%, 570px);
+  }
+}
+
+/* =====================================================
+   RESPONSIVE — MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+  .hero4 {
+    padding: 48px 18px 50px;
+  }
+
+  .hero4__container {
+    gap: 38px;
+  }
+
+  .hero4__eyebrow {
+    margin-bottom: 18px;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+  }
+
+  .hero4__title {
+    font-size: clamp(36px, 9.5vw, 48px);
+    line-height: 1.04;
+  }
+
+  .hero4__description {
+    margin-top: 18px;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .hero4__cta {
+    margin-top: 22px;
+  }
+
+  .hero4__highlights {
+    gap: 8px 13px;
+    margin-top: 23px;
+  }
+
+  .hero4__highlights span {
+    font-size: 10px;
+  }
+
+  .hero4__orbit-stage {
+    width: 100%;
+    max-width: 440px;
+  }
+
+  .hero4__dimension {
+    width: clamp(122px, 39vw, 152px);
+    min-height: 51px;
+    gap: 7px;
+    padding: 7px;
+    border-radius: 6px;
+  }
+
+  .hero4__dimension-icon {
+    flex: 0 0 27px;
+    width: 27px;
+    height: 27px;
+    border-radius: 5px;
+  }
+
+  .hero4__dimension-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .hero4__dimension-label {
+    font-size: 11px;
+  }
+
+  .hero4__core {
+    width: 34%;
+    min-width: 120px;
+  }
+
+  .hero4__core-name {
+    font-size: 22px;
+  }
+
+  .hero4__core-subtitle {
+    font-size: 8px;
+  }
+}
+
+/* =====================================================
+   RESPONSIVE — SMALL MOBILE
+===================================================== */
+
+@media (max-width: 380px) {
+  .hero4 {
+    padding-inline: 14px;
+  }
+
+  .hero4__orbit-stage {
+    width: 100%;
+  }
+
+  .hero4__dimension {
+    width: 124px;
+    min-height: 48px;
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .hero4__dimension-icon {
+    flex-basis: 25px;
+    width: 25px;
+    height: 25px;
+  }
+
+  .hero4__dimension-label {
+    font-size: 10px;
+  }
+
+  .hero4__core {
+    min-width: 112px;
+  }
+
+  .hero4__core-name {
+    font-size: 20px;
+  }
+}
+
+/* =====================================================
+   ACCESSIBILITY — REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero4__dimension,
+  .hero4__cta,
+  .hero4__rotate-button,
+  .hero4__rotate-reset {
+    transition: none;
+  }
+
+  .hero4__cta:hover,
+  .hero4__rotate-button:hover {
+    transform: none;
+  }
+}
